@@ -5,13 +5,21 @@ import { fileURLToPath } from 'url'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// In Docker standalone builds the working directory is /app, and public/media
+// is copied there. In dev it resolves relative to this file's location.
+// PAYLOAD_MEDIA_DIR env var lets the Docker container override the path explicitly.
+const staticDir =
+  process.env.PAYLOAD_MEDIA_DIR ??
+  path.resolve(dirname, '../../public/media')
+
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
     group: 'Content',
   },
   upload: {
-    staticDir: path.resolve(dirname, '../../public/media'),
+    staticDir,
+    staticURL: '/media',
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 400, position: 'centre' },
       { name: 'card',      width: 800, height: 450, position: 'centre' },
