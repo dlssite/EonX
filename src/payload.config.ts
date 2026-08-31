@@ -48,7 +48,7 @@ export default buildConfig({
     // We use versioned migrations for all future schema changes.
     // Setting push=false prevents Payload from re-running pushDevSchema on every
     // hot-reload, which was causing db.query[tableName] to be undefined on reads.
-    push: false,
+    push: process.env.PAYLOAD_PUSH_SCHEMA === 'true',
     pool: {
       connectionString: process.env.DATABASE_URI as string,
       ssl: process.env.DATABASE_URI?.includes('sslmode=require')
