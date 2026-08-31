@@ -6,15 +6,20 @@ const nextConfig: NextConfig = {
 
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Allow Next.js image optimisation to proxy images served by Payload CMS.
-    // Payload stores absolute URLs (prefixed with serverURL) when a serverURL is
-    // set in payload.config.ts. Without this entry, next/image returns 400 for
-    // any src that starts with https://eonrisia.org/...
+    // Allow next/image to optimise Payload-served media.
+    // Payload v3 always serves uploads via /api/media/file/[filename] (same-origin).
+    // localPatterns whitelists those paths so next/image doesn't return 400.
+    localPatterns: [
+      {
+        pathname: '/api/media/file/**',
+      },
+    ],
+    // Also allow absolute URLs (e.g. when serverURL is set in payload.config).
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'eonrisia.org',
-        pathname: '/**',
+        pathname: '/api/media/file/**',
       },
     ],
   },
