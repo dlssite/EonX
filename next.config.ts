@@ -6,22 +6,12 @@ const nextConfig: NextConfig = {
 
   images: {
     formats: ['image/avif', 'image/webp'],
-    // Allow next/image to optimise Payload-served media.
-    // Payload v3 always serves uploads via /api/media/file/[filename] (same-origin).
-    // localPatterns whitelists those paths so next/image doesn't return 400.
-    localPatterns: [
-      {
-        pathname: '/api/media/file/**',
-      },
-    ],
-    // Also allow absolute URLs (e.g. when serverURL is set in payload.config).
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'eonrisia.org',
-        pathname: '/api/media/file/**',
-      },
-    ],
+    // Payload v3 serves all uploads through /api/media/file/[filename].
+    // Next.js image optimisation cannot proxy same-origin API routes without
+    // an explicit allowlist. Since this app self-hosts both Next.js and Payload
+    // on the same origin, we disable the built-in proxy and serve Payload images
+    // directly — they are already optimised by Payload's sharp pipeline on upload.
+    unoptimized: true,
   },
 
   async redirects() {
