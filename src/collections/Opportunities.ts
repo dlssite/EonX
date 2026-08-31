@@ -33,7 +33,7 @@ export const Opportunities: CollectionConfig = {
       type: 'text',
       admin: {
         description: 'Required when department is "Other (custom)". This label is shown on the site.',
-        condition: (data) => data?.department === 'other',
+        condition: (_data, siblingData) => siblingData?.department === 'other',
       },
     },
     {
