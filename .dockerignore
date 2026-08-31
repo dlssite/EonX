@@ -1,0 +1,42 @@
+# Dependencies — reinstalled in Docker
+node_modules
+
+# Next.js build output — rebuilt in Docker
+.next
+out
+
+# Environment files — injected at runtime
+.env
+.env.local
+.env.production
+.env.docker
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# Docs — not needed in the app image
+docs
+constitution
+
+# Editor
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+coverage
+playwright-report
+test-results
+
+# Local backups
+backups
+*.sql.gz
+*.tar.gz
+
+# README
+README.md

@@ -1,0 +1,85 @@
+# ─────────────────────────────────────────────────────────────
+# Eonrisia Caddyfile
+# Caddy automatically provisions and renews TLS via Let's Encrypt.
+# Replace {$CADDY_DOMAIN} with your actual domain, or set the
+# CADDY_DOMAIN environment variable before starting Caddy.
+# ─────────────────────────────────────────────────────────────
+
+{$CADDY_DOMAIN:eonrisia.org} {
+    # Proxy all traffic to the Next.js app container
+    reverse_proxy app:3000
+
+    # Compress responses for performance
+    encode gzip
+
+    # Security headers
+    header {
+        # HSTS — tell browsers to always use HTTPS
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+        # Prevent MIME type sniffing
+        X-Content-Type-Options "nosniff"
+
+        # Prevent clickjacking
+        X-Frame-Options "SAMEORIGIN"
+
+        # Control referrer information
+        Referrer-Policy "strict-origin-when-cross-origin"
+
+        # Restrict browser features
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+        # Remove server identification header
+        -Server
+    }
+
+    # Logging
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 10mb
+            roll_keep 5
+        }
+    }
+}
+
+# ─────────────────────────────────────────────────────────────
+# CMS subdomain — cms.eonrisia.org → /admin
+#
+# This routes cms.eonrisia.org directly to the Payload admin panel
+# hosted inside the same Next.js app container. No separate service
+# or deployment needed. Payload's admin is already at /admin.
+#
+# To enable:
+#   1. Add an A record: cms.eonrisia.org → your VPS IP
+#   2. Uncomment this block and redeploy Caddy
+#   3. Optionally set NEXT_PUBLIC_SITE_URL to https://eonrisia.org
+#      (keep main site URL as-is; Payload uses serverURL in payload.config.ts)
+# ─────────────────────────────────────────────────────────────
+
+# cms.{$CADDY_DOMAIN:eonrisia.org} {
+#     # Rewrite all cms.eonrisia.org/* requests to /admin/* on the app
+#     rewrite * /admin{uri}
+#     reverse_proxy app:3000
+#
+#     encode gzip
+#
+#     header {
+#         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+#         X-Content-Type-Options "nosniff"
+#         X-Frame-Options "SAMEORIGIN"
+#         Referrer-Policy "strict-origin-when-cross-origin"
+#         -Server
+#     }
+#
+#     log {
+#         output file /var/log/caddy/cms-access.log {
+#             roll_size 10mb
+#             roll_keep 5
+#         }
+#     }
+# }
+
+# Redirect www to non-www
+www.{$CADDY_DOMAIN:eonrisia.org} {
+    redir https://{$CADDY_DOMAIN:eonrisia.org}{uri} permanent
+}

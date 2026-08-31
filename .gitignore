@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Production
+build/
+
+# Environment variables — NEVER commit these
+.env
+.env.local
+.env.production
+.env.docker
+.env.*.local
+
+# Vercel (not used but keep to avoid accidental commits)
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Payload generated types (auto-generated, do not edit)
+# Kept in repo so contributors don't need to generate on first clone
+# src/types/payload-types.ts
+
+# Test results
+coverage/
+playwright-report/
+test-results/
+
+# Backup files
+backups/
+*.sql.gz
+*.tar.gz

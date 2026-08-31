@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  # ── Caddy: reverse proxy + automatic HTTPS ─────────────────
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - eonrisia_network
+    depends_on:
+      - app
+
+  # ── App: Next.js + Payload CMS ─────────────────────────────
+  app:
+    image: ${IMAGE_TAG:-ghcr.io/eonrisia/eonrisia-web:latest}
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    volumes:
+      # Persist uploaded media files across container restarts/rebuilds
+      - media_uploads:/app/public/media
+    networks:
+      - eonrisia_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ── PostgreSQL 16 ───────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - eonrisia_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+# ── Volumes ──────────────────────────────────────────────────
+volumes:
+  postgres_data:
+    driver: local
+  media_uploads:
+    driver: local
+  caddy_data:
+    driver: local
+  caddy_config:
+    driver: local
+
+# ── Networks ─────────────────────────────────────────────────
+networks:
+  eonrisia_network:
+    driver: bridge

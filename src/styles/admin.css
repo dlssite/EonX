@@ -1,0 +1,660 @@
+﻿/* Eonrisia Admin Theme */
+
+/* ================================================================
+   Eonrisia Admin — Design System Override
+   Targets Payload's --color-base-* and --theme-* CSS custom props.
+   Loaded after @payloadcms/next/css so these always win.
+   ================================================================ */
+
+/* ── Google Fonts: Syne (display) + Inter (body) ────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+
+/* ── Base palette: Eonrisia navy scale.
+   NOTE: We override --theme-elevation-* directly in the dark theme
+   block below, so these base values only affect light mode fallbacks. */
+:root {
+  --color-base-0:    rgb(250, 250, 253);
+  --color-base-50:   rgb(244, 244, 248);
+  --color-base-100:  rgb(232, 232, 240);
+  --color-base-150:  rgb(208, 208, 224);
+  --color-base-200:  rgb(180, 180, 210);
+  --color-base-250:  rgb(148, 148, 184);
+  --color-base-300:  rgb(115, 115, 160);
+  --color-base-350:  rgb(88,  88,  135);
+  --color-base-400:  rgb(70,  70,  115);
+  --color-base-450:  rgb(55,  55,   88);
+  --color-base-500:  rgb(44,  44,   70);
+  --color-base-550:  rgb(36,  36,   52);
+  --color-base-600:  rgb(28,  28,   42);
+  --color-base-650:  rgb(24,  24,   36);
+  --color-base-700:  rgb(20,  20,   30);
+  --color-base-750:  rgb(16,  16,   24);
+  --color-base-800:  rgb(13,  13,   19);
+  --color-base-850:  rgb(10,  10,   15);
+  --color-base-900:  rgb( 8,   8,   12);
+  --color-base-950:  rgb( 5,   5,    8);
+  --color-base-1000: rgb( 0,   0,    0);
+}
+
+/* ── Dark theme overrides ─────────────────────────────────────── */
+html[data-theme=dark] {
+  /* Page background — deepest navy */
+  --theme-bg:           #0A0A0F;
+  --theme-input-bg:     #111118;
+  --theme-text:         #E8E8F0;
+
+  /* Elevations remapped to Eonrisia's navy palette.
+     Low numbers = dark surfaces. High numbers = light text.
+     elevation-400 is used for muted labels so must be readable. */
+  --theme-elevation-0:   #0A0A0F;
+  --theme-elevation-50:  #0E0E14;
+  --theme-elevation-100: #111118;
+  --theme-elevation-150: #161620;
+  --theme-elevation-200: #1A1A26;
+  --theme-elevation-250: #1E1E2C;
+  --theme-elevation-300: #252535;
+  --theme-elevation-350: #2D2D48;
+  --theme-elevation-400: #6B6B88;  /* muted label grey — readable */
+  --theme-elevation-450: #8080A0;
+  --theme-elevation-500: #9494B0;
+  --theme-elevation-550: #AAAAC0;
+  --theme-elevation-600: #BDBDD0;
+  --theme-elevation-650: #CECEE0;
+  --theme-elevation-700: #D8D8E8;
+  --theme-elevation-750: #E0E0EE;
+  --theme-elevation-800: #E8E8F0;
+  --theme-elevation-850: #F0F0F6;
+  --theme-elevation-900: #F4F4F8;
+  --theme-elevation-950: #F8F8FC;
+  --theme-elevation-1000:#FFFFFF;
+
+  --theme-border-color:  #1A1A26;
+}
+
+/* ── Brand accent: wire brand purple into Payload's success colour ─
+   Payload uses --theme-success-* for active states, selected items,
+   focus rings, and the primary action button.                      */
+html[data-theme=dark] {
+  --theme-success-50:  rgba(108, 99, 255, 0.06);
+  --theme-success-100: rgba(108, 99, 255, 0.10);
+  --theme-success-150: rgba(108, 99, 255, 0.15);
+  --theme-success-200: rgba(108, 99, 255, 0.20);
+  --theme-success-250: rgba(108, 99, 255, 0.30);
+  --theme-success-300: rgba(108, 99, 255, 0.40);
+  --theme-success-350: rgba(108, 99, 255, 0.50);
+  --theme-success-400: #6C63FF;
+  --theme-success-450: #7B73FF;
+  --theme-success-500: #8A83FF;
+  --theme-success-550: #9590FF;
+  --theme-success-600: #A09DFF;
+  --theme-success-650: #B0AEFF;
+  --theme-success-700: #C0BEFF;
+  --theme-success-750: #D0CEFF;
+  --theme-success-800: #E0DEFF;
+  --theme-success-850: #EEEEFF;
+  --theme-success-900: #F5F5FF;
+  --theme-success-950: #FAFAFF;
+}
+
+/* ── Typography: Syne for headings, Inter for UI ─────────────── */
+html {
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Dashboard headings and collection titles use Syne */
+.dashboard__label,
+.collection-list h1,
+.collection-edit h1,
+.doc-header__title,
+.render-title h1,
+.render-title h2,
+.nav__label {
+  font-family: 'Syne', sans-serif !important;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ── Nav sidebar ────────────────────────────────────────────── */
+/*
+ * Correct class names from Payload's SCSS source:
+ *   .nav                — outer container
+ *   .nav__scroll        — scrollable inner
+ *   .nav__wrap          — flex column holding all links
+ *   .nav__link          — each nav anchor
+ *   .nav__link.active   — active page link
+ *   .nav__link-indicator— the 2px left bar on active links
+ *   .nav-group          — collapsible group wrapper
+ *   .nav-group__toggle  — the group label button
+ */
+
+/* Container background and border */
+html[data-theme=dark] .nav,
+html[data-theme=dark] .nav__scroll {
+  background-color: #0A0A0F;
+}
+
+html[data-theme=dark] .nav {
+  border-right: 1px solid #1A1A26!important;
+}
+
+/* All nav links: pill shape, no underline */
+html[data-theme=dark] .nav__link {
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  color: rgba(244, 244, 248, 0.55) !important;
+  text-decoration: none !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  transition: background-color 0.12s ease, color 0.12s ease !important;
+}
+
+/* Hover: subtle fill */
+html[data-theme=dark] a.nav__link:hover,
+html[data-theme=dark] a.nav__link:focus-visible {
+  background-color: #1A1A26 !important;
+  color: #F4F4F8 !important;
+  text-decoration: none !important;
+}
+
+/* Active link: brand purple pill */
+html[data-theme=dark] .nav__link.active,
+html[data-theme=dark] .nav__link:has(.nav__link-indicator) {
+  background-color: rgba(108, 99, 255, 0.12) !important;
+  color: #A9A4FF !important;
+  font-weight: 600 !important;
+}
+
+html[data-theme=dark] .nav__link.active:hover {
+  background-color: rgba(108, 99, 255, 0.18) !important;
+}
+
+/* Replace the side-bar indicator with an inline dot so it
+   doesn't bleed outside the pill shape */
+html[data-theme=dark] .nav__link-indicator {
+  position: static !important;
+  display: inline-block !important;
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  border-radius: 9999px !important;
+  background: #6C63FF !important;
+  margin-right: 8px !important;
+  flex-shrink: 0;
+}
+
+/* Group label buttons */
+html[data-theme=dark] .nav-group__toggle {
+  color: rgba(244, 244, 248, 0.28) !important;
+  font-size: 0.625rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  padding: 0 12px !important;
+  margin-top: 16px !important;
+  margin-bottom: 4px !important;
+}
+
+html[data-theme=dark] .nav-group__toggle:hover,
+html[data-theme=dark] .nav-group__toggle:focus-visible {
+  color: rgba(244, 244, 248, 0.50) !important;
+}
+
+/* Collapse indicator chevron */
+html[data-theme=dark] .nav-group__indicator svg .stroke {
+  stroke: rgba(244, 244, 248, 0.28) !important;
+}
+
+/* Nav scroll padding for breathing room */
+html[data-theme=dark] .nav__scroll {
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+}
+
+/* Nav wrap gap between items */
+html[data-theme=dark] .nav__wrap {
+  gap: 2px;
+}
+
+/* Remove first group's extra top margin */
+html[data-theme=dark] .nav-group:first-child .nav-group__toggle {
+  margin-top: 8px !important;
+}
+
+/* Nav footer controls (logout button) */
+html[data-theme=dark] .nav__controls {
+  padding: 0 12px;
+  border-top: 1px solid #1A1A26;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+/* Nav account/user label area */
+html[data-theme=dark] .nav__label {
+  color: rgba(244, 244, 248, 0.40);
+  font-size: 0.75rem;
+}
+
+/* ── Dashboard cards ─────────────────────────────────────────── */
+html[data-theme=dark] .dashboard__card-list .card {
+  background-color: #111118;
+  border: 1px solid #1A1A26;
+  border-radius: 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+html[data-theme=dark] .dashboard__card-list .card:hover {
+  border-color: rgba(108, 99, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+html[data-theme=dark] .dashboard__card-list .card .card__title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Dashboard group headings */
+html[data-theme=dark] .dashboard__group-title {
+  color: rgba(244, 244, 248, 0.30);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* The + (create) button on dashboard cards */
+html[data-theme=dark] .dashboard__card-list .card .btn--style-icon-label {
+  color: rgba(108, 99, 255, 0.7);
+  transition: color 0.15s ease;
+}
+
+html[data-theme=dark] .dashboard__card-list .card:hover .btn--style-icon-label {
+  color: #8A83FF;
+}
+
+/* ── Primary action button: brand purple ─────────────────────── */
+html[data-theme=dark] .btn--style-primary {
+  --bg-color:   #6C63FF;
+  --color:      #FFFFFF;
+  --hover-bg:   #8A83FF;
+  --hover-color:#FFFFFF;
+  border-radius: 8px;
+}
+
+/* ── Secondary / outline button ─────────────────────────────── */
+html[data-theme=dark] .btn--style-secondary {
+  --box-shadow:       inset 0 0 0 1px #252535;
+  --hover-box-shadow: inset 0 0 0 1px #6C63FF;
+  --hover-color:      #A9A4FF;
+  border-radius: 8px;
+}
+
+/* ── Input fields ────────────────────────────────────────────── */
+html[data-theme=dark] input,
+html[data-theme=dark] textarea,
+html[data-theme=dark] select,
+html[data-theme=dark] .rs__control {
+  background-color: #111118 !important;
+  border-color: #1A1A26 !important;
+  border-radius: 8px !important;
+  color: #F4F4F8 !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+html[data-theme=dark] input:focus,
+html[data-theme=dark] textarea:focus,
+html[data-theme=dark] .rs__control--is-focused {
+  border-color: #6C63FF !important;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.20) !important;
+  outline: none !important;
+}
+
+/* ── Top toolbar / header bar ────────────────────────────────── */
+html[data-theme=dark] .app-header {
+  background-color: #0A0A0F;
+  border-bottom: 1px solid #1A1A26;
+  backdrop-filter: blur(12px);
+}
+
+/* ── Table rows ──────────────────────────────────────────────── */
+html[data-theme=dark] .table .row {
+  border-bottom: 1px solid #1A1A26;
+  transition: background-color 0.12s ease;
+}
+
+html[data-theme=dark] .table .row:hover {
+  background-color: #111118;
+}
+
+/* ── Pill / status badge ─────────────────────────────────────── */
+html[data-theme=dark] .pill--style-light {
+  background-color: rgba(108, 99, 255, 0.12);
+  color: #A9A4FF;
+  border-radius: 9999px;
+}
+
+/* ── Login page ──────────────────────────────────────────────── */
+html[data-theme=dark] .login__form {
+  background-color: #111118;
+  border: 1px solid #1A1A26;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme=dark] .login {
+  background-color: #0A0A0F;
+  background-image:
+    radial-gradient(ellipse 800px 500px at 50% -80px, rgba(108, 99, 255, 0.14) 0%, transparent 70%),
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: auto, 32px 32px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+html[data-theme=dark] ::-webkit-scrollbar { width: 5px; height: 5px; }
+html[data-theme=dark] ::-webkit-scrollbar-track { background: #0A0A0F; }
+html[data-theme=dark] ::-webkit-scrollbar-thumb { background: #252535; border-radius: 9999px; }
+html[data-theme=dark] ::-webkit-scrollbar-thumb:hover { background: #6C63FF; }
+
+/* ── Focus ring ──────────────────────────────────────────────── */
+html[data-theme=dark] :focus-visible {
+  outline: 2px solid #6C63FF !important;
+  outline-offset: 2px !important;
+}
+
+/* ── Top accent line ─────────────────────────────────────────── */
+html[data-theme=dark] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #6C63FF 40%, #FF6B35 70%, transparent 100%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ================================================================
+   Fine-tuning: toolbar, buttons, search, breadcrumb, account
+   ================================================================ */
+
+/* ── App header (top bar) ──────────────────────────────────────── */
+html[data-theme=dark] .app-header {
+  background-color: #0A0A0F;
+  border-bottom: 1px solid #1A1A26;
+}
+
+html[data-theme=dark] .app-header__bg {
+  background-color: #0A0A0F;
+}
+
+/* ── Breadcrumb / step-nav ──────────────────────────────────────── */
+html[data-theme=dark] .step-nav {
+  color: rgba(244, 244, 248, 0.45);
+  font-size: 0.8125rem;
+}
+
+html[data-theme=dark] .step-nav a {
+  color: rgba(244, 244, 248, 0.55) !important;
+  text-decoration: none !important;
+}
+
+html[data-theme=dark] .step-nav a:hover {
+  color: #A9A4FF !important;
+  text-decoration: none !important;
+}
+
+/* The "/" separator and current page label */
+html[data-theme=dark] .step-nav span {
+  color: rgba(244, 244, 248, 0.30);
+}
+
+/* ── Collection list header bar ───────────────────────────────── */
+html[data-theme=dark] .collection-list__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* The collection title (e.g. "Teams", "Projects") */
+html[data-theme=dark] .collection-list__header h1,
+html[data-theme=dark] .list-header h1,
+html[data-theme=dark] .render-title {
+  font-family: 'Syne', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #F4F4F8 !important;
+}
+
+/* ── "Create New" primary button ──────────────────────────────── */
+html[data-theme=dark] .btn--style-primary {
+  background-color: #6C63FF !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: background-color 0.15s ease, transform 0.1s ease !important;
+}
+
+html[data-theme=dark] .btn--style-primary:hover {
+  background-color: #8A83FF !important;
+  transform: translateY(-1px) !important;
+}
+
+html[data-theme=dark] .btn--style-primary:active {
+  transform: scale(0.98) !important;
+}
+
+/* ── "Columns" / "Filters" pill buttons (list controls) ──────── */
+html[data-theme=dark] .pill {
+  background: #1A1A26 !important;
+  color: rgba(244, 244, 248, 0.65) !important;
+  border: 1px solid #252535 !important;
+  border-radius: 8px !important;
+  font-size: 0.75rem !important;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease !important;
+}
+
+html[data-theme=dark] .pill--has-action:hover,
+html[data-theme=dark] .pill--has-action:focus-visible {
+  background: #252535 !important;
+  border-color: #6C63FF !important;
+  color: #A9A4FF !important;
+  cursor: pointer;
+}
+
+/* Active/modified pill state */
+html[data-theme=dark] .pill--style-success,
+html[data-theme=dark] .list-controls__modified .pill {
+  background: rgba(108, 99, 255, 0.15) !important;
+  border-color: rgba(108, 99, 255, 0.40) !important;
+  color: #A9A4FF !important;
+}
+
+/* ── List controls wrap (the search + buttons row) ─────────────── */
+html[data-theme=dark] .list-controls__wrap {
+  background-color: #111118 !important;
+  border: 1px solid #1A1A26 !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+}
+
+/* ── Search input inside list controls ─────────────────────────── */
+html[data-theme=dark] .search-filter__input {
+  background-color: transparent !important;
+  color: #F4F4F8 !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-size: 0.8125rem !important;
+}
+
+html[data-theme=dark] .search-filter__input::placeholder {
+  color: rgba(244, 244, 248, 0.30) !important;
+}
+
+/* Search icon */
+html[data-theme=dark] .search-filter svg .stroke {
+  stroke: rgba(244, 244, 248, 0.30) !important;
+}
+
+/* ── Secondary button (outline style) ──────────────────────────── */
+html[data-theme=dark] .btn--style-secondary {
+  border: 1px solid #252535 !important;
+  color: rgba(244, 244, 248, 0.70) !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  transition: border-color 0.12s ease, color 0.12s ease !important;
+}
+
+html[data-theme=dark] .btn--style-secondary:hover {
+  border-color: #6C63FF !important;
+  color: #A9A4FF !important;
+}
+
+/* ── Nav toggle chevrons (group collapse arrows) ─────────────────── */
+html[data-theme=dark] .nav-toggler {
+  color: rgba(244, 244, 248, 0.30) !important;
+  transition: color 0.12s ease !important;
+}
+
+html[data-theme=dark] .nav-toggler:hover {
+  color: rgba(244, 244, 248, 0.65) !important;
+}
+
+/* The collapse button inside the nav (the ← arrow at top of nav) */
+html[data-theme=dark] .nav-toggler svg .stroke {
+  stroke: rgba(244, 244, 248, 0.30) !important;
+}
+
+html[data-theme=dark] .nav-toggler:hover svg .stroke {
+  stroke: rgba(244, 244, 248, 0.65) !important;
+}
+
+/* ── Account avatar (top-right) ──────────────────────────────────── */
+html[data-theme=dark] .graphic-account__bg {
+  fill: #1A1A26 !important;
+  stroke: #252535 !important;
+}
+
+html[data-theme=dark] .graphic-account__head,
+html[data-theme=dark] .graphic-account__body {
+  fill: rgba(244, 244, 248, 0.50) !important;
+}
+
+html[data-theme=dark] .graphic-account--active .graphic-account__bg {
+  fill: rgba(108, 99, 255, 0.20) !important;
+  stroke: #6C63FF !important;
+}
+
+html[data-theme=dark] .graphic-account--active .graphic-account__head,
+html[data-theme=dark] .graphic-account--active .graphic-account__body {
+  fill: #A9A4FF !important;
+}
+
+/* ── Table: cell text, column headers ───────────────────────────── */
+html[data-theme=dark] .table thead th {
+  color: rgba(244, 244, 248, 0.35) !important;
+  font-size: 0.6875rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid #1A1A26 !important;
+}
+
+html[data-theme=dark] .table tbody td {
+  border-bottom: 1px solid #111118 !important;
+  color: rgba(244, 244, 248, 0.80) !important;
+}
+
+html[data-theme=dark] .table tbody tr:hover td {
+  background-color: #111118 !important;
+}
+
+/* ── "Create new X" empty-state button ──────────────────────────── */
+html[data-theme=dark] .collection-list__no-results .btn {
+  background-color: #6C63FF !important;
+  color: #FFFFFF !important;
+  border-radius: 8px !important;
+}
+
+html[data-theme=dark] .collection-list__no-results .btn:hover {
+  background-color: #8A83FF !important;
+}
+
+/* ── Doc header divider line ─────────────────────────────────────── */
+html[data-theme=dark] .doc-header::after {
+  background: #1A1A26 !important;
+}
+
+/* ── Checkbox focus glow: brand purple instead of green ─────────── */
+html[data-theme=dark] .checkbox-input:not(.checkbox-input--read-only):active .checkbox-input__input,
+html[data-theme=dark] .checkbox-input:not(.checkbox-input--read-only):focus-within .checkbox-input__input {
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.30) !important;
+  border-color: #6C63FF !important;
+}
+
+/* ── Collapsible toggle button (used in nav groups) ─────────────── */
+html[data-theme=dark] .collapsible__toggle {
+  color: rgba(244, 244, 248, 0.28) !important;
+}
+
+html[data-theme=dark] .collapsible__toggle:hover {
+  color: rgba(244, 244, 248, 0.60) !important;
+}
+/* fine-tuning appended */
+
+/* === FINE TUNING: toolbar, buttons, search, breadcrumb, account === */
+
+/* App header top bar */
+html[data-theme=dark] .app-header { background-color: #0A0A0F; border-bottom: 1px solid #1A1A26; }
+html[data-theme=dark] .app-header__bg { background-color: #0A0A0F; }
+/* Breadcrumb step-nav */
+html[data-theme=dark] .step-nav { color: rgba(244,244,248,0.45); font-size: 0.8125rem; }
+html[data-theme=dark] .step-nav a { color: rgba(244,244,248,0.55) !important; text-decoration: none !important; }
+html[data-theme=dark] .step-nav a:hover { color: #A9A4FF !important; text-decoration: none !important; }
+html[data-theme=dark] .step-nav span { color: rgba(244,244,248,0.30); }
+/* Create New primary button */
+html[data-theme=dark] .btn--style-primary { background-color: #6C63FF !important; color: #FFFFFF !important; border-radius: 8px !important; font-weight: 600 !important; transition: background-color 0.15s ease, transform 0.1s ease !important; }
+html[data-theme=dark] .btn--style-primary:hover { background-color: #8A83FF !important; transform: translateY(-1px) !important; }
+html[data-theme=dark] .btn--style-primary:active { transform: scale(0.98) !important; }
+/* Pill buttons (Columns, Filters, etc.) */
+html[data-theme=dark] .pill { background: #1A1A26 !important; color: rgba(244,244,248,0.65) !important; border: 1px solid #252535 !important; border-radius: 8px !important; font-size: 0.75rem !important; transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease !important; }
+html[data-theme=dark] .pill--has-action:hover, html[data-theme=dark] .pill--has-action:focus-visible { background: #252535 !important; border-color: #6C63FF !important; color: #A9A4FF !important; cursor: pointer; }
+html[data-theme=dark] .pill--style-success { background: rgba(108,99,255,0.15) !important; border-color: rgba(108,99,255,0.40) !important; color: #A9A4FF !important; }
+/* List controls search row */
+html[data-theme=dark] .list-controls__wrap { background-color: #111118 !important; border: 1px solid #1A1A26 !important; border-radius: 10px !important; padding: 8px 12px !important; }
+html[data-theme=dark] .search-filter__input { background-color: transparent !important; color: #F4F4F8 !important; border: none !important; box-shadow: none !important; font-size: 0.8125rem !important; }
+html[data-theme=dark] .search-filter__input::placeholder { color: rgba(244,244,248,0.30) !important; }
+html[data-theme=dark] .search-filter svg .stroke { stroke: rgba(244,244,248,0.30) !important; }
+/* Secondary button */
+html[data-theme=dark] .btn--style-secondary { border: 1px solid #252535 !important; color: rgba(244,244,248,0.70) !important; background: transparent !important; border-radius: 8px !important; transition: border-color 0.12s ease, color 0.12s ease !important; }
+html[data-theme=dark] .btn--style-secondary:hover { border-color: #6C63FF !important; color: #A9A4FF !important; }
+/* Nav toggle chevrons */
+html[data-theme=dark] .nav-toggler { color: rgba(244,244,248,0.30) !important; transition: color 0.12s ease, opacity 0.12s ease !important; }
+html[data-theme=dark] .nav-toggler:hover { color: rgba(244,244,248,0.65) !important; opacity: 1 !important; }
+html[data-theme=dark] .nav-toggler svg .stroke { stroke: rgba(244,244,248,0.30) !important; }
+html[data-theme=dark] .nav-toggler:hover svg .stroke { stroke: rgba(244,244,248,0.65) !important; }
+html[data-theme=dark] .nav-toggler--is-open { opacity: 1 !important; }
+/* Account avatar */
+html[data-theme=dark] .graphic-account__bg { fill: #1A1A26 !important; stroke: #252535 !important; }
+html[data-theme=dark] .graphic-account__head, html[data-theme=dark] .graphic-account__body { fill: rgba(244,244,248,0.50) !important; }
+html[data-theme=dark] .graphic-account--active .graphic-account__bg { fill: rgba(108,99,255,0.20) !important; stroke: #6C63FF !important; }
+html[data-theme=dark] .graphic-account--active .graphic-account__head, html[data-theme=dark] .graphic-account--active .graphic-account__body { fill: #A9A4FF !important; }
+/* Table headers + rows */
+html[data-theme=dark] .table thead th { color: rgba(244,244,248,0.35) !important; font-size: 0.6875rem !important; font-weight: 700 !important; letter-spacing: 0.08em !important; text-transform: uppercase !important; border-bottom: 1px solid #1A1A26 !important; }
+html[data-theme=dark] .table tbody td { border-bottom: 1px solid #111118 !important; color: rgba(244,244,248,0.80) !important; }
+html[data-theme=dark] .table tbody tr:hover td { background-color: #111118 !important; }
+/* Doc header divider */
+html[data-theme=dark] .doc-header::after { background: #1A1A26 !important; }
+/* Checkbox focus: brand purple not green */
+html[data-theme=dark] .checkbox-input:not(.checkbox-input--read-only):focus-within .checkbox-input__input { box-shadow: 0 0 0 3px rgba(108,99,255,0.30) !important; border-color: #6C63FF !important; }
+/* Collapsible toggle */
+html[data-theme=dark] .collapsible__toggle { color: rgba(244,244,248,0.28) !important; }
+html[data-theme=dark] .collapsible__toggle:hover { color: rgba(244,244,248,0.60) !important; }
+/* Empty-state Create button */
+html[data-theme=dark] .collection-list__no-results .btn { background-color: #6C63FF !important; color: #FFFFFF !important; border-radius: 8px !important; }
+html[data-theme=dark] .collection-list__no-results .btn:hover { background-color: #8A83FF !important; }
+/* Collection title uses Syne */
+html[data-theme=dark] .render-title, html[data-theme=dark] .collection-list__header h1 { font-family: 'Syne', sans-serif !important; font-weight: 800 !important; letter-spacing: -0.02em !important; }

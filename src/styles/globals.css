@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — single source of truth for all raw visual values */
+@import './tokens.css';
+
+/* ─────────────────────────────────────────────────────────────
+   Base overrides
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── Dark mode (default) ──────────────────────────────────── */
+  body {
+    @apply bg-base-950 text-base-100 font-body text-body;
+    min-height: 100vh;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tight text-base-100;
+  }
+
+  /* ── Light mode overrides ─────────────────────────────────── */
+  [data-theme="light"] body {
+    @apply bg-surface-100 text-surface-900;
+  }
+
+  [data-theme="light"] h1,
+  [data-theme="light"] h2,
+  [data-theme="light"] h3,
+  [data-theme="light"] h4,
+  [data-theme="light"] h5,
+  [data-theme="light"] h6 {
+    @apply text-surface-900;
+  }
+
+  /* Scrollbar — light mode */
+  [data-theme="light"] ::-webkit-scrollbar-track {
+    @apply bg-surface-200;
+  }
+  [data-theme="light"] ::-webkit-scrollbar-thumb {
+    @apply bg-surface-400 rounded-full;
+  }
+  [data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-500;
+  }
+
+  /* Focus ring offset — light mode */
+  [data-theme="light"] :focus-visible {
+    @apply ring-offset-surface-100;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  ::selection {
+    background-color: #6C63FF;
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-500 ring-offset-2 ring-offset-base-950 rounded-sm;
+  }
+
+  ::-webkit-scrollbar       { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-base-900; }
+  ::-webkit-scrollbar-thumb { @apply bg-base-700 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-brand-500; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Component utilities
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply font-body text-label font-semibold uppercase tracking-widest text-brand-500;
+  }
+
+  /* Pill chip */
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full
+           text-label font-body font-medium
+           border border-base-700 bg-base-800/60 text-base-100/70
+           backdrop-blur-sm;
+  }
+
+  [data-theme="light"] .chip {
+    @apply border-surface-300 bg-surface-200 text-surface-700;
+  }
+
+  /* Brand gradient background */
+  .gradient-brand {
+    background: linear-gradient(135deg, #6C63FF, #FF6B35);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #8A83FF, #FF8A5C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Subtle horizontal divider */
+  .section-divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-base-700 to-transparent;
+  }
+
+  [data-theme="light"] .section-divider {
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.08), transparent);
+  }
+
+  /* Card surface */
+  .card-surface {
+    @apply rounded-2xl border border-base-800 bg-base-900
+           hover:border-brand-500/40 transition-all duration-normal;
+  }
+
+  [data-theme="light"] .card-surface {
+    @apply border-surface-300 bg-surface-50
+           hover:border-brand-500/60;
+  }
+
+  /* Glow blob */
+  .glow-blob {
+    @apply absolute rounded-full blur-[120px] pointer-events-none;
+  }
+
+  /* Noise overlay */
+  .noise-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}

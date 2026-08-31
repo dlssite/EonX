@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Eonrisen mark — stylised "E" letterform on dark background -->
+  <rect width="64" height="64" rx="12" fill="#0A0A0F"/>
+  <text x="10" y="48" font-family="sans-serif" font-weight="800" font-size="44" fill="#6C63FF">E</text>
+</svg>
