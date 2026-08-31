@@ -7,7 +7,7 @@ import { getPayload } from '@/lib/payload'
 import { generateMetadata as genMeta } from '@/lib/metadata'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/structured-data'
-import { absoluteUrl } from '@/lib/utils'
+import { absoluteUrl, payloadImageUrl } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
 import { Container } from '@/components/ui/Container'
 import { CtaBand } from '@/components/sections/CtaBand'
@@ -69,6 +69,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   if (!project) notFound()
 
   const coverImage = project.coverImage as { url?: string; alt?: string; width?: number; height?: number } | null
+  const coverImageUrl = payloadImageUrl(coverImage?.url)
   const tags = project.tags as Array<{ tag: string }> | null
 
   const statusVariant: Record<string, 'brand' | 'success' | 'default' | 'warning'> = {
@@ -120,13 +121,13 @@ export default async function ProjectDetailPage({ params }: Props) {
               {project.tagline as string}
             </p>
           </div>
-          {coverImage?.url && (
+          {coverImageUrl && (
             <div className="rounded-2xl overflow-hidden border border-base-800 mt-4">
               <Image
-                src={coverImage.url}
-                alt={coverImage.alt ?? (project.name as string)}
-                width={coverImage.width ?? 1200}
-                height={coverImage.height ?? 675}
+                src={coverImageUrl}
+                alt={coverImage?.alt ?? (project.name as string)}
+                width={coverImage?.width ?? 1200}
+                height={coverImage?.height ?? 675}
                 className="w-full h-auto"
                 priority
               />

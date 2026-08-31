@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { staggerContainer, fadeUp } from '@/variants'
@@ -130,6 +130,7 @@ type ProjectCardProps = {
 
 function ProjectCard({ project, className }: ProjectCardProps) {
   const cover  = project.coverImage as { url?: string; alt?: string } | null
+  const coverUrl = payloadImageUrl(cover?.url)
   const slug   = project.slug as string
   const status = project.status as string
 
@@ -147,10 +148,10 @@ function ProjectCard({ project, className }: ProjectCardProps) {
     >
       {/* Cover image — full bleed, tall aspect ratio */}
       <div className="relative aspect-[4/3] overflow-hidden bg-base-800">
-        {cover?.url ? (
+        {coverUrl ? (
           <Image
-            src={cover.url}
-            alt={cover.alt ?? (project.name as string)}
+            src={coverUrl}
+            alt={cover?.alt ?? (project.name as string)}
             fill
             className="object-cover group-hover:scale-[1.04] transition-transform duration-slow"
             sizes="(max-width: 768px) 76vw, (max-width: 1280px) 33vw, 400px"

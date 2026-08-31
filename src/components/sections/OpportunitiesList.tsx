@@ -10,6 +10,7 @@ type Opportunity = {
   id: string
   title: unknown
   department: unknown
+  customDepartment: unknown
   timeCommitment: unknown
   isRemote: unknown
   skills: unknown
@@ -64,6 +65,12 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
           <div className="space-y-3">
             {opportunities.map((opp) => {
               const skills = (opp.skills as Skill[]) ?? []
+              const dept = opp.department as string
+              // Use customDepartment label when department is 'other'
+              const deptLabel =
+                dept === 'other' && opp.customDepartment
+                  ? (opp.customDepartment as string)
+                  : dept
               return (
                 <div
                   key={opp.id}
@@ -72,8 +79,8 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <Badge variant={deptBadge[opp.department as string] ?? 'default'} size="sm">
-                          {opp.department as string}
+                        <Badge variant={deptBadge[dept] ?? 'default'} size="sm">
+                          {deptLabel}
                         </Badge>
                         {Boolean(opp.isRemote) && (
                           <span className="inline-flex items-center gap-1 text-label text-base-100/40">

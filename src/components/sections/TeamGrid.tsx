@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { Linkedin, Twitter, Github, Globe } from 'lucide-react'
+import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { DeptFilter } from '@/components/sections/DeptFilter'
@@ -11,6 +12,7 @@ type TeamMember = {
   name: unknown
   role: unknown
   department: unknown
+  customDepartment: unknown
   bio: unknown
   photo: unknown
   socialLinks: unknown
@@ -58,11 +60,20 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                 name: string
                 role: string
                 department: string
+                customDepartment?: string
                 bio?: string
                 photo?: { url?: string; alt?: string }
                 socialLinks?: SocialLink[]
               }
-              const photo = member.photo ?? null
+              // Use customDepartment label when department is 'other'
+              const deptLabel =
+                member.department === 'other' && member.customDepartment
+                  ? member.customDepartment
+                  : member.department
+              const rawPhoto = member.photo as { url?: string; alt?: string } | null ?? null
+              const photo = rawPhoto
+                ? { ...rawPhoto, url: payloadImageUrl(rawPhoto.url) }
+                : null
               const socials = member.socialLinks ?? []
 
               return (
@@ -91,7 +102,7 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
 
                   {/* Info */}
                   <Badge variant={deptBadge[member.department] ?? 'default'} size="sm" className="mb-3">
-                    {member.department}
+                    {deptLabel}
                   </Badge>
                   <h3 className="font-display font-bold text-h4 text-base-100 mb-0.5">
                     {member.name}

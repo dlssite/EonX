@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { staggerContainer, fadeUp } from '@/variants'
 
@@ -13,6 +13,7 @@ type TeamMember = {
   name: unknown
   role: unknown
   department: unknown
+  customDepartment: unknown
   photo: unknown
 }
 
@@ -98,10 +99,18 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10"
         >
           {members.map((member) => {
-            const photo      = member.photo as { url?: string; alt?: string } | null
+            const rawPhoto   = member.photo as { url?: string; alt?: string } | null
+            const photo      = rawPhoto
+              ? { ...rawPhoto, url: payloadImageUrl(rawPhoto.url) }
+              : rawPhoto
             const name       = member.name as string
             const role       = member.role as string
             const department = member.department as string
+            // Use customDepartment label when department is 'other'
+            const deptLabel  =
+              department === 'other' && member.customDepartment
+                ? (member.customDepartment as string)
+                : department
 
             return (
               <motion.li key={member.id} variants={item} className="group flex flex-col items-center text-center">
@@ -152,7 +161,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
                       departmentChipClass(department),
                     )}
                   >
-                    {department}
+                    {deptLabel}
                   </span>
                 )}
 

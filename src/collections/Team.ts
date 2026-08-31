@@ -30,8 +30,16 @@ export const Team: CollectionConfig = {
         { label: 'Writing', value: 'writing' },
         { label: 'Art', value: 'art' },
         { label: 'Community', value: 'community' },
-        { label: 'Other', value: 'other' },
+        { label: 'Other (custom)', value: 'other' },
       ],
+    },
+    {
+      name: 'customDepartment',
+      type: 'text',
+      admin: {
+        description: 'Required when department is "Other (custom)". This label is shown on the site.',
+        condition: (data) => data?.department === 'other',
+      },
     },
     {
       name: 'bio',

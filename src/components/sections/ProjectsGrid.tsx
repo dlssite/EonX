@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter, usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
+import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { FolderOpen } from 'lucide-react'
@@ -99,7 +99,7 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
               {(featured.coverImage as { url?: string })?.url && (
                 <div className="rounded-xl overflow-hidden aspect-video bg-base-800">
                   <Image
-                    src={(featured.coverImage as { url: string }).url}
+                    src={payloadImageUrl((featured.coverImage as { url: string }).url)!}
                     alt={
                       (featured.coverImage as { alt?: string }).alt ??
                       (featured.name as string)
@@ -166,6 +166,7 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => {
               const cover = project.coverImage as { url?: string; alt?: string } | null
+              const coverUrl = payloadImageUrl(cover?.url)
               return (
                 <Link
                   key={project.id}
@@ -177,11 +178,11 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                     'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',
                   )}
                 >
-                  {cover?.url ? (
+                  {coverUrl ? (
                     <div className="aspect-video overflow-hidden bg-base-800">
                       <Image
-                        src={cover.url}
-                        alt={cover.alt ?? (project.name as string)}
+                        src={coverUrl}
+                        alt={cover?.alt ?? (project.name as string)}
                         width={600}
                         height={338}
                         className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-slow"
