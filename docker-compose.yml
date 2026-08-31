@@ -1,33 +1,18 @@
-version: "3.9"
-
 services:
-  # ── Caddy: reverse proxy + automatic HTTPS ─────────────────
-  caddy:
-    image: caddy:2-alpine
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - eonrisia_network
-    depends_on:
-      - app
-
   # ── App: Next.js + Payload CMS ─────────────────────────────
   app:
     image: ${IMAGE_TAG:-ghcr.io/eonrisia/eonrisia-web:latest}
     restart: unless-stopped
     env_file:
       - .env.production
+    expose:
+      - "3000"
     volumes:
       # Persist uploaded media files across container restarts/rebuilds
       - media_uploads:/app/public/media
     networks:
       - eonrisia_network
+      - proxy_network   # shared network the central Caddy is also on
     depends_on:
       postgres:
         condition: service_healthy
@@ -57,12 +42,10 @@ volumes:
     driver: local
   media_uploads:
     driver: local
-  caddy_data:
-    driver: local
-  caddy_config:
-    driver: local
 
 # ── Networks ─────────────────────────────────────────────────
 networks:
   eonrisia_network:
     driver: bridge
+  proxy_network:
+    external: true   # must be created once on the host; shared with central Caddy
