@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Linkedin, Twitter, Github, Globe } from 'lucide-react'
-import { cn, payloadImageUrl } from '@/lib/utils'
+import { payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { DeptFilter } from '@/components/sections/DeptFilter'
