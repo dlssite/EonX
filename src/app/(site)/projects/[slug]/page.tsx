@@ -13,10 +13,16 @@ import { Container } from '@/components/ui/Container'
 import { CtaBand } from '@/components/sections/CtaBand'
 
 export const revalidate = 120
+// Allow slugs not returned by generateStaticParams to be rendered at runtime
+export const dynamicParams = true
 
 type Props = { params: Promise<{ slug: string }> }
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  // PAYLOAD_SECRET is not available at Docker build time — skip pre-rendering.
+  // Pages are generated on first request and cached by ISR (revalidate = 120).
+  if (!process.env.PAYLOAD_SECRET) return []
+
   const payload = await getPayload()
   const { docs } = await payload.find({
     collection: 'projects',
@@ -28,6 +34,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  if (!process.env.PAYLOAD_SECRET) return {}
+
   const { slug } = await params
   const payload = await getPayload()
   const { docs } = await payload.find({
