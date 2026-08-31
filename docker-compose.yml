@@ -12,7 +12,7 @@ services:
       - media_uploads:/app/public/media
     networks:
       - eonrisia_network
-      - proxy_network   # shared network the central Caddy is also on
+      - caddy-proxy     # shared network the central Caddy gateway uses
     depends_on:
       postgres:
         condition: service_healthy
@@ -47,5 +47,5 @@ volumes:
 networks:
   eonrisia_network:
     driver: bridge
-  proxy_network:
-    external: true   # must be created once on the host; shared with central Caddy
+  caddy-proxy:
+    external: true   # created once with: docker network create caddy-proxy
