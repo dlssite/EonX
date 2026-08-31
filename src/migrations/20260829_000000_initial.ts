@@ -12,13 +12,13 @@
  */
 import type { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/drizzle/postgres'
 
-export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
+export async function up({ payload, req: _req }: MigrateUpArgs): Promise<void> {
   // Schema already exists — bootstrapped by dev-push on 2026-08-29.
   // Nothing to run.
   payload.logger.info({ msg: 'Migration 20260829_000000_initial: schema already exists, skipping.' })
 }
 
-export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
+export async function down({ payload, req: _req }: MigrateDownArgs): Promise<void> {
   // No-op — rolling back the initial schema is a manual process.
   payload.logger.info({ msg: 'Migration 20260829_000000_initial: down() is a no-op for the initial snapshot.' })
 }

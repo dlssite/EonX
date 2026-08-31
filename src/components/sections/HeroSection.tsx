@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Sparkles, Users, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { Container } from '@/components/ui/Container'
 import { heroStaggerContainer, fadeUp, fadeIn } from '@/variants'
 
 const chips = [
