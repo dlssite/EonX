@@ -30,8 +30,8 @@ export function DeptFilter({ activeDept }: DeptFilterProps) {
   }
 
   return (
-    <nav aria-label="Filter by department">
-      <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-fit shadow-md">
+    <nav aria-label="Filter by department" className="w-full">
+      <div className="flex items-center gap-2 p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md max-w-full overflow-x-auto no-scrollbar shadow-md">
         {DEPT_OPTIONS.map(({ value, label }) => {
           const isSelected = activeDept === value
           return (
@@ -40,9 +40,9 @@ export function DeptFilter({ activeDept }: DeptFilterProps) {
               onClick={() => handleSelect(value)}
               aria-pressed={isSelected}
               className={cn(
-                'px-4 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none',
+                'px-4 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none shrink-0 whitespace-nowrap',
                 isSelected
-                  ? 'bg-base-800/80 text-base-100 font-semibold border border-glass-subtle shadow-sm'
+                  ? 'bg-brand-500 text-white font-semibold shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
                   : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
               )}
             >

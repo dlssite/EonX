@@ -89,13 +89,14 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {members.map((member) => {
-            const rawPhoto   = member.photo as { url?: string; alt?: string } | null
-            const photo      = rawPhoto
-              ? { ...rawPhoto, url: payloadImageUrl(rawPhoto.url) }
-              : rawPhoto
+            const photoUrl   = payloadImageUrl(member.photo as Parameters<typeof payloadImageUrl>[0])
+            const photoAlt   =
+              typeof member.photo === 'object' && member.photo !== null
+                ? (member.photo as { alt?: string }).alt ?? (member.name as string)
+                : (member.name as string)
             const name       = member.name as string
             const role       = member.role as string
             const department = member.department as string
@@ -108,50 +109,54 @@ export function TeamPreview({ members }: TeamPreviewProps) {
               <motion.li
                 key={member.id}
                 variants={item}
-                className="group flex flex-col items-center text-center p-6 rounded-3xl border border-glass bg-gradient-to-b from-base-900/80 to-base-950/90 backdrop-blur-sm hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_16px_32px_-10px_rgba(108,99,255,0.25)]"
+                className="group relative flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/95 via-base-900/75 to-base-950/90 backdrop-blur-md overflow-hidden hover:border-glass-strong transition-all duration-normal hover:-translate-y-2 hover:shadow-[0_24px_48px_-15px_rgba(108,99,255,0.25)]"
               >
-                {/* Avatar */}
-                <div
-                  className={cn(
-                    'relative mb-4 w-20 h-20 sm:w-22 sm:h-22 rounded-2xl overflow-hidden shrink-0',
-                    'border border-glass bg-base-950',
-                    'group-hover:border-brand-400 group-hover:shadow-[0_0_24px_0_rgba(108,99,255,0.35)]',
-                    'transition-all duration-normal',
-                  )}
-                >
-                  {photo?.url ? (
+                {/* Portrait Image Header */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-base-950 border-b border-glass">
+                  {photoUrl ? (
                     <Image
-                      src={photo.url}
-                      alt={photo.alt ?? name}
+                      src={photoUrl}
+                      alt={photoAlt}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-slow"
-                      sizes="(max-width: 640px) 80px, 96px"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/30 to-base-950">
-                      <span className="font-display font-bold text-h3 text-brand-300 select-none">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/30 via-base-900 to-base-950">
+                      <span className="font-display font-extrabold text-[5rem] text-brand-300/40 select-none">
                         {name.charAt(0)}
                       </span>
                     </div>
                   )}
+
+                  {/* Gradient Fade */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-base-950/90 via-base-950/20 to-transparent"
+                  />
+
+                  {/* Pinned Department Badge */}
+                  {department && (
+                    <div className="absolute top-4 left-4 z-10">
+                      <Badge variant={deptBadge[department] ?? 'default'} size="sm" showDot>
+                        {deptLabel}
+                      </Badge>
+                    </div>
+                  )}
                 </div>
 
-                {/* Name */}
-                <p className="font-display font-bold text-body-sm text-base-100 leading-tight mb-1 group-hover:text-brand-300 transition-colors">
-                  {name}
-                </p>
+                {/* Profile Details */}
+                <div className="p-6 sm:p-7 flex flex-col justify-between flex-1">
+                  <div>
+                    <h3 className="font-display font-bold text-h3 text-base-100 leading-tight mb-1 group-hover:text-brand-300 transition-colors">
+                      {name}
+                    </h3>
 
-                {/* Role */}
-                <p className="text-label text-base-100/50 leading-snug mb-3">
-                  {role}
-                </p>
-
-                {/* Department badge */}
-                {department && (
-                  <Badge variant={deptBadge[department] ?? 'default'} size="sm" className="mt-auto">
-                    {deptLabel}
-                  </Badge>
-                )}
+                    <p className="text-body-sm text-brand-400 font-semibold">
+                      {role}
+                    </p>
+                  </div>
+                </div>
               </motion.li>
             )
           })}
