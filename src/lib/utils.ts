@@ -47,42 +47,16 @@ export function absoluteUrl(path: string): string {
 }
 
 /**
- * Media-like payload type containing url, filename, alt.
- */
-export type MediaLike =
-  | {
-      url?: string | null
-      filename?: string | null
-      alt?: string | null
-    }
-  | string
-  | null
-  | undefined
-
-/**
  * Normalise a Payload CMS media URL for use with next/image.
  *
- * Handles:
- * - Direct Media objects with `.url` or `.filename`
- * - String URLs (strips site origin for local Next.js static resolution)
- * - Safely ignores unpopulated relationship IDs
+ * Payload v3 serves all uploads via /api/media/file/[filename].
+ * This helper strips any absolute same-origin prefix so the URL
+ * is always root-relative (e.g. /api/media/file/photo.jpg).
  */
-export function payloadImageUrl(media: MediaLike): string | undefined {
-  if (!media) return undefined
-
-  let rawUrl: string | undefined
-
-  if (typeof media === 'string') {
-    if (media.startsWith('/') || media.startsWith('http')) {
-      rawUrl = media
-    } else {
-      return undefined
-    }
-  } else {
-    rawUrl = media.url || (media.filename ? `/media/${media.filename}` : undefined)
-  }
-
-  if (!rawUrl) return undefined
-
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://eonrisia.org'
+export function payloadImageUrl(url: string): string
+export function payloadImageUrl(url: string | null | undefined): string | undefined
+export function payloadImageUrl(url: string | null | undefined): string | undefined {
+  if (!url) return undefined
+  // Strip absolute same-origin prefix → keep as root-relative path
+  return url.replace(/^https?:\/\/[^/]+/, '')
 }
