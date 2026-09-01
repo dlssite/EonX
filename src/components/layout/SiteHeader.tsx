@@ -5,6 +5,7 @@ import { Header } from './Header'
 const DEFAULT_LINKS = [
   { label: 'About', href: '/about' },
   { label: 'Projects', href: '/projects' },
+  { label: 'Updates', href: '/updates' },
   { label: 'Team', href: '/team' },
   { label: 'Volunteer', href: '/volunteer' },
 ]

@@ -14,7 +14,6 @@ type CtaBandProps = {
   primaryHref: string
   secondaryLabel?: string
   secondaryHref?: string
-  /** Override the default trust indicators */
   indicators?: IndicatorItem[]
 }
 
@@ -24,10 +23,10 @@ type IndicatorItem = {
 }
 
 const DEFAULT_INDICATORS: IndicatorItem[] = [
-  { icon: Globe,  label: 'Global community' },
-  { icon: Layers, label: 'Multiple universes' },
-  { icon: Heart,  label: 'Community-owned' },
-  { icon: Zap,    label: 'Always open' },
+  { icon: Globe,  label: 'Global Community' },
+  { icon: Layers, label: 'Living Universes' },
+  { icon: Heart,  label: 'Community-Owned' },
+  { icon: Zap,    label: 'Open Standards' },
 ]
 
 export function CtaBand({
@@ -45,27 +44,18 @@ export function CtaBand({
 
   return (
     <section
-      className="relative overflow-hidden bg-base-950 py-24 md:py-32"
+      className="relative overflow-hidden bg-base-950 py-28 md:py-36 border-t border-white/[0.08]"
       aria-label="Call to action"
     >
       {/* ── Background glows ──────────────────────────────────── */}
       <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-        <div className="glow-blob w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-500/12" />
-        <div className="glow-blob w-[300px] h-[300px] top-0 right-[15%] bg-accent-500/8" />
+        <div
+          className="absolute rounded-full blur-[140px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-25"
+          style={{
+            background: 'radial-gradient(ellipse, rgba(108,99,255,0.3) 0%, rgba(255,107,53,0.12) 50%, transparent 75%)',
+          }}
+        />
       </div>
-
-      {/* Top divider */}
-      <div aria-hidden="true" className="section-divider absolute top-0 left-0 right-0" />
-
-      {/* ── Subtle dot-grid texture ────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none opacity-[0.03]"
-        style={{
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-        }}
-      />
 
       <Container className="relative z-10">
         <motion.div
@@ -73,13 +63,13 @@ export function CtaBand({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="max-w-3xl mx-auto text-center"
+          className="max-w-4xl mx-auto text-center"
         >
 
           {/* ── Trust indicator badge row ──────────────────────── */}
           <motion.div
             variants={item}
-            className="flex flex-wrap items-center justify-center gap-3 mb-10"
+            className="flex flex-wrap items-center justify-center gap-2.5 mb-10"
           >
             {indicators.map(({ icon: Icon, label }) => (
               <span
@@ -88,8 +78,8 @@ export function CtaBand({
                   'inline-flex items-center gap-2',
                   'px-4 py-1.5 rounded-full',
                   'text-label font-body font-medium',
-                  'border border-base-700/80 bg-base-900/60 text-base-100/60',
-                  'backdrop-blur-sm',
+                  'border border-white/[0.08] bg-base-900/80 text-base-100/70',
+                  'backdrop-blur-md shadow-sm',
                 )}
               >
                 <Icon size={12} aria-hidden="true" className="text-brand-400 shrink-0" />
@@ -101,7 +91,7 @@ export function CtaBand({
           {/* ── Headline ──────────────────────────────────────────── */}
           <motion.h2
             variants={item}
-            className="font-display font-extrabold text-h1 text-base-100 tracking-tight mb-4"
+            className="font-display font-extrabold text-h1 md:text-[3.25rem] text-base-100 tracking-tight leading-[1.08] mb-6"
           >
             {headline}
           </motion.h2>
@@ -110,7 +100,7 @@ export function CtaBand({
           {subtext && (
             <motion.p
               variants={item}
-              className="text-body-lg text-base-100/50 mb-10 max-w-xl mx-auto leading-relaxed"
+              className="text-body-lg text-base-100/65 mb-12 max-w-2xl mx-auto leading-relaxed"
             >
               {subtext}
             </motion.p>
@@ -119,42 +109,36 @@ export function CtaBand({
           {/* ── CTA buttons ───────────────────────────────────────── */}
           <motion.div
             variants={item}
-            className={cn(
-              'flex flex-col sm:flex-row items-center justify-center gap-3',
-              !subtext && 'mt-8',
-            )}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            {/* Primary — white pill */}
             <Link
               href={primaryHref}
               className={cn(
-                'inline-flex items-center gap-2',
-                'px-7 py-3.5 rounded-full',
-                'text-body font-body font-semibold',
-                'bg-base-100 text-base-950',
-                'hover:bg-brand-300 hover:text-base-950',
-                'active:scale-[0.97]',
+                'inline-flex items-center justify-center gap-2.5',
+                'px-9 py-4 rounded-full',
+                'text-body font-body font-semibold text-white',
+                'bg-brand-500 hover:bg-brand-400 active:bg-brand-600',
+                'shadow-[0_0_32px_0_rgba(108,99,255,0.45)] sheen-sweep',
+                'active:scale-[0.97] hover:scale-[1.02]',
                 'transition-all duration-fast',
-                'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
               )}
             >
-              {primaryLabel}
-              <ArrowRight size={16} aria-hidden="true" />
+              <span>{primaryLabel}</span>
+              <ArrowRight size={17} aria-hidden="true" />
             </Link>
 
-            {/* Secondary — ghost pill */}
             {secondaryLabel && secondaryHref && (
               <Link
                 href={secondaryHref}
                 className={cn(
-                  'inline-flex items-center gap-2',
-                  'px-7 py-3.5 rounded-full',
-                  'text-body font-body font-semibold',
-                  'border border-base-700 text-base-100/65',
-                  'hover:border-base-500 hover:text-base-100 hover:bg-base-800/40',
-                  'active:scale-[0.97]',
+                  'inline-flex items-center justify-center gap-2.5',
+                  'px-9 py-4 rounded-full',
+                  'text-body font-body font-semibold text-base-100',
+                  'border border-white/15 bg-base-900/60 hover:bg-base-800/80 hover:border-brand-500/50 hover:text-white',
+                  'backdrop-blur-md active:scale-[0.97]',
                   'transition-all duration-fast',
-                  'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
                 )}
               >
                 {secondaryLabel}

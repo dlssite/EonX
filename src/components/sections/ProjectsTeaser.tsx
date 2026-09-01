@@ -1,12 +1,14 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Eye, Layers } from 'lucide-react'
 import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
+import { Drawer } from '@/components/ui/Drawer'
 import { staggerContainer, fadeUp } from '@/variants'
 
 type Project = {
@@ -14,8 +16,10 @@ type Project = {
   name: unknown
   slug: unknown
   tagline: unknown
+  description?: unknown
   coverImage: unknown
   status: unknown
+  tags?: unknown
 }
 
 export type { Project }
@@ -31,6 +35,7 @@ const statusVariant: Record<string, 'brand' | 'success' | 'warning' | 'default'>
 }
 
 export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const prefersReduced = useReducedMotion()
   const container = prefersReduced ? {} : staggerContainer
   const item = prefersReduced ? {} : fadeUp
@@ -38,7 +43,7 @@ export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
   if (!projects.length) return null
 
   return (
-    <section className="py-24 md:py-32" aria-labelledby="projects-heading">
+    <section className="py-28 md:py-36 bg-base-950" aria-labelledby="projects-heading">
       <Container>
 
         {/* Section header */}
@@ -47,10 +52,10 @@ export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 md:mb-16"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 md:mb-16"
         >
           <div>
-            <p className="eyebrow mb-3">What We&apos;re Building</p>
+            <p className="eyebrow mb-3">Flagship Projects & Universes</p>
             <h2
               id="projects-heading"
               className="font-display font-extrabold text-h1 text-base-100 tracking-tight"
@@ -62,61 +67,93 @@ export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
           <Link
             href="/projects"
             className={cn(
-              'hidden sm:inline-flex items-center gap-1.5 shrink-0',
-              'text-body-sm font-body font-medium',
-              'text-base-100/40 hover:text-brand-300',
+              'inline-flex items-center gap-2 shrink-0',
+              'text-body-sm font-body font-semibold',
+              'text-base-100/60 hover:text-brand-300',
               'transition-colors duration-fast',
             )}
           >
             See all projects
-            <ArrowRight size={14} aria-hidden="true" />
+            <ArrowRight size={15} aria-hidden="true" />
           </Link>
+        </motion.div>
+
+        {/* ── Desktop & Tablet Grid ────────────────────────────── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {projects.map((project) => (
+            <motion.div key={project.id} variants={item}>
+              <ProjectCard
+                project={project}
+                onQuickView={() => setSelectedProject(project)}
+              />
+            </motion.div>
+          ))}
         </motion.div>
 
       </Container>
 
-      {/* ── Card rail: contained on md+, full-bleed horizontal scroll on mobile ── */}
-      <div className="relative">
+      {/* ── Quick-View Drawer ─────────────────────────────────── */}
+      <Drawer
+        isOpen={Boolean(selectedProject)}
+        onClose={() => setSelectedProject(null)}
+        title={String(selectedProject?.name ?? 'Project Details')}
+        description={String(selectedProject?.tagline ?? '')}
+      >
+        {selectedProject && (
+          <div className="space-y-6">
+            {/* Media preview */}
+            {Boolean(selectedProject.coverImage) && (
+              <div className="relative aspect-video rounded-2xl overflow-hidden border border-glass bg-base-950">
+                <Image
+                  src={payloadImageUrl((selectedProject.coverImage as { url: string }).url)!}
+                  alt={String(selectedProject.name)}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
 
-        {/* Mobile: full-width horizontal scroll rail */}
-        <div className="md:hidden px-6 overflow-x-auto scrollbar-none pb-4">
-          <div className="flex gap-4 w-max">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} className="w-[76vw] max-w-sm" />
-            ))}
-            {/* Peek card — hint there's more */}
-            <div className="w-8 shrink-0" aria-hidden="true" />
+            {/* Status & Category */}
+            <div className="flex items-center gap-3">
+              <Badge
+                variant={statusVariant[String(selectedProject.status)] ?? 'default'}
+                showDot
+              >
+                {String(selectedProject.status)}
+              </Badge>
+            </div>
+
+            {/* Content summary */}
+            <div className="p-6 rounded-2xl border border-glass bg-base-950/50 space-y-3">
+              <div className="flex items-center gap-2 text-label font-body font-semibold uppercase tracking-widest text-brand-400">
+                <Layers size={14} aria-hidden="true" />
+                <span>Overview</span>
+              </div>
+              <p className="text-body-sm text-base-100/70 leading-relaxed">
+                {String(selectedProject.tagline)}
+              </p>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-glass">
+              <Link
+                href={`/projects/${String(selectedProject.slug)}`}
+                onClick={() => setSelectedProject(null)}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.35)] sheen-sweep"
+              >
+                <span>View Full Project Page</span>
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
-        </div>
-
-        {/* Desktop: contained grid */}
-        <Container className="hidden md:block">
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-          >
-            {projects.map((project) => (
-              <motion.div key={project.id} variants={item}>
-                <ProjectCard project={project} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </Container>
-      </div>
-
-      {/* Mobile see-all link */}
-      <Container className="mt-8 md:hidden">
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-1.5 text-body-sm font-body font-medium text-brand-400 hover:text-brand-300 transition-colors duration-fast"
-        >
-          See all projects
-          <ArrowRight size={14} aria-hidden="true" />
-        </Link>
-      </Container>
+        )}
+      </Drawer>
     </section>
   )
 }
@@ -125,80 +162,88 @@ export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
 
 type ProjectCardProps = {
   project: Project
-  className?: string
+  onQuickView: () => void
 }
 
-function ProjectCard({ project, className }: ProjectCardProps) {
+function ProjectCard({ project, onQuickView }: ProjectCardProps) {
   const cover  = project.coverImage as { url?: string; alt?: string } | null
   const coverUrl = payloadImageUrl(cover?.url)
   const slug   = project.slug as string
   const status = project.status as string
 
   return (
-    <Link
-      href={`/projects/${slug}`}
+    <div
       className={cn(
         'group relative flex flex-col rounded-3xl overflow-hidden',
-        'border border-base-800 bg-base-900',
-        'hover:border-base-700',
-        'transition-all duration-normal hover:-translate-y-1 hover:shadow-card-hover',
-        'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',
-        className,
+        'border border-glass bg-base-900/80 backdrop-blur-md',
+        'hover:border-glass-hover transition-all duration-normal hover:-translate-y-1.5 hover:shadow-card-hover',
       )}
     >
-      {/* Cover image — full bleed, tall aspect ratio */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-base-800">
+      {/* Cover image */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-base-950">
         {coverUrl ? (
           <Image
             src={coverUrl}
             alt={cover?.alt ?? (project.name as string)}
             fill
             className="object-cover group-hover:scale-[1.04] transition-transform duration-slow"
-            sizes="(max-width: 768px) 76vw, (max-width: 1280px) 33vw, 400px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
           />
         ) : (
-          /* Placeholder when no cover image */
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-base-800 to-base-900">
-            <span className="font-display font-extrabold text-[4rem] text-base-700 select-none">
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-base-900 to-base-950">
+            <span className="font-display font-extrabold text-[4rem] text-base-800 select-none">
               {(project.name as string).charAt(0)}
             </span>
           </div>
         )}
 
-        {/* Gradient overlay for text legibility */}
+        {/* Gradient overlay */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-base-900/80 via-base-900/10 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-base-950/90 via-base-950/20 to-transparent"
         />
 
         {/* Status badge pinned top-left */}
-        <div className="absolute top-4 left-4">
+        <div className="absolute top-4 left-4 z-10">
           <Badge
             variant={statusVariant[status] ?? 'default'}
             size="sm"
+            showDot
           >
             {status}
           </Badge>
         </div>
 
-        {/* Arrow icon pinned top-right — visible on hover */}
-        <div
-          aria-hidden="true"
-          className="absolute top-4 right-4 p-2 rounded-full bg-base-950/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-fast"
+        {/* Quick-view pill button */}
+        <button
+          onClick={onQuickView}
+          aria-label={`Quick view ${project.name as string}`}
+          className="absolute bottom-4 right-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-label font-body font-semibold text-white bg-base-950/80 border border-glass-strong backdrop-blur-md opacity-0 group-hover:opacity-100 hover:bg-brand-500 hover:border-brand-400 transition-all duration-fast"
         >
-          <ArrowUpRight size={14} className="text-base-100" />
-        </div>
+          <Eye size={13} aria-hidden="true" />
+          <span>Quick View</span>
+        </button>
       </div>
 
       {/* Text block */}
-      <div className="flex flex-col flex-1 p-6">
-        <h3 className="font-display font-bold text-h4 text-base-100 mb-2 group-hover:text-brand-300 transition-colors duration-fast leading-snug">
-          {project.name as string}
-        </h3>
-        <p className="text-body-sm text-base-100/55 leading-relaxed line-clamp-2">
+      <div className="flex flex-col flex-1 p-6 md:p-7">
+        <Link
+          href={`/projects/${slug}`}
+          className="group/link flex items-start justify-between gap-2 mb-2.5"
+        >
+          <h3 className="font-display font-bold text-h4 text-base-100 group-hover/link:text-brand-300 transition-colors duration-fast leading-snug">
+            {project.name as string}
+          </h3>
+          <ArrowUpRight
+            size={18}
+            className="text-base-100/40 group-hover/link:text-brand-300 shrink-0 transition-colors"
+            aria-hidden="true"
+          />
+        </Link>
+        <p className="text-body-sm text-base-100/60 leading-relaxed line-clamp-2">
           {project.tagline as string}
         </p>
       </div>
-    </Link>
+    </div>
   )
 }

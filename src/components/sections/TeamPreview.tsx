@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
+import { Badge } from '@/components/ui/Badge'
 import { staggerContainer, fadeUp } from '@/variants'
 
 type TeamMember = {
@@ -23,20 +24,14 @@ type TeamPreviewProps = {
   members: TeamMember[]
 }
 
-/**
- * Maps department strings to a subtle tinted chip colour.
- * Falls back to the default neutral chip if no match.
- */
-function departmentChipClass(department: string): string {
-  const map: Record<string, string> = {
-    leadership:  'bg-brand-500/10 text-brand-300 border-brand-500/20',
-    engineering: 'bg-info/10 text-info border-info/20',
-    writing:     'bg-accent-500/10 text-accent-400 border-accent-500/20',
-    art:         'bg-success/10 text-success border-success/20',
-    music:       'bg-warning/10 text-warning border-warning/20',
-    community:   'bg-brand-400/10 text-brand-300 border-brand-400/20',
-  }
-  return map[department?.toLowerCase()] ?? 'bg-base-800 text-base-100/50 border-base-700'
+const deptBadge: Record<string, 'brand' | 'accent' | 'default'> = {
+  leadership:  'brand',
+  engineering: 'accent',
+  design:      'default',
+  writing:     'default',
+  art:         'default',
+  community:   'default',
+  other:       'default',
 }
 
 export function TeamPreview({ members }: TeamPreviewProps) {
@@ -48,11 +43,9 @@ export function TeamPreview({ members }: TeamPreviewProps) {
 
   return (
     <section
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-28 md:py-36 overflow-hidden bg-base-950"
       aria-labelledby="team-heading"
     >
-      {/* Subtle section background */}
-      <div aria-hidden="true" className="absolute inset-0 bg-base-900/25 pointer-events-none" />
       <div aria-hidden="true" className="section-divider absolute top-0 left-0 right-0" />
 
       <Container className="relative z-10">
@@ -63,29 +56,29 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-14 md:mb-16"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 md:mb-20"
         >
           <div>
-            <p className="eyebrow mb-3">The People Behind It</p>
+            <p className="eyebrow mb-3">Core Stewards & Leadership</p>
             <h2
               id="team-heading"
               className="font-display font-extrabold text-h1 text-base-100 tracking-tight"
             >
-              Our{' '}
-              <span className="gradient-text">core team.</span>
+              The people behind{' '}
+              <span className="gradient-text">Eonrisia.</span>
             </h2>
           </div>
           <Link
             href="/team"
             className={cn(
-              'hidden sm:inline-flex items-center gap-1.5 shrink-0',
-              'text-body-sm font-body font-medium',
-              'text-base-100/40 hover:text-brand-300',
+              'inline-flex items-center gap-2 shrink-0',
+              'text-body-sm font-body font-semibold',
+              'text-base-100/60 hover:text-brand-300',
               'transition-colors duration-fast',
             )}
           >
-            Meet everyone
-            <ArrowRight size={14} aria-hidden="true" />
+            Meet the entire team
+            <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </motion.div>
 
@@ -96,7 +89,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-10"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6"
         >
           {members.map((member) => {
             const rawPhoto   = member.photo as { url?: string; alt?: string } | null
@@ -106,21 +99,23 @@ export function TeamPreview({ members }: TeamPreviewProps) {
             const name       = member.name as string
             const role       = member.role as string
             const department = member.department as string
-            // Use customDepartment label when department is 'other'
             const deptLabel  =
               department === 'other' && member.customDepartment
                 ? (member.customDepartment as string)
                 : department
 
             return (
-              <motion.li key={member.id} variants={item} className="group flex flex-col items-center text-center">
-
-                {/* Circular avatar */}
+              <motion.li
+                key={member.id}
+                variants={item}
+                className="group flex flex-col items-center text-center p-5 rounded-3xl border border-white/[0.08] bg-base-900/60 backdrop-blur-sm hover:border-brand-500/40 transition-all duration-normal hover:-translate-y-1.5"
+              >
+                {/* Avatar */}
                 <div
                   className={cn(
-                    'relative mb-4 w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0',
-                    'border-2 border-base-800 bg-base-800',
-                    'ring-2 ring-transparent group-hover:ring-brand-500/40',
+                    'relative mb-4 w-20 h-20 sm:w-22 sm:h-22 rounded-2xl overflow-hidden shrink-0',
+                    'border border-white/[0.1] bg-base-950',
+                    'group-hover:border-brand-500/50 group-hover:shadow-[0_0_20px_0_rgba(108,99,255,0.3)]',
                     'transition-all duration-normal',
                   )}
                 >
@@ -133,8 +128,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
                       sizes="(max-width: 640px) 80px, 96px"
                     />
                   ) : (
-                    /* Initials fallback */
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-600/30 to-base-800">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-base-900 to-base-950">
                       <span className="font-display font-bold text-h3 text-brand-300 select-none">
                         {name.charAt(0)}
                       </span>
@@ -143,43 +137,25 @@ export function TeamPreview({ members }: TeamPreviewProps) {
                 </div>
 
                 {/* Name */}
-                <p className="font-body font-semibold text-body-sm text-base-100 leading-tight mb-1.5">
+                <p className="font-display font-bold text-body-sm text-base-100 leading-tight mb-1 group-hover:text-brand-300 transition-colors">
                   {name}
                 </p>
 
                 {/* Role */}
-                <p className="text-label text-base-100/45 leading-snug mb-2.5">
+                <p className="text-label text-base-100/50 leading-snug mb-3">
                   {role}
                 </p>
 
-                {/* Department chip */}
+                {/* Department badge */}
                 {department && (
-                  <span
-                    className={cn(
-                      'inline-flex items-center px-2.5 py-0.5 rounded-full',
-                      'text-label-xs font-body font-medium border',
-                      departmentChipClass(department),
-                    )}
-                  >
+                  <Badge variant={deptBadge[department] ?? 'default'} size="sm" className="mt-auto">
                     {deptLabel}
-                  </span>
+                  </Badge>
                 )}
-
               </motion.li>
             )
           })}
         </motion.ul>
-
-        {/* Mobile see-all */}
-        <div className="mt-10 sm:hidden">
-          <Link
-            href="/team"
-            className="inline-flex items-center gap-1.5 text-body-sm font-body font-medium text-brand-400 hover:text-brand-300 transition-colors duration-fast"
-          >
-            Meet everyone
-            <ArrowRight size={14} aria-hidden="true" />
-          </Link>
-        </div>
 
       </Container>
 

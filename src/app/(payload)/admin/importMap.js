@@ -23,6 +23,8 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { AdminIcon as AdminIcon_d500ae2ad98a0a33d640ae0ac1a3417c } from '@/components/admin/AdminIcon'
 import { AdminLogo as AdminLogo_b80a86fce1072afc84cd6a430a965697 } from '@/components/admin/AdminLogo'
+import { AdminBeforeDashboard as AdminBeforeDashboard_76bc36f5bc9c1a4907ebcc4d728b23b9 } from '@/components/admin/AdminBeforeDashboard'
+import { AdminBeforeLogin as AdminBeforeLogin_da0b88c9352829bfb1929e2a227c9496 } from '@/components/admin/AdminBeforeLogin'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -49,5 +51,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/admin/AdminIcon#AdminIcon": AdminIcon_d500ae2ad98a0a33d640ae0ac1a3417c,
-  "@/components/admin/AdminLogo#AdminLogo": AdminLogo_b80a86fce1072afc84cd6a430a965697
+  "@/components/admin/AdminLogo#AdminLogo": AdminLogo_b80a86fce1072afc84cd6a430a965697,
+  "@/components/admin/AdminBeforeDashboard#AdminBeforeDashboard": AdminBeforeDashboard_76bc36f5bc9c1a4907ebcc4d728b23b9,
+  "@/components/admin/AdminBeforeLogin#AdminBeforeLogin": AdminBeforeLogin_da0b88c9352829bfb1929e2a227c9496
 }

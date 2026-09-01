@@ -88,3 +88,24 @@ export function articleSchema(post: {
     dateModified: post.updatedAt,
   }
 }
+
+export function projectSchema(project: {
+  name: string
+  description: string
+  url: string
+  image?: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.name,
+    description: project.description,
+    url: project.url,
+    ...(project.image ? { image: project.image } : {}),
+    author: {
+      '@type': 'Organization',
+      name: 'Eonrisia',
+      url: absoluteUrl('/'),
+    },
+  }
+}

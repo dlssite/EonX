@@ -62,16 +62,20 @@ export default async function ProjectsPage({ searchParams }: ProjectsPageProps) 
         lead="From the Sanctyria universe to community tools and commissioned work — everything Eonrisia creates is driven by the same mission."
       />
       <ProjectsGrid featured={featured} projects={rest} activeStatus={status ?? 'all'} activeTag={tag ?? ''} />
-      <section className="py-16 bg-base-900/50">
+      <section className="py-20 bg-base-950 border-t border-glass">
         <Container>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 py-8 px-8 rounded-2xl border border-base-800">
+          <div className="glass-panel p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 border border-glass">
             <div>
-              <p className="font-display font-bold text-h4 text-base-100 mb-1">
-                Have a project in mind?
+              <p className="font-display font-bold text-h3 text-base-100 mb-1">
+                Have a creative project or universe idea?
               </p>
-              <p className="text-body-sm text-base-100/60">We build for clients who share our values.</p>
+              <p className="text-body text-base-100/60">
+                We collaborate with partners, studios, and clients who share our dedication to open world-building.
+              </p>
             </div>
-            <Button href="/work-with-us" variant="secondary" size="md">Work With Us</Button>
+            <Button href="/work-with-us" variant="secondary" size="md" className="shrink-0">
+              Work With Us
+            </Button>
           </div>
         </Container>
       </section>

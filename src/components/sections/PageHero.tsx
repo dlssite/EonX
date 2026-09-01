@@ -10,11 +10,6 @@ type PageHeroProps = {
   lead?: string
 }
 
-/**
- * Animated page hero used on all inner pages.
- * Entry animation mirrors HeroSection's stagger pattern but is
- * lighter — no glows, just text entrance — to keep inner pages fast.
- */
 export function PageHero({ eyebrow, headline, lead }: PageHeroProps) {
   const prefersReduced = useReducedMotion()
   const container = prefersReduced ? {} : heroStaggerContainer
@@ -22,54 +17,54 @@ export function PageHero({ eyebrow, headline, lead }: PageHeroProps) {
 
   return (
     <section
-      className="relative pt-28 pb-14 md:pt-36 md:pb-16 border-b border-base-800/60 bg-base-950 overflow-hidden"
+      className="relative pt-32 pb-16 md:pt-40 md:pb-20 border-b border-white/[0.08] bg-base-950 overflow-hidden"
       aria-label="Page header"
     >
       {/* ── Ambient glow top-right ──────────────────────────────── */}
       <div
         aria-hidden="true"
-        className="absolute top-0 right-0 w-[560px] h-[320px] pointer-events-none"
+        className="absolute top-0 right-0 w-[600px] h-[350px] pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at top right, rgba(108,99,255,0.09) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse at top right, rgba(108,99,255,0.14) 0%, transparent 70%)',
         }}
       />
 
-      {/* ── Subtle dot grid ─────────────────────────────────────── */}
+      {/* ── Precision dot grid ──────────────────────────────────── */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        className="absolute inset-0 pointer-events-none opacity-30"
         style={{
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.8) 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
+          backgroundImage: 'radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)',
+          backgroundSize: '32px 32px',
         }}
       />
 
-      {/* ── Top accent line ─────────────────────────────────────── */}
+      {/* ── Top hairline accent line ────────────────────────────── */}
       <div
         aria-hidden="true"
         className="absolute top-0 left-0 right-0 h-px"
         style={{
           background:
-            'linear-gradient(90deg, transparent 0%, rgba(108,99,255,0.5) 40%, rgba(255,107,53,0.3) 70%, transparent 100%)',
+            'linear-gradient(90deg, transparent 0%, rgba(108,99,255,0.6) 40%, rgba(255,107,53,0.3) 70%, transparent 100%)',
         }}
       />
 
-      <Container className="relative">
+      <Container className="relative z-10">
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="max-w-3xl"
+          className="max-w-4xl"
         >
           {eyebrow && (
-            <motion.p variants={item} className="eyebrow mb-3">
+            <motion.p variants={item} className="eyebrow mb-3.5">
               {eyebrow}
             </motion.p>
           )}
 
           <motion.h1
             variants={item}
-            className="font-display font-bold text-h1 text-base-100 tracking-tight mb-5"
+            className="font-display font-extrabold text-h1 md:text-[3.5rem] text-base-100 tracking-tight leading-[1.06] mb-6"
           >
             {headline}
           </motion.h1>
@@ -77,7 +72,7 @@ export function PageHero({ eyebrow, headline, lead }: PageHeroProps) {
           {lead && (
             <motion.p
               variants={item}
-              className="text-body-lg text-base-100/60 leading-relaxed max-w-2xl"
+              className="text-body-lg text-base-100/65 leading-relaxed max-w-2xl"
             >
               {lead}
             </motion.p>

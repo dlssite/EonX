@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -22,17 +23,15 @@ type HeaderProps = {
   currentPath?: string
 }
 
-/**
- * Site header — transparent over hero, frosted glass on scroll.
- * CTA uses a pill shape. Scroll state adds a subtle border, not a heavy background.
- */
-export function Header({ links, ctaLabel, ctaHref, currentPath = '' }: HeaderProps) {
+export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }: HeaderProps) {
+  const pathname = usePathname()
+  const activePath = pathname || propPath || '/'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     function handleScroll() {
-      setScrolled(window.scrollY > 48)
+      setScrolled(window.scrollY > 30)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
@@ -41,92 +40,99 @@ export function Header({ links, ctaLabel, ctaHref, currentPath = '' }: HeaderPro
   return (
     <>
       <motion.header
-        initial={{ y: -8, opacity: 0 }}
+        initial={{ y: -12, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+        transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-sticky',
-          'transition-all duration-normal',
+          'fixed top-0 left-0 right-0 z-sticky transition-all duration-normal',
           scrolled
-            ? 'bg-base-950/90 backdrop-blur-xl border-b border-base-800/40'
-            : 'bg-base-950/60 backdrop-blur-md',
+            ? 'bg-base-950/85 backdrop-blur-xl border-b border-glass shadow-lg py-2.5 md:py-3.5'
+            : 'bg-transparent py-4 md:py-6',
         )}
       >
         <Container>
-          <div className="flex items-center justify-between h-16 md:h-[72px]">
+          <div className="flex items-center justify-between">
 
-            {/* Wordmark */}
+            {/* Wordmark Lockup */}
             <Link
               href="/"
               aria-label="Eonrisia — go to homepage"
-              className="flex items-center shrink-0 group"
+              className="flex items-center group shrink-0 select-none"
             >
-              <span className="font-display font-extrabold text-[1.25rem] tracking-tight text-base-100 group-hover:text-brand-300 transition-colors duration-fast">
+              <span className="font-display font-extrabold text-[1.3rem] tracking-tight text-base-100 group-hover:text-brand-400 transition-colors duration-fast">
                 Eonrisia
               </span>
             </Link>
 
-            {/* Desktop nav */}
-            <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-0.5">
-              <ul className="flex items-center gap-0.5" role="list">
+            {/* Desktop Navigation Pill Island */}
+            <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-1 bg-base-900/60 border border-glass px-2 py-1.5 rounded-full backdrop-blur-md">
+              <ul className="flex items-center gap-1" role="list">
                 {links.map((link) => {
                   const isActive =
-                    currentPath === link.href ||
-                    (link.href !== '/' && currentPath.startsWith(link.href))
+                    activePath === link.href ||
+                    (link.href !== '/' && activePath.startsWith(link.href))
 
                   return (
-                    <li key={link.href}>
+                    <li key={link.href} className="relative">
                       <Link
                         href={link.href}
                         target={link.isExternal ? '_blank' : undefined}
                         rel={link.isExternal ? 'noopener noreferrer' : undefined}
                         aria-current={isActive ? 'page' : undefined}
                         className={cn(
-                          'relative px-4 py-2 rounded-full text-body-sm font-body font-medium',
-                          'transition-colors duration-fast',
+                          'relative z-10 block px-4 py-1.5 rounded-full text-body-sm font-body font-medium transition-colors duration-fast',
                           isActive
-                            ? 'text-base-100 bg-base-800/60'
-                            : 'text-base-100/55 hover:text-base-100 hover:bg-base-800/40',
+                            ? 'text-base-100 font-semibold'
+                            : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
                         )}
                       >
                         {link.label}
                       </Link>
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeNavIndicator"
+                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                          className="absolute inset-0 bg-base-800/80 border border-glass-subtle rounded-full z-0 pointer-events-none"
+                        />
+                      )}
                     </li>
                   )
                 })}
               </ul>
-
-              {/* Theme toggle + Pill CTA */}
-              <div className="ml-3 flex items-center gap-2">
-                <ThemeToggle />
-                <Link
-                  href={ctaHref}
-                  className={cn(
-                    'inline-flex items-center justify-center',
-                    'px-5 py-2 rounded-full',
-                    'text-body-sm font-body font-semibold',
-                    'bg-base-100 text-base-950',
-                    'hover:bg-brand-300 hover:text-base-950',
-                    'active:scale-[0.97]',
-                    'transition-all duration-fast',
-                    'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',
-                  )}
-                >
-                  {ctaLabel}
-                </Link>
-              </div>
             </nav>
 
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open navigation menu"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              className="md:hidden p-2 rounded-lg text-base-100/55 hover:text-base-100 hover:bg-base-800/60 transition-colors duration-fast"
-            >
-              <Menu size={21} aria-hidden="true" />
-            </button>
+            {/* Header Right Actions */}
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
+              <Link
+                href={ctaHref}
+                className={cn(
+                  'inline-flex items-center justify-center',
+                  'px-5 py-2 rounded-full text-body-sm font-body font-semibold',
+                  'bg-brand-500 text-white hover:bg-brand-400',
+                  'shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep',
+                  'active:scale-[0.97] hover:scale-[1.02]',
+                  'transition-all duration-fast',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
+                )}
+              >
+                {ctaLabel}
+              </Link>
+            </div>
+
+            {/* Mobile Actions */}
+            <div className="flex md:hidden items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open navigation menu"
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                className="p-2.5 rounded-full bg-base-900/80 border border-glass text-base-100/70 hover:text-base-100 hover:bg-base-800 transition-colors"
+              >
+                <Menu size={20} aria-hidden="true" />
+              </button>
+            </div>
 
           </div>
         </Container>

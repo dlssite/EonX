@@ -1,9 +1,11 @@
+'use client'
+
 import Image from 'next/image'
-import { Linkedin, Twitter, Github, Globe } from 'lucide-react'
-import { payloadImageUrl } from '@/lib/utils'
+import { Youtube, Instagram, Twitter, Github } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
-import { DeptFilter } from '@/components/sections/DeptFilter'
+import { DeptFilter } from './DeptFilter'
+import { payloadImageUrl } from '@/lib/utils'
 
 type SocialLink = { platform: string; url: string }
 
@@ -12,10 +14,10 @@ type TeamMember = {
   name: unknown
   role: unknown
   department: unknown
-  customDepartment: unknown
-  bio: unknown
-  photo: unknown
-  socialLinks: unknown
+  customDepartment?: unknown
+  bio?: unknown
+  photo?: unknown
+  socialLinks?: unknown
 }
 
 export type { TeamMember }
@@ -25,35 +27,36 @@ type TeamGridProps = {
   activeDept: string
 }
 
-const deptBadge: Record<string, 'brand' | 'accent' | 'default'> = {
-  leadership: 'brand',
-  engineering: 'accent',
-  design: 'default',
-  writing: 'default',
-  art: 'default',
-  community: 'default',
-  other: 'default',
+const deptBadge: Record<string, 'brand' | 'accent' | 'success' | 'warning' | 'default'> = {
+  engineering: 'brand',
+  design:      'accent',
+  writing:     'default',
+  art:         'accent',
+  community:   'success',
+  leadership:  'warning',
 }
 
 const socialIcons: Record<string, React.ComponentType<{ size?: number; 'aria-hidden'?: 'true' }>> = {
-  linkedin: Linkedin,
-  twitter: Twitter,
-  github: Github,
-  website: Globe,
+  youtube:   Youtube,
+  instagram: Instagram,
+  twitter:   Twitter,
+  github:    Github,
 }
 
 export function TeamGrid({ members, activeDept }: TeamGridProps) {
   return (
-    <section className="py-24">
+    <section className="py-24 bg-base-950">
       <Container>
-        <DeptFilter activeDept={activeDept} basePath="/team" />
+        <div className="mb-14">
+          <DeptFilter activeDept={activeDept} basePath="/team" />
+        </div>
 
         {members.length === 0 ? (
-          <div className="text-center py-20">
+          <div className="text-center py-20 rounded-3xl border border-dashed border-glass-subtle bg-base-900/30">
             <p className="text-body text-base-100/50">No team members found in this department.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {members.map((rawMember) => {
               const member = rawMember as {
                 id: string
@@ -65,7 +68,6 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                 photo?: { url?: string; alt?: string }
                 socialLinks?: SocialLink[]
               }
-              // Use customDepartment label when department is 'other'
               const deptLabel =
                 member.department === 'other' && member.customDepartment
                   ? member.customDepartment
@@ -79,21 +81,21 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
               return (
                 <div
                   key={member.id}
-                  className="group p-6 rounded-2xl border border-base-800 bg-base-900 hover:border-brand-500/30 transition-all duration-normal hover:-translate-y-1"
+                  className="group flex flex-col p-7 rounded-3xl border border-glass bg-base-900/70 backdrop-blur-md hover:border-glass-hover transition-all duration-normal hover:-translate-y-1.5 shadow-sm hover:shadow-card-hover"
                 >
-                  {/* Photo */}
-                  <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-base-800 mb-4 border border-base-700">
+                  {/* Photo container */}
+                  <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-base-950 mb-5 border border-glass-subtle group-hover:border-brand-500/50 transition-colors">
                     {photo?.url ? (
                       <Image
                         src={photo.url}
                         alt={photo.alt ?? member.name}
                         fill
-                        className="object-cover"
-                        sizes="64px"
+                        className="object-cover group-hover:scale-105 transition-transform duration-slow"
+                        sizes="80px"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="font-display font-bold text-h3 text-base-700">
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-base-900 to-base-950">
+                        <span className="font-display font-bold text-h3 text-brand-300">
                           {member.name.charAt(0)}
                         </span>
                       </div>
@@ -101,22 +103,27 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                   </div>
 
                   {/* Info */}
-                  <Badge variant={deptBadge[member.department] ?? 'default'} size="sm" className="mb-3">
+                  <Badge variant={deptBadge[member.department] ?? 'default'} size="sm" showDot className="mb-3.5 self-start">
                     {deptLabel}
                   </Badge>
-                  <h3 className="font-display font-bold text-h4 text-base-100 mb-0.5">
+
+                  <h3 className="font-display font-bold text-h4 text-base-100 mb-1 group-hover:text-brand-300 transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-body-sm text-base-100/50 mb-3">{member.role}</p>
+
+                  <p className="text-body-sm text-brand-400/90 font-medium mb-3">
+                    {member.role}
+                  </p>
+
                   {member.bio && (
-                    <p className="text-body-sm text-base-100/60 leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-body-sm text-base-100/60 leading-relaxed mb-6 line-clamp-3">
                       {member.bio}
                     </p>
                   )}
 
                   {/* Social links */}
                   {socials.length > 0 && (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 mt-auto pt-4 border-t border-glass-subtle">
                       {socials.map((s) => {
                         const Icon = socialIcons[s.platform]
                         if (!Icon) return null
@@ -127,7 +134,6 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`${member.name} on ${s.platform}`}
-                            className="p-1.5 rounded-md text-base-100/40 hover:text-base-100 hover:bg-base-800 transition-colors duration-fast"
                           >
                             <Icon size={14} aria-hidden="true" />
                           </a>

@@ -4,6 +4,7 @@ import { getPayload } from '@/lib/payload'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { breadcrumbSchema } from '@/lib/structured-data'
 import { HeroSection } from '@/components/sections/HeroSection'
+import { StatsRow } from '@/components/sections/StatsRow'
 import { MissionSnapshot } from '@/components/sections/MissionSnapshot'
 import { ProjectsTeaser } from '@/components/sections/ProjectsTeaser'
 import type { Project } from '@/components/sections/ProjectsTeaser'
@@ -50,12 +51,14 @@ export default async function HomePage() {
     <>
       <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: 'https://eonrisia.org' }])} />
       <HeroSection />
+      <StatsRow />
       <MissionSnapshot />
       {featuredProjects.length > 0 && <ProjectsTeaser projects={featuredProjects} />}
       {teamMembers.length > 0 && <TeamPreview members={teamMembers} />}
       <CtaBand
         headline="Ready to build something that lasts?"
-        primaryLabel="Volunteer"
+        subtext="Join writers, artists, and developers in crafting original living universes with transparent governance and open rewards."
+        primaryLabel="Get Involved"
         primaryHref="/volunteer"
         secondaryLabel="Contact Us"
         secondaryHref="/contact"

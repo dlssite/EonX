@@ -26,7 +26,6 @@ function getInitialTheme(): Theme {
   } catch {
     // localStorage blocked (private browsing, etc.) — ignore
   }
-  if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light'
   return DEFAULT_THEME
 }
 

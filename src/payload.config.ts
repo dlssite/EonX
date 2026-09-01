@@ -11,6 +11,7 @@ import { Team } from '@/collections/Team'
 import { Projects } from '@/collections/Projects'
 import { Opportunities } from '@/collections/Opportunities'
 import { Inquiries } from '@/collections/Inquiries'
+import { Posts } from '@/collections/Posts'
 
 // Globals
 import { SiteSettings } from '@/globals/SiteSettings'
@@ -34,10 +35,12 @@ export default buildConfig({
         Logo: '@/components/admin/AdminLogo#AdminLogo',
         Icon: '@/components/admin/AdminIcon#AdminIcon',
       },
+      beforeDashboard: ['@/components/admin/AdminBeforeDashboard#AdminBeforeDashboard'],
+      beforeLogin: ['@/components/admin/AdminBeforeLogin#AdminBeforeLogin'],
     },
   },
 
-  collections: [Users, Media, Team, Projects, Opportunities, Inquiries],
+  collections: [Users, Media, Team, Projects, Opportunities, Inquiries, Posts],
 
   globals: [SiteSettings, Navigation, Footer],
 

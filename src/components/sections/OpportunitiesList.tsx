@@ -1,20 +1,30 @@
+'use client'
+
+import { useState } from 'react'
+import Link from 'next/link'
+import { MapPin, Clock, ArrowRight, Eye, Briefcase, CheckCircle2 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
-import { Button } from '@/components/ui/Button'
-import { DeptFilter } from '@/components/sections/DeptFilter'
-import { MapPin, Clock } from 'lucide-react'
+import { Drawer } from '@/components/ui/Drawer'
+import { DeptFilter } from './DeptFilter'
 
-type Skill = { skill: string }
+type Skill = {
+  skill: string
+  id?: string | null
+}
 
 type Opportunity = {
   id: string
   title: unknown
   department: unknown
-  customDepartment: unknown
-  timeCommitment: unknown
-  isRemote: unknown
-  skills: unknown
-  applyUrl: unknown
+  customDepartment?: unknown
+  isRemote?: unknown
+  timeCommitment?: unknown
+  description?: unknown
+  responsibilities?: unknown
+  requirements?: unknown
+  skills?: unknown
+  applyUrl?: unknown
 }
 
 export type { Opportunity }
@@ -24,93 +34,111 @@ type OpportunitiesListProps = {
   activeDept: string
 }
 
-const deptBadge: Record<string, 'brand' | 'accent' | 'default'> = {
-  engineering: 'accent',
-  design: 'brand',
-  writing: 'default',
-  art: 'default',
-  community: 'default',
-  other: 'default',
+const deptBadge: Record<string, 'brand' | 'accent' | 'success' | 'warning' | 'default'> = {
+  engineering: 'brand',
+  design:      'accent',
+  writing:     'default',
+  art:         'accent',
+  community:   'success',
+  leadership:  'warning',
 }
 
 export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesListProps) {
+  const [selectedOpp, setSelectedOpp] = useState<Opportunity | null>(null)
+
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-16 bg-base-950">
       <Container>
-        <div className="mb-8">
-          <p className="eyebrow mb-4">Open Roles</p>
+        <div className="mb-14">
           <DeptFilter activeDept={activeDept} />
         </div>
 
         {opportunities.length === 0 ? (
-          <div className="flex flex-col items-center justify-center text-center py-20 rounded-2xl border border-dashed border-base-700 bg-base-900/40">
-            <div className="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center bg-base-800 border border-base-700">
-              <MapPin size={22} className="text-base-100/30" aria-hidden="true" />
+          <div className="flex flex-col items-center justify-center text-center py-20 rounded-3xl border border-dashed border-glass-subtle bg-base-900/30">
+            <div className="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center bg-base-900 border border-glass">
+              <MapPin size={22} className="text-base-100/40" aria-hidden="true" />
             </div>
-            <p className="font-display font-bold text-h4 text-base-100/60 mb-2">
-              No open roles right now
+            <p className="font-display font-bold text-h4 text-base-100/70 mb-2">
+              No open roles in this department right now
             </p>
-            <p className="text-body-sm text-base-100/35 max-w-xs leading-relaxed">
-              We&apos;re not actively recruiting in this area, but we&apos;re always open to
-              hearing from talented people.
+            <p className="text-body-sm text-base-100/40 max-w-xs leading-relaxed">
+              We&apos;re not actively recruiting in this specific discipline, but we are always eager to hear from dedicated creators.
             </p>
-            <a
+            <Link
               href="/contact"
-              className="mt-6 text-body-sm font-body font-medium text-brand-400 hover:text-brand-300 transition-colors duration-fast"
+              className="mt-6 text-body-sm font-body font-semibold text-brand-400 hover:text-brand-300 transition-colors"
             >
               Reach out anyway →
-            </a>
+            </Link>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {opportunities.map((opp) => {
               const skills = (opp.skills as Skill[]) ?? []
               const dept = opp.department as string
-              // Use customDepartment label when department is 'other'
               const deptLabel =
                 dept === 'other' && opp.customDepartment
                   ? (opp.customDepartment as string)
                   : dept
+
               return (
                 <div
                   key={opp.id}
-                  className="group p-6 rounded-2xl border border-base-700 bg-base-900 hover:border-brand-500/40 hover:bg-base-800/50 transition-all duration-normal"
+                  className="group p-6 sm:p-8 rounded-3xl border border-glass bg-base-900/70 backdrop-blur-md hover:border-glass-hover hover:bg-base-900/90 transition-all duration-normal shadow-sm hover:shadow-card-hover"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                     <div className="flex-1">
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <Badge variant={deptBadge[dept] ?? 'default'} size="sm">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <Badge variant={deptBadge[dept] ?? 'default'} size="sm" showDot>
                           {deptLabel}
                         </Badge>
                         {Boolean(opp.isRemote) && (
-                          <span className="inline-flex items-center gap-1 text-label text-base-100/40">
-                            <MapPin size={10} aria-hidden="true" /> Remote
+                          <span className="inline-flex items-center gap-1 text-label text-base-100/50 font-body">
+                            <MapPin size={11} aria-hidden="true" className="text-brand-400" /> Remote / Flexible
                           </span>
                         )}
                         {opp.timeCommitment ? (
-                          <span className="inline-flex items-center gap-1 text-label text-base-100/40">
-                            <Clock size={10} aria-hidden="true" />
+                          <span className="inline-flex items-center gap-1 text-label text-base-100/50 font-body">
+                            <Clock size={11} aria-hidden="true" className="text-accent-400" />
                             {String(opp.timeCommitment)}
                           </span>
                         ) : null}
                       </div>
-                      <h3 className="font-display font-bold text-h4 text-base-100 mb-2">
+
+                      <h3 className="font-display font-bold text-h3 text-base-100 mb-3 group-hover:text-brand-300 transition-colors duration-fast">
                         {opp.title as string}
                       </h3>
+
                       {skills.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-2">
                           {skills.map(({ skill }) => (
-                            <span key={skill} className="px-2 py-0.5 text-label rounded-md bg-base-800 border border-base-700 text-base-100/50">
+                            <span
+                              key={skill}
+                              className="px-3 py-1 text-label font-body font-medium rounded-full bg-base-950/80 border border-glass text-base-100/65"
+                            >
                               {skill}
                             </span>
                           ))}
                         </div>
                       )}
                     </div>
-                    <div className="shrink-0">
-                      <Button href={(opp.applyUrl as string) || '/contact'} variant="secondary" size="sm">
-                        Apply
-                      </Button>
+
+                    <div className="flex items-center gap-3 shrink-0">
+                      <button
+                        onClick={() => setSelectedOpp(opp)}
+                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-body-sm font-body font-medium text-base-100 border border-glass bg-base-950/60 hover:bg-base-800/80 transition-all duration-fast"
+                      >
+                        <Eye size={14} aria-hidden="true" />
+                        <span>Role Details</span>
+                      </button>
+
+                      <Link
+                        href={(opp.applyUrl as string) || '/contact'}
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_20px_0_rgba(108,99,255,0.35)] sheen-sweep"
+                      >
+                        <span>Apply</span>
+                        <ArrowRight size={14} aria-hidden="true" />
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -119,6 +147,80 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
           </div>
         )}
       </Container>
+
+      {/* ── Quick-View Application Drawer ─────────────────────── */}
+      <Drawer
+        isOpen={Boolean(selectedOpp)}
+        onClose={() => setSelectedOpp(null)}
+        title={String(selectedOpp?.title ?? 'Role Overview')}
+        description={`Volunteer Position · ${String(selectedOpp?.department ?? 'General')}`}
+      >
+        {selectedOpp && (
+          <div className="space-y-6">
+            {/* Meta Tags */}
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant={deptBadge[String(selectedOpp.department)] ?? 'default'} showDot>
+                {String(selectedOpp.department)}
+              </Badge>
+              {Boolean(selectedOpp.isRemote) && (
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
+                  <MapPin size={11} /> 100% Remote
+                </span>
+              )}
+              {Boolean(selectedOpp.timeCommitment) && (
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
+                  <Clock size={11} /> {String(selectedOpp.timeCommitment)}
+                </span>
+              )}
+            </div>
+
+            {/* Role Purpose */}
+            <div className="p-6 rounded-2xl border border-glass bg-base-950/60 space-y-3">
+              <div className="flex items-center gap-2 text-label font-body font-semibold uppercase tracking-widest text-brand-400">
+                <Briefcase size={14} />
+                <span>What You Will Do</span>
+              </div>
+              <p className="text-body-sm text-base-100/75 leading-relaxed">
+                As a volunteer in the {String(selectedOpp.department)} division, you will collaborate directly with our core stewards and fellow creators, building real assets, software, or narrative frameworks for active projects.
+              </p>
+            </div>
+
+            {/* Contributor Benefits */}
+            <div className="p-6 rounded-2xl border border-glass bg-base-950/60 space-y-3">
+              <div className="flex items-center gap-2 text-label font-body font-semibold uppercase tracking-widest text-emerald-400">
+                <CheckCircle2 size={14} />
+                <span>What You Receive</span>
+              </div>
+              <ul className="space-y-2 text-body-sm text-base-100/70">
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Verified contributor credits on official project releases</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Eonrisia contributor tokens unlocking ecosystem benefits</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span>Direct peer collaboration with international creative leads</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Action buttons */}
+            <div className="pt-4 border-t border-glass flex flex-col sm:flex-row gap-3">
+              <Link
+                href={(selectedOpp.applyUrl as string) || `/contact?inquiry=volunteer&role=${encodeURIComponent(String(selectedOpp.title))}`}
+                onClick={() => setSelectedOpp(null)}
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep"
+              >
+                <span>Apply for This Role</span>
+                <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        )}
+      </Drawer>
     </section>
   )
 }

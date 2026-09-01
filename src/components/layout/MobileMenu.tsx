@@ -68,10 +68,10 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed top-0 right-0 h-full w-[min(320px,88vw)] bg-base-900 border-l border-base-800/60 z-modal flex flex-col"
+            className="fixed top-0 right-0 h-full w-[min(320px,88vw)] bg-base-900 border-l border-glass z-modal flex flex-col"
           >
             {/* Header row */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-base-800/60">
+            <div className="flex items-center justify-between px-6 py-5 border-b border-glass">
               <span className="font-display font-extrabold text-[1.125rem] tracking-tight text-base-100">
                 Eonrisia
               </span>
@@ -112,7 +112,7 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
             </nav>
 
             {/* Pill CTA */}
-            <div className="px-6 py-6 border-t border-base-800/60">
+            <div className="px-6 py-6 border-t border-glass">
               <Link
                 href={ctaHref}
                 onClick={onClose}
@@ -120,8 +120,8 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
                   'flex items-center justify-center w-full',
                   'px-6 py-3 rounded-full',
                   'text-body font-body font-semibold',
-                  'bg-base-100 text-base-950',
-                  'hover:bg-brand-300 hover:text-base-950',
+                  'bg-brand-500 text-white',
+                  'hover:bg-brand-400',
                   'active:scale-[0.97]',
                   'transition-all duration-fast',
                   'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',

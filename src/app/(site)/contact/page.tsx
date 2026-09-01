@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { generateMetadata } from '@/lib/metadata'
 import { JsonLd } from '@/components/seo/JsonLd'
@@ -7,7 +8,7 @@ import { PageHero } from '@/components/sections/PageHero'
 import { ContactForms } from '@/components/sections/ContactForms'
 import { Container } from '@/components/ui/Container'
 
-export const revalidate = false // Static — form handled server-side
+export const revalidate = false
 
 export const metadata: Metadata = generateMetadata({
   title: 'Contact Eonrisia — Partnership, Press, and General Inquiries',
@@ -27,14 +28,16 @@ export default function ContactPage() {
       />
 
       <PageHero
-        eyebrow="Contact"
-        headline="Let's talk."
-        lead="Whether you're a potential partner, a member of the press, or just curious — we'd love to hear from you. We typically respond within 2–3 business days."
+        eyebrow="Contact Stewards"
+        headline="Let's build something lasting together."
+        lead="Whether you are an aspiring contributor, strategic partner, donor, or member of the press — we look forward to hearing from you."
       />
 
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-24 bg-base-950">
         <Container>
-          <ContactForms />
+          <Suspense fallback={<div className="text-center py-20 text-base-100/50">Loading contact system…</div>}>
+            <ContactForms />
+          </Suspense>
         </Container>
       </section>
     </>

@@ -4,12 +4,12 @@ import { useRouter, usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
 const DEPT_OPTIONS = [
-  { value: 'all', label: 'All' },
+  { value: 'all', label: 'All Disciplines' },
   { value: 'leadership', label: 'Leadership' },
   { value: 'engineering', label: 'Engineering' },
   { value: 'design', label: 'Design' },
   { value: 'writing', label: 'Writing' },
-  { value: 'art', label: 'Art' },
+  { value: 'art', label: 'Art & Illustration' },
   { value: 'community', label: 'Community' },
 ]
 
@@ -31,24 +31,26 @@ export function DeptFilter({ activeDept }: DeptFilterProps) {
 
   return (
     <nav aria-label="Filter by department">
-      <ul role="list" className="flex flex-wrap gap-2">
-        {DEPT_OPTIONS.map(({ value, label }) => (
-          <li key={value}>
+      <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-fit shadow-md">
+        {DEPT_OPTIONS.map(({ value, label }) => {
+          const isSelected = activeDept === value
+          return (
             <button
+              key={value}
               onClick={() => handleSelect(value)}
-              aria-pressed={activeDept === value}
+              aria-pressed={isSelected}
               className={cn(
-                'px-4 py-1.5 rounded-lg text-body-sm font-body font-medium transition-all duration-fast border',
-                activeDept === value
-                  ? 'bg-brand-500 text-white border-brand-500 shadow-brand/30 shadow-sm'
-                  : 'bg-base-900 text-base-100/50 border-base-700 hover:text-base-100 hover:border-brand-500/50 hover:bg-base-800',
+                'px-4 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none',
+                isSelected
+                  ? 'bg-base-800/80 text-base-100 font-semibold border border-glass-subtle shadow-sm'
+                  : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
               )}
             >
               {label}
             </button>
-          </li>
-        ))}
-      </ul>
+          )
+        })}
+      </div>
     </nav>
   )
 }

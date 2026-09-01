@@ -102,6 +102,48 @@ export const heroStaggerContainer: Variants = {
   },
 }
 
+// ── Drawer slide from right ──────────────────────────────────
+export const drawerSlide: Variants = {
+  hidden: { x: '100%', opacity: 0.8 },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+  exit: {
+    x: '100%',
+    opacity: 0.8,
+    transition: {
+      duration: 0.25,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
+}
+
+// ── Tab content transition ───────────────────────────────────
+export const tabContentVariant: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.25,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    transition: {
+      duration: 0.15,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
+}
+
 // ── Reduced motion fallback — instant, no movement ───────────
 export const reducedVariants: Variants = {
   hidden: {},

@@ -73,35 +73,49 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
 
   return (
     <footer
-      className="bg-base-950 border-t border-base-800/50"
+      className="bg-base-950 border-t border-glass relative overflow-hidden"
       role="contentinfo"
     >
-      <Container className="py-14 md:py-18">
+      {/* Ambient background glow */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] pointer-events-none opacity-20"
+        style={{
+          background: 'radial-gradient(ellipse at bottom, rgba(108,99,255,0.18) 0%, transparent 70%)',
+        }}
+      />
+
+      <Container className="py-16 md:py-20 relative z-10">
 
         {/* ── Main grid ─────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 mb-14">
 
           {/* Brand column */}
-          <div className="lg:col-span-2 flex flex-col gap-5">
+          <div className="lg:col-span-2 flex flex-col gap-4">
             <Link
               href="/"
               aria-label="Eonrisia homepage"
-              className="inline-block group w-fit"
+              className="inline-flex items-center gap-2 group w-fit"
             >
-              <span className="font-display font-extrabold text-[1.25rem] tracking-tight text-base-100 group-hover:text-brand-300 transition-colors duration-fast">
+              <span className="w-2 h-2 rounded-full bg-brand-400 group-hover:scale-125 transition-transform duration-fast shadow-[0_0_8px_0_rgba(108,99,255,0.8)]" />
+              <span className="font-display font-extrabold text-[1.3rem] tracking-tight text-base-100 group-hover:text-brand-400 transition-colors duration-fast">
                 Eonrisia
               </span>
             </Link>
 
             {tagline && (
-              <p className="text-body-sm text-base-100/40 max-w-xs leading-relaxed">
+              <p className="text-body-sm text-base-100/55 max-w-sm leading-relaxed">
                 {tagline}
               </p>
             )}
 
+            <p className="text-label-xs text-base-100/40 max-w-xs leading-relaxed">
+              Official organization portal. Fictional universe lore and media live exclusively on dedicated project sites.
+            </p>
+
             {/* Social icons */}
             {socialLinks.length > 0 && (
-              <div className="flex items-center gap-2 mt-1">
+              <div className="flex items-center gap-2 mt-2">
                 {socialLinks.map((social) => {
                   const Icon  = socialIcons[social.platform] ?? customIcons[social.platform]
                   const label = socialLabels[social.platform] ?? social.platform
@@ -113,14 +127,13 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
                       rel="noopener noreferrer"
                       aria-label={`Eonrisia on ${label}`}
                       className={cn(
-                        'p-2 rounded-full',
-                        'text-base-100/35 hover:text-base-100',
-                        'hover:bg-base-800/60',
-                        'transition-colors duration-fast',
+                        'p-2.5 rounded-full border border-glass bg-base-900/60',
+                        'text-base-100/50 hover:text-base-100 hover:border-glass-hover hover:bg-base-800',
+                        'transition-all duration-fast',
                       )}
                     >
                       {Icon ? (
-                        <Icon size={16} aria-hidden="true" />
+                        <Icon size={15} aria-hidden="true" />
                       ) : (
                         <span className="text-label font-body font-medium">{label.charAt(0).toUpperCase()}</span>
                       )}
@@ -131,50 +144,51 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
             )}
           </div>
 
-          {/* Nav columns */}
-          {columns.map((col) => (
-            <nav key={col.heading} aria-label={`${col.heading} links`}>
-              <h3 className="text-label-xs font-body font-semibold text-base-100/30 uppercase tracking-widest mb-4">
-                {col.heading}
-              </h3>
-              <ul className="flex flex-col gap-2.5" role="list">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      target={link.isExternal ? '_blank' : undefined}
-                      rel={link.isExternal ? 'noopener noreferrer' : undefined}
-                      className={cn(
-                        'text-body-sm font-body text-base-100/45',
-                        'hover:text-base-100',
-                        'transition-colors duration-fast',
-                        'focus-visible:text-base-100 focus-visible:outline-brand-500',
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+          {/* Nav columns (span 4 cols) */}
+          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {columns.map((col) => (
+              <nav key={col.heading} aria-label={`${col.heading} links`}>
+                <h3 className="text-label-xs font-body font-semibold text-base-100/40 uppercase tracking-widest mb-4">
+                  {col.heading}
+                </h3>
+                <ul className="flex flex-col gap-3" role="list">
+                  {col.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        target={link.isExternal ? '_blank' : undefined}
+                        rel={link.isExternal ? 'noopener noreferrer' : undefined}
+                        className={cn(
+                          'text-body-sm font-body text-base-100/60',
+                          'hover:text-base-100 transition-colors duration-fast',
+                          'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-500 rounded-sm',
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
+          </div>
         </div>
 
         {/* ── Bottom bar ────────────────────────────────────────── */}
-        <div className="mt-12 pt-6 border-t border-base-800/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-label text-base-100/25 font-body">
+        <div className="pt-8 border-t border-glass flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <p className="text-label text-base-100/40 font-body">
             © {year} {legalText ?? 'Eonrisia. All rights reserved.'}
           </p>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-6">
             <Link
               href="/governance"
-              className="text-label text-base-100/25 hover:text-base-100/50 transition-colors duration-fast"
+              className="text-label text-base-100/40 hover:text-base-100/80 transition-colors duration-fast"
             >
-              Governance
+              Governance & Constitution
             </Link>
             <Link
               href="/contact"
-              className="text-label text-base-100/25 hover:text-base-100/50 transition-colors duration-fast"
+              className="text-label text-base-100/40 hover:text-base-100/80 transition-colors duration-fast"
             >
               Contact
             </Link>
