@@ -65,8 +65,8 @@ export default async function AboutPage() {
   try {
     const payload = await getPayload()
     const { docs } = await payload.find({
-      collection: 'team-members',
-      where: { isActive: { equals: true } },
+      collection: 'team',
+      where: { isPublished: { equals: true } },
       sort: 'order',
       limit: 12,
     })
