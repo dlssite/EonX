@@ -54,7 +54,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
         </div>
 
         {opportunities.length === 0 ? (
-          <div className="flex flex-col items-center justify-center text-center py-20 rounded-3xl border border-dashed border-glass-subtle bg-base-900/30">
+          <div className="flex flex-col items-center justify-center text-center py-20 rounded-3xl border border-dashed border-glass bg-base-900/30">
             <div className="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center bg-base-900 border border-glass">
               <MapPin size={22} className="text-base-100/40" aria-hidden="true" />
             </div>
@@ -72,7 +72,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
             </Link>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {opportunities.map((opp) => {
               const skills = (opp.skills as Skill[]) ?? []
               const dept = opp.department as string
@@ -84,7 +84,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
               return (
                 <div
                   key={opp.id}
-                  className="group p-6 sm:p-8 rounded-3xl border border-glass bg-base-900/70 backdrop-blur-md hover:border-glass-hover hover:bg-base-900/90 transition-all duration-normal shadow-sm hover:shadow-card-hover"
+                  className="group relative p-6 sm:p-8 rounded-3xl border border-glass bg-gradient-to-r from-base-900/90 via-base-900/70 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal shadow-sm hover:shadow-[0_16px_40px_-15px_rgba(108,99,255,0.2)]"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                     <div className="flex-1">
@@ -93,13 +93,13 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
                           {deptLabel}
                         </Badge>
                         {Boolean(opp.isRemote) && (
-                          <span className="inline-flex items-center gap-1 text-label text-base-100/50 font-body">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
                             <MapPin size={11} aria-hidden="true" className="text-brand-400" /> Remote / Flexible
                           </span>
                         )}
                         {opp.timeCommitment ? (
-                          <span className="inline-flex items-center gap-1 text-label text-base-100/50 font-body">
-                            <Clock size={11} aria-hidden="true" className="text-accent-400" />
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
+                            <Clock size={11} aria-hidden="true" className="text-brand-400" />
                             {String(opp.timeCommitment)}
                           </span>
                         ) : null}
@@ -114,7 +114,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
                           {skills.map(({ skill }) => (
                             <span
                               key={skill}
-                              className="px-3 py-1 text-label font-body font-medium rounded-full bg-base-950/80 border border-glass text-base-100/65"
+                              className="px-3 py-1 text-label font-body font-medium rounded-full bg-base-950 border border-glass text-base-100/70"
                             >
                               {skill}
                             </span>
@@ -123,7 +123,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0">
+                    <div className="flex items-center gap-3 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-glass">
                       <button
                         onClick={() => setSelectedOpp(opp)}
                         className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-body-sm font-body font-medium text-base-100 border border-glass bg-base-950/60 hover:bg-base-800/80 transition-all duration-fast"

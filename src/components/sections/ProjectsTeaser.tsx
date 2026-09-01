@@ -84,7 +84,7 @@ export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {projects.map((project) => (
             <motion.div key={project.id} variants={item}>
@@ -170,27 +170,28 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
   const coverUrl = payloadImageUrl(cover?.url)
   const slug   = project.slug as string
   const status = project.status as string
+  const tags   = (project.tags as { tag: string }[]) ?? []
 
   return (
     <div
       className={cn(
         'group relative flex flex-col rounded-3xl overflow-hidden',
-        'border border-glass bg-base-900/80 backdrop-blur-md',
-        'hover:border-glass-hover transition-all duration-normal hover:-translate-y-1.5 hover:shadow-card-hover',
+        'border border-glass bg-gradient-to-b from-base-900/90 via-base-900/60 to-base-950/80 backdrop-blur-md',
+        'hover:border-glass-strong transition-all duration-normal hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(108,99,255,0.2)]',
       )}
     >
       {/* Cover image */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-base-950">
+      <div className="relative aspect-[16/10] overflow-hidden bg-base-950 border-b border-glass">
         {coverUrl ? (
           <Image
             src={coverUrl}
             alt={cover?.alt ?? (project.name as string)}
             fill
-            className="object-cover group-hover:scale-[1.04] transition-transform duration-slow"
+            className="object-cover group-hover:scale-[1.06] transition-transform duration-slow"
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-base-900 to-base-950">
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-base-950">
             <span className="font-display font-extrabold text-[4rem] text-base-800 select-none">
               {(project.name as string).charAt(0)}
             </span>
@@ -200,7 +201,7 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
         {/* Gradient overlay */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-base-950/90 via-base-950/20 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-base-950/90 via-base-950/30 to-transparent"
         />
 
         {/* Status badge pinned top-left */}
@@ -218,7 +219,7 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
         <button
           onClick={onQuickView}
           aria-label={`Quick view ${project.name as string}`}
-          className="absolute bottom-4 right-4 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-label font-body font-semibold text-white bg-base-950/80 border border-glass-strong backdrop-blur-md opacity-0 group-hover:opacity-100 hover:bg-brand-500 hover:border-brand-400 transition-all duration-fast"
+          className="absolute bottom-4 right-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-label font-body font-semibold text-white bg-base-950/80 border border-glass backdrop-blur-md opacity-0 group-hover:opacity-100 hover:bg-brand-500 hover:border-brand-400 transition-all duration-fast"
         >
           <Eye size={13} aria-hidden="true" />
           <span>Quick View</span>
@@ -226,23 +227,38 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
       </div>
 
       {/* Text block */}
-      <div className="flex flex-col flex-1 p-6 md:p-7">
-        <Link
-          href={`/projects/${slug}`}
-          className="group/link flex items-start justify-between gap-2 mb-2.5"
-        >
-          <h3 className="font-display font-bold text-h4 text-base-100 group-hover/link:text-brand-300 transition-colors duration-fast leading-snug">
-            {project.name as string}
-          </h3>
-          <ArrowUpRight
-            size={18}
-            className="text-base-100/40 group-hover/link:text-brand-300 shrink-0 transition-colors"
-            aria-hidden="true"
-          />
-        </Link>
-        <p className="text-body-sm text-base-100/60 leading-relaxed line-clamp-2">
-          {project.tagline as string}
-        </p>
+      <div className="flex flex-col flex-1 p-6 md:p-7 justify-between">
+        <div>
+          {tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {tags.slice(0, 2).map(({ tag }) => (
+                <span
+                  key={tag}
+                  className="px-2.5 py-0.5 rounded-full text-[0.7rem] font-medium bg-base-950 border border-glass text-base-100/50"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <Link
+            href={`/projects/${slug}`}
+            className="group/link flex items-start justify-between gap-2 mb-2.5"
+          >
+            <h3 className="font-display font-bold text-h4 text-base-100 group-hover/link:text-brand-300 transition-colors duration-fast leading-snug">
+              {project.name as string}
+            </h3>
+            <ArrowUpRight
+              size={18}
+              className="text-base-100/40 group-hover/link:text-brand-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 shrink-0 transition-all"
+              aria-hidden="true"
+            />
+          </Link>
+          <p className="text-body-sm text-base-100/60 leading-relaxed line-clamp-2">
+            {project.tagline as string}
+          </p>
+        </div>
       </div>
     </div>
   )

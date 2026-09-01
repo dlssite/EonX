@@ -117,7 +117,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                     className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all duration-fast shrink-0 ${
                       isActive
                         ? 'bg-brand-500 text-white shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
-                        : 'bg-base-900 border border-glass text-base-100/60 hover:text-base-100 hover:border-glass-hover'
+                        : 'bg-base-900 border border-glass text-base-100/60 hover:text-base-100 hover:border-glass-strong'
                     }`}
                   >
                     {cat.label}
@@ -130,7 +130,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
             <Link
               href="/feed.xml"
               target="_blank"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-label font-medium bg-base-900 border border-glass text-base-100/60 hover:text-brand-400 hover:border-glass-hover transition-colors shrink-0"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-label font-medium bg-base-900 border border-glass text-base-100/60 hover:text-brand-400 hover:border-glass-strong transition-colors shrink-0"
               title="Subscribe via RSS 2.0"
             >
               <Rss size={13} className="text-brand-400" />
@@ -149,22 +149,23 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
               <p className="eyebrow mb-4">Featured Highlight</p>
               <Link
                 href={`/updates/${featuredPost.slug}`}
-                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 glass-panel p-6 sm:p-8 border border-glass hover:border-glass-strong transition-all duration-normal"
+                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/70 to-base-950/90 p-6 sm:p-8 md:p-10 hover:border-glass-strong transition-all duration-normal shadow-2xl overflow-hidden"
               >
                 {/* Cover Image */}
-                <div className="lg:col-span-7 relative aspect-[16/9] rounded-2xl overflow-hidden bg-base-900 border border-glass">
+                <div className="lg:col-span-7 relative aspect-[16/9] rounded-2xl overflow-hidden bg-base-950 border border-glass">
                   {featuredPost.coverImage?.url ? (
                     <Image
                       src={payloadImageUrl(featuredPost.coverImage.url) ?? ''}
                       alt={featuredPost.coverImage.alt ?? featuredPost.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-normal"
+                      className="object-cover group-hover:scale-105 transition-transform duration-slow"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/30 to-base-900 text-base-100/30">
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/30 to-base-950 text-base-100/30">
                       <Tag size={48} strokeWidth={1} />
                     </div>
                   )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-base-950/80 via-transparent to-transparent" />
                 </div>
 
                 {/* Content */}
@@ -185,7 +186,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                       )}
                     </div>
 
-                    <h2 className="font-display font-bold text-h2 text-base-100 group-hover:text-brand-400 transition-colors leading-tight mb-4">
+                    <h2 className="font-display font-bold text-h2 text-base-100 group-hover:text-brand-300 transition-colors leading-tight mb-4">
                       {featuredPost.title}
                     </h2>
 
@@ -196,7 +197,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
                   <div className="pt-4 border-t border-glass flex items-center justify-between">
                     <div className="flex items-center gap-2 text-body-sm text-base-100/60">
-                      <User size={14} />
+                      <User size={14} className="text-brand-400" />
                       <span>{featuredPost.author?.name ?? 'Eonrisia Team'}</span>
                     </div>
                     <span className="inline-flex items-center gap-1 text-body-sm font-semibold text-brand-400 group-hover:translate-x-1 transition-transform">
@@ -217,22 +218,23 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                   <Link
                     key={post.id}
                     href={`/updates/${post.slug}`}
-                    className="group glass-panel flex flex-col border border-glass hover:border-glass-strong transition-all duration-normal overflow-hidden"
+                    className="group flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/60 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(108,99,255,0.2)] overflow-hidden"
                   >
                     {/* Thumbnail */}
-                    <div className="relative aspect-[16/9] bg-base-900 border-b border-glass overflow-hidden">
+                    <div className="relative aspect-[16/9] bg-base-950 border-b border-glass overflow-hidden">
                       {post.coverImage?.url ? (
                         <Image
                           src={payloadImageUrl(post.coverImage.url) ?? ''}
                           alt={post.coverImage.alt ?? post.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-normal"
+                          className="object-cover group-hover:scale-105 transition-transform duration-slow"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-base-900 text-base-100/20">
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-base-950 text-base-100/20">
                           <Tag size={36} strokeWidth={1} />
                         </div>
                       )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-base-950/70 via-transparent to-transparent" />
                     </div>
 
                     {/* Card Content */}
@@ -241,6 +243,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                         <div className="flex items-center gap-3 mb-3">
                           <Badge
                             variant={categoryBadgeVariant[post.category] ?? 'default'}
+                            showDot
                           >
                             {categoryLabelMap[post.category] ?? post.category}
                           </Badge>
@@ -251,7 +254,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                           )}
                         </div>
 
-                        <h3 className="font-display font-bold text-h4 text-base-100 group-hover:text-brand-400 transition-colors line-clamp-2 mb-2">
+                        <h3 className="font-display font-bold text-h4 text-base-100 group-hover:text-brand-300 transition-colors line-clamp-2 mb-2">
                           {post.title}
                         </h3>
 
@@ -261,7 +264,10 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                       </div>
 
                       <div className="pt-4 border-t border-glass flex items-center justify-between text-label text-base-100/50">
-                        <span>{post.author?.name ?? 'Eonrisia'}</span>
+                        <span className="flex items-center gap-1">
+                          <User size={12} className="text-brand-400" />
+                          <span>{post.author?.name ?? 'Eonrisia'}</span>
+                        </span>
                         <span className="text-brand-400 font-semibold group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
                           Read <ArrowRight size={12} />
                         </span>
@@ -308,4 +314,3 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
     </>
   )
 }
-

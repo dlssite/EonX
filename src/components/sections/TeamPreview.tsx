@@ -108,14 +108,14 @@ export function TeamPreview({ members }: TeamPreviewProps) {
               <motion.li
                 key={member.id}
                 variants={item}
-                className="group flex flex-col items-center text-center p-5 rounded-3xl border border-white/[0.08] bg-base-900/60 backdrop-blur-sm hover:border-brand-500/40 transition-all duration-normal hover:-translate-y-1.5"
+                className="group flex flex-col items-center text-center p-6 rounded-3xl border border-glass bg-gradient-to-b from-base-900/80 to-base-950/90 backdrop-blur-sm hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_16px_32px_-10px_rgba(108,99,255,0.25)]"
               >
                 {/* Avatar */}
                 <div
                   className={cn(
                     'relative mb-4 w-20 h-20 sm:w-22 sm:h-22 rounded-2xl overflow-hidden shrink-0',
-                    'border border-white/[0.1] bg-base-950',
-                    'group-hover:border-brand-500/50 group-hover:shadow-[0_0_20px_0_rgba(108,99,255,0.3)]',
+                    'border border-glass bg-base-950',
+                    'group-hover:border-brand-400 group-hover:shadow-[0_0_24px_0_rgba(108,99,255,0.35)]',
                     'transition-all duration-normal',
                   )}
                 >
@@ -128,7 +128,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
                       sizes="(max-width: 640px) 80px, 96px"
                     />
                   ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-base-900 to-base-950">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/30 to-base-950">
                       <span className="font-display font-bold text-h3 text-brand-300 select-none">
                         {name.charAt(0)}
                       </span>
