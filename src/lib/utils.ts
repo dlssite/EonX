@@ -49,14 +49,16 @@ export function absoluteUrl(path: string): string {
 /**
  * Normalise a Payload CMS media URL for use with next/image.
  *
- * Payload v3 serves all uploads via /api/media/file/[filename].
- * This helper strips any absolute same-origin prefix so the URL
- * is always root-relative (e.g. /api/media/file/photo.jpg).
+ * Payload v3 serves uploads via /api/media/file/[filename]. This helper
+ * accepts either a raw URL string or a Payload media object and always
+ * returns a root-relative path by stripping any absolute same-origin prefix.
  */
-export function payloadImageUrl(url: string): string
-export function payloadImageUrl(url: string | null | undefined): string | undefined
-export function payloadImageUrl(url: string | null | undefined): string | undefined {
-  if (!url) return undefined
-  // Strip absolute same-origin prefix → keep as root-relative path
-  return url.replace(/^https?:\/\/[^/]+/, '')
+export function payloadImageUrl(
+  input: { url?: string | null } | string | null | undefined,
+): string | undefined {
+  if (!input) return undefined
+  const raw = typeof input === 'string' ? input : input.url
+  if (!raw) return undefined
+  // Strip absolute origin (https://eonrisia.org/...) → /...
+  return raw.replace(/^https?:\/\/[^/]+/, '')
 }
