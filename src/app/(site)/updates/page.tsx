@@ -69,7 +69,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
   try {
     const payload = await getPayload()
 
-    // Build where conditions — isPublished is the canonical published flag
+    // isPublished is the canonical published flag on the Posts collection
     const conditions: Where[] = [{ isPublished: { equals: true } }]
 
     if (category && category !== 'all') {
@@ -87,10 +87,8 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
     const typed = docs as unknown as Post[]
     featuredPost = typed.find((p) => p.isFeatured) ?? typed[0] ?? null
     postsList = featuredPost ? typed.filter((p) => p.id !== featuredPost?.id) : typed
-  } catch {
   } catch (err) {
     console.error('[UpdatesPage] Failed to load posts:', err)
-    // Database fallback — empty list handled gracefully
   }
 
   return (
@@ -119,7 +117,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                   <Link
                     key={cat.value}
                     href={cat.value === 'all' ? '/updates' : `/updates?category=${cat.value}`}
-                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all duration-fast shrink-0 ${
+                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all duration-fast shrink-0 whitespace-nowrap ${
                       isActive
                         ? 'bg-brand-500 text-white shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
                         : 'bg-base-900 border border-glass text-base-100/60 hover:text-base-100 hover:border-glass-strong'
