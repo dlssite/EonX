@@ -32,7 +32,6 @@ export function generateMetadata({
   canonical,
 }: MetadataProps = {}): Metadata {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Community-Driven Creative Organization`
-  const ogImage = image ?? absoluteUrl('/brand/og-default.png')
   const ogImage = image ?? absoluteUrl('/brand/eon.png')
   const canonicalUrl = canonical ? absoluteUrl(canonical) : undefined
 
