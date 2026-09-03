@@ -107,19 +107,19 @@ export default function DonatePage() {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
               {donationTiers.map((tier) => (
                 <div
                   key={tier.name}
-                  className={`p-8 md:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-normal ${
+                  className={`p-6 sm:p-8 md:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-normal ${
                     tier.featured
-                      ? 'border-brand-500/50 bg-base-900 shadow-[0_0_40px_0_rgba(108,99,255,0.15)] relative scale-105 z-10'
+                      ? 'border-brand-500/50 bg-base-900 shadow-[0_0_40px_0_rgba(108,99,255,0.15)] relative scale-100 lg:scale-105 z-10'
                       : 'border-glass bg-base-900/60 backdrop-blur-md hover:border-glass-hover'
                   }`}
                 >
                   <div>
                     {tier.featured && (
-                      <span className="inline-block px-3 py-1 rounded-full text-label-xs font-mono font-bold uppercase tracking-widest bg-brand-500 text-white mb-6">
+                      <span className="inline-block px-3 py-1 rounded-full text-label-xs font-mono font-bold uppercase tracking-widest bg-brand-500 text-white mb-4 sm:mb-6">
                         Most Popular
                       </span>
                     )}

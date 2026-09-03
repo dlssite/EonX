@@ -9,6 +9,7 @@ import { OpportunitiesList } from '@/components/sections/OpportunitiesList'
 import type { Opportunity } from '@/components/sections/OpportunitiesList'
 import { CtaBand } from '@/components/sections/CtaBand'
 import { Container } from '@/components/ui/Container'
+import { StickyBottomBar } from '@/components/ui/StickyBottomBar'
 
 export const revalidate = 60
 
@@ -78,10 +79,10 @@ export default async function VolunteerPage({ searchParams }: VolunteerPageProps
       />
 
       {/* ── Why Volunteer ──────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-base-900/40 border-y border-glass">
+      <section className="py-14 sm:py-20 md:py-32 bg-base-900/40 border-y border-glass">
         <Container>
-          <div className="max-w-4xl mx-auto mb-16 text-center">
-            <p className="eyebrow mb-3">Contributor Experience</p>
+          <div className="max-w-4xl mx-auto mb-10 sm:mb-16 text-center">
+            <p className="eyebrow mb-2 sm:mb-3">Contributor Experience</p>
             <h2 className="font-display font-extrabold text-h2 md:text-[2.75rem] text-base-100 tracking-tight">
               Why creators build with Eonrisia.
             </h2>
@@ -91,9 +92,9 @@ export default async function VolunteerPage({ searchParams }: VolunteerPageProps
             {whyVolunteer.map((item) => (
               <div
                 key={item.title}
-                className="p-8 rounded-3xl border border-glass bg-base-900/70 backdrop-blur-md hover:border-glass-hover transition-all duration-normal hover:-translate-y-1 group"
+                className="p-6 sm:p-8 rounded-3xl border border-glass bg-base-900/70 backdrop-blur-md hover:border-glass-hover transition-all duration-normal hover:-translate-y-1 group"
               >
-                <h3 className="font-display font-bold text-h3 text-base-100 mb-3 group-hover:text-brand-300 transition-colors">
+                <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-2 sm:mb-3 group-hover:text-brand-300 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-body-sm text-base-100/60 leading-relaxed">
@@ -105,20 +106,22 @@ export default async function VolunteerPage({ searchParams }: VolunteerPageProps
         </Container>
       </section>
 
-      <OpportunitiesList opportunities={opportunities} activeDept={dept ?? 'all'} />
+      <div id="opportunities">
+        <OpportunitiesList opportunities={opportunities} activeDept={dept ?? 'all'} />
+      </div>
 
       {/* ── Token System ───────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-base-950 border-t border-glass">
+      <section className="py-14 sm:py-20 md:py-32 bg-base-950 border-t border-glass">
         <Container>
-          <div className="glass-panel p-8 md:p-12 max-w-4xl mx-auto border border-brand-500/30">
-            <p className="eyebrow mb-3">Contributor Rewards</p>
-            <h2 className="font-display font-extrabold text-h2 text-base-100 mb-4">
+          <div className="glass-panel p-6 sm:p-8 md:p-12 max-w-4xl mx-auto border border-brand-500/30">
+            <p className="eyebrow mb-2 sm:mb-3">Contributor Rewards</p>
+            <h2 className="font-display font-extrabold text-h3 sm:text-h2 text-base-100 mb-3 sm:mb-4">
               Earn tokens for your contributions.
             </h2>
-            <p className="text-body text-base-100/70 leading-relaxed mb-8 max-w-2xl">
+            <p className="text-body-sm sm:text-body text-base-100/70 leading-relaxed mb-6 sm:mb-8 max-w-2xl">
               Every accepted contribution earns non-speculative tokens that unlock ecosystem benefits, official release credits, exclusive merchandise, and community governance voting weight.
             </p>
-            <div className="inline-flex flex-wrap items-center gap-3 px-6 py-3 rounded-full bg-base-950 border border-glass text-body-sm text-base-100/70 font-body">
+            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl sm:rounded-full bg-base-950 border border-glass text-body-sm text-base-100/70 font-body">
               <span className="font-semibold text-base-100">Contribute</span>
               <span className="text-brand-400">→</span>
               <span className="font-semibold text-base-100">Earn Verified Tokens</span>
@@ -136,6 +139,13 @@ export default async function VolunteerPage({ searchParams }: VolunteerPageProps
         primaryHref="#opportunities"
         secondaryLabel="General Contact"
         secondaryHref="/contact"
+      />
+
+      {/* Sticky Mobile Bottom Bar */}
+      <StickyBottomBar
+        label="Explore Roles"
+        href="#opportunities"
+        sublabel="Open volunteer openings"
       />
     </>
   )

@@ -31,25 +31,27 @@ export function DeptFilter({ activeDept }: DeptFilterProps) {
 
   return (
     <nav aria-label="Filter by department" className="w-full">
-      <div className="flex items-center gap-2 p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md max-w-full overflow-x-auto no-scrollbar shadow-md">
-        {DEPT_OPTIONS.map(({ value, label }) => {
-          const isSelected = activeDept === value
-          return (
-            <button
-              key={value}
-              onClick={() => handleSelect(value)}
-              aria-pressed={isSelected}
-              className={cn(
-                'px-4 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none shrink-0 whitespace-nowrap',
-                isSelected
-                  ? 'bg-brand-500 text-white font-semibold shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
-                  : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
-              )}
-            >
-              {label}
-            </button>
-          )
-        })}
+      <div className="overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 edge-fade-x">
+        <div className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-fit shadow-md min-w-full sm:min-w-0">
+          {DEPT_OPTIONS.map(({ value, label }) => {
+            const isSelected = activeDept === value
+            return (
+              <button
+                key={value}
+                onClick={() => handleSelect(value)}
+                aria-pressed={isSelected}
+                className={cn(
+                  'px-4 sm:px-5 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none shrink-0 whitespace-nowrap min-h-[44px] flex items-center',
+                  isSelected
+                    ? 'bg-brand-500 text-white font-semibold shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
+                    : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
+                )}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
       </div>
     </nav>
   )

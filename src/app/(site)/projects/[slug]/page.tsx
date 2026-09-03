@@ -91,23 +91,23 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       />
 
       {/* Breadcrumb Navigation */}
-      <div className="pt-32 pb-8 border-b border-glass bg-base-950">
+      <div className="pt-24 pb-4 sm:pt-32 sm:pb-6 border-b border-glass bg-base-950">
         <Container>
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-body-sm text-base-100/50 hover:text-base-100 transition-colors duration-fast"
+            className="inline-flex items-center gap-2 py-2 text-body-sm text-base-100/60 hover:text-base-100 transition-colors duration-fast min-h-[44px]"
           >
-            <ArrowLeft size={14} aria-hidden="true" />
+            <ArrowLeft size={15} aria-hidden="true" />
             <span>All Projects & Universes</span>
           </Link>
         </Container>
       </div>
 
       {/* Hero Section */}
-      <section className="py-16 md:py-24 bg-base-950">
+      <section className="py-10 sm:py-16 md:py-24 bg-base-950">
         <Container>
           <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
               <Badge variant={statusVariant[project.status as string] ?? 'default'} showDot>
                 {project.status as string}
               </Badge>
@@ -120,16 +120,16 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 </span>
               ))}
             </div>
-            <h1 className="font-display font-extrabold text-h1 md:text-[3.5rem] text-base-100 tracking-tight leading-[1.06] mb-6">
+            <h1 className="font-display font-extrabold text-h2 sm:text-h1 md:text-[3.5rem] text-base-100 tracking-tight leading-[1.06] mb-4 sm:mb-6">
               {project.name as string}
             </h1>
-            <p className="text-body-lg text-base-100/70 max-w-2xl leading-relaxed mb-10">
+            <p className="text-body sm:text-body-lg text-base-100/70 max-w-2xl leading-relaxed mb-6 sm:mb-10">
               {project.tagline as string}
             </p>
           </div>
 
           {coverImageUrl && (
-            <div className="rounded-3xl overflow-hidden border border-glass bg-base-950 mt-6 shadow-2xl relative">
+            <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-glass bg-base-950 mt-4 sm:mt-6 shadow-2xl relative">
               <Image
                 src={coverImageUrl}
                 alt={coverImage?.alt ?? (project.name as string)}
@@ -144,14 +144,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       </section>
 
       {/* Overview & Content */}
-      <section className="py-16 md:py-20 bg-base-950 border-t border-glass">
+      <section className="py-12 sm:py-16 md:py-20 bg-base-950 border-t border-glass">
         <Container>
           <div className="max-w-3xl">
-            <p className="eyebrow mb-3">Project Scope</p>
-            <h2 className="font-display font-bold text-h2 text-base-100 mb-6">
+            <p className="eyebrow mb-2 sm:mb-3">Project Scope</p>
+            <h2 className="font-display font-bold text-h3 sm:text-h2 text-base-100 mb-4 sm:mb-6">
               Overview & Objectives
             </h2>
-            <div className="glass-panel p-8 md:p-10 space-y-4 text-base-100/75 text-body leading-relaxed">
+            <div className="glass-panel p-5 sm:p-8 md:p-10 space-y-4 text-base-100/75 text-body-sm sm:text-body leading-relaxed">
               <p>
                 {project.description
                   ? String(project.description)
@@ -160,13 +160,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
 
             {Boolean(project.externalUrl) && (
-              <div className="mt-8 flex items-center gap-4">
+              <div className="mt-6 sm:mt-8 flex items-center gap-4">
                 <Button
                   href={String(project.externalUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="primary"
                   size="md"
+                  className="w-full sm:w-auto min-h-[44px]"
                 >
                   <span>Visit Project Portal</span>
                   <ExternalLink size={15} aria-hidden="true" />

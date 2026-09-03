@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, headline, lead }: PageHeroProps) {
 
   return (
     <section
-      className="relative pt-32 pb-16 md:pt-40 md:pb-20 border-b border-white/[0.08] bg-base-950 overflow-hidden"
+      className="relative pt-28 pb-12 sm:pt-36 sm:pb-16 md:pt-40 md:pb-20 border-b border-glass bg-base-950 overflow-hidden"
       aria-label="Page header"
     >
       {/* ── Ambient glow top-right ──────────────────────────────── */}
@@ -57,14 +57,14 @@ export function PageHero({ eyebrow, headline, lead }: PageHeroProps) {
           className="max-w-4xl"
         >
           {eyebrow && (
-            <motion.p variants={item} className="eyebrow mb-3.5">
+            <motion.p variants={item} className="eyebrow mb-2 sm:mb-3.5">
               {eyebrow}
             </motion.p>
           )}
 
           <motion.h1
             variants={item}
-            className="font-display font-extrabold text-h1 md:text-[3.5rem] text-base-100 tracking-tight leading-[1.06] mb-6"
+            className="font-display font-extrabold text-h2 sm:text-h1 md:text-[3.5rem] text-base-100 tracking-tight leading-[1.06] mb-4 sm:mb-6"
           >
             {headline}
           </motion.h1>
@@ -72,7 +72,7 @@ export function PageHero({ eyebrow, headline, lead }: PageHeroProps) {
           {lead && (
             <motion.p
               variants={item}
-              className="text-body-lg text-base-100/65 leading-relaxed max-w-2xl"
+              className="text-body sm:text-body-lg text-base-100/65 leading-relaxed max-w-2xl"
             >
               {lead}
             </motion.p>

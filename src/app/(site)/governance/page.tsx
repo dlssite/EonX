@@ -88,24 +88,24 @@ export default function GovernancePage() {
       />
 
       {/* ── Governance Principles & Articles ─────────────────────── */}
-      <section className="py-24 md:py-32 bg-base-950">
+      <section className="py-14 sm:py-20 md:py-32 bg-base-950">
         <Container>
-          <div className="max-w-4xl mx-auto mb-16 text-center">
-            <p className="eyebrow mb-3">Founding Pillars</p>
-            <h2 className="font-display font-extrabold text-h2 md:text-[2.75rem] text-base-100 tracking-tight mb-4">
+          <div className="max-w-4xl mx-auto mb-10 sm:mb-16 text-center">
+            <p className="eyebrow mb-2 sm:mb-3">Founding Pillars</p>
+            <h2 className="font-display font-extrabold text-h2 md:text-[2.75rem] text-base-100 tracking-tight mb-3 sm:mb-4">
               Rules codified for generational durability.
             </h2>
-            <p className="text-body-lg text-base-100/70 leading-relaxed">
+            <p className="text-body sm:text-body-lg text-base-100/70 leading-relaxed px-2 sm:px-0">
               Unlike traditional studios that centralize power or Web3 DAOs plagued by speculation, Eonrisia pairs benevolent open stewardship with strict constitutional bylaws. Every member, lead, and founder is bound by these operational charters.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-20">
-            <div className="p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md">
-              <div className="w-12 h-12 rounded-2xl bg-base-950 border border-glass-subtle flex items-center justify-center mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto mb-14 sm:mb-20">
+            <div className="p-5 sm:p-7 md:p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md">
+              <div className="w-12 h-12 rounded-2xl bg-base-950 border border-glass-subtle flex items-center justify-center mb-5 sm:mb-6">
                 <Scale size={22} className="text-brand-400" />
               </div>
-              <h3 className="font-display font-bold text-h3 text-base-100 mb-2">
+              <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-2">
                 Open Commons
               </h3>
               <p className="text-body-sm text-base-100/60 leading-relaxed">
@@ -113,11 +113,11 @@ export default function GovernancePage() {
               </p>
             </div>
 
-            <div className="p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md">
-              <div className="w-12 h-12 rounded-2xl bg-base-950 border border-glass-subtle flex items-center justify-center mb-6">
+            <div className="p-5 sm:p-7 md:p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md">
+              <div className="w-12 h-12 rounded-2xl bg-base-950 border border-glass-subtle flex items-center justify-center mb-5 sm:mb-6">
                 <CheckCircle2 size={22} className="text-emerald-400" />
               </div>
-              <h3 className="font-display font-bold text-h3 text-base-100 mb-2">
+              <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-2">
                 Fair Attribution
               </h3>
               <p className="text-body-sm text-base-100/60 leading-relaxed">
@@ -125,11 +125,11 @@ export default function GovernancePage() {
               </p>
             </div>
 
-            <div className="p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md">
-              <div className="w-12 h-12 rounded-2xl bg-base-950 border border-glass-subtle flex items-center justify-center mb-6">
+            <div className="p-5 sm:p-7 md:p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md">
+              <div className="w-12 h-12 rounded-2xl bg-base-950 border border-glass-subtle flex items-center justify-center mb-5 sm:mb-6">
                 <Terminal size={22} className="text-accent-400" />
               </div>
-              <h3 className="font-display font-bold text-h3 text-base-100 mb-2">
+              <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-2">
                 Technical Rigor
               </h3>
               <p className="text-body-sm text-base-100/60 leading-relaxed">
@@ -140,28 +140,28 @@ export default function GovernancePage() {
 
           {/* ── Articles Grid ────────────────────────────────────── */}
           <div className="max-w-4xl mx-auto">
-            <h3 className="font-display font-bold text-h3 text-base-100 mb-8">
+            <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-6 sm:mb-8">
               Constitutional Articles
             </h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {articles.map((art) => (
                 <div
                   key={art.code}
-                  className="p-6 md:p-7 rounded-2xl border border-glass bg-base-900/40 backdrop-blur-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-glass-hover transition-colors"
+                  className="p-5 sm:p-6 md:p-7 rounded-2xl border border-glass bg-base-900/40 backdrop-blur-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 hover:border-glass-hover transition-colors"
                 >
                   <div>
                     <div className="text-label-xs font-mono text-brand-400 uppercase tracking-wider mb-1">
                       {art.code}
                     </div>
-                    <h4 className="font-display font-bold text-body-lg text-base-100 mb-1">
+                    <h4 className="font-display font-bold text-body sm:text-body-lg text-base-100 mb-1">
                       {art.title}
                     </h4>
-                    <p className="text-body-sm text-base-100/60">
+                    <p className="text-body-sm text-base-100/60 leading-relaxed">
                       {art.description}
                     </p>
                   </div>
-                  <span className="shrink-0 px-3 py-1 rounded-full text-label-xs font-mono bg-base-950 text-base-100/50 border border-glass-subtle">
+                  <span className="self-start sm:self-center shrink-0 px-3 py-1 rounded-full text-label-xs font-mono bg-base-950 text-base-100/50 border border-glass-subtle">
                     Active Law
                   </span>
                 </div>

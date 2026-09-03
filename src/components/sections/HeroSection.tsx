@@ -82,7 +82,7 @@ export function HeroSection() {
       />
 
       {/* ── Content ──────────────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-6 md:px-10 xl:px-20 pt-32 pb-20">
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-4 sm:px-6 md:px-10 xl:px-20 pt-28 pb-16 sm:pt-36 sm:pb-20">
         <motion.div
           variants={container}
           initial="hidden"
@@ -93,20 +93,20 @@ export function HeroSection() {
           {/* ── Eyebrow Pill Row ─────────────────────────────────── */}
           <motion.div
             variants={item}
-            className="flex flex-wrap items-center justify-center gap-2.5 mb-8 md:mb-10"
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-6 sm:mb-8 md:mb-10"
           >
             {disciplineChips.map(({ icon: Icon, label }) => (
               <span
                 key={label}
                 className={cn(
-                  'inline-flex items-center gap-2 px-4 py-1.5 rounded-full',
+                  'inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full',
                   'text-label font-body font-medium',
                   'border border-glass bg-base-900/80 text-base-100/80',
                   'backdrop-blur-md shadow-sm',
                 )}
               >
                 <Icon size={13} aria-hidden="true" className="shrink-0 text-brand-400" />
-                {label}
+                <span>{label}</span>
               </span>
             ))}
           </motion.div>
@@ -115,9 +115,9 @@ export function HeroSection() {
           <motion.h1
             variants={item}
             className={cn(
-              'font-display font-extrabold text-base-100 mb-8',
-              'leading-[1.04] tracking-tightest',
-              'text-[clamp(2.4rem,5.5vw,4.5rem)]',
+              'font-display font-extrabold text-base-100 mb-6 sm:mb-8',
+              'leading-[1.06] tracking-tightest',
+              'text-[clamp(2.125rem,6vw,4.5rem)]',
             )}
           >
             Building immersive{' '}
@@ -130,7 +130,7 @@ export function HeroSection() {
           {/* ── Lead Paragraph ───────────────────────────────────── */}
           <motion.p
             variants={item}
-            className="text-body-lg md:text-[1.25rem] text-base-100/65 max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-body sm:text-body-lg md:text-[1.25rem] text-base-100/65 max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed px-2 sm:px-0"
           >
             Eonrisia is the community-driven organization building living fictional universes —
             and the software, games, comics, and collective tools that bring them to life.
@@ -139,13 +139,13 @@ export function HeroSection() {
           {/* ── Dual Pill CTA Group ──────────────────────────────── */}
           <motion.div
             variants={item}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full max-w-md sm:max-w-none mx-auto"
           >
             <Link
               href="/volunteer"
               className={cn(
-                'inline-flex items-center justify-center gap-2.5',
-                'px-9 py-4 rounded-full',
+                'inline-flex items-center justify-center gap-2.5 w-full sm:w-auto',
+                'px-8 sm:px-9 py-3.5 sm:py-4 rounded-full min-h-[48px]',
                 'text-body font-body font-semibold text-white',
                 'bg-brand-500 hover:bg-brand-400 active:bg-brand-600',
                 'shadow-[0_0_32px_0_rgba(108,99,255,0.45)] sheen-sweep',
@@ -154,15 +154,15 @@ export function HeroSection() {
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
               )}
             >
-              Get Involved
+              <span>Get Involved</span>
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
 
             <Link
               href="/projects"
               className={cn(
-                'inline-flex items-center justify-center gap-2.5',
-                'px-9 py-4 rounded-full',
+                'inline-flex items-center justify-center gap-2.5 w-full sm:w-auto',
+                'px-8 sm:px-9 py-3.5 sm:py-4 rounded-full min-h-[48px]',
                 'text-body font-body font-semibold text-base-100',
                 'border border-glass bg-base-900/60 hover:bg-base-800/80 hover:border-glass-hover hover:text-base-100',
                 'backdrop-blur-md active:scale-[0.97]',
@@ -170,32 +170,32 @@ export function HeroSection() {
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
               )}
             >
-              See Our Work
+              <span>See Our Work</span>
             </Link>
           </motion.div>
 
           {/* ── Disciplines Marquee Ribbon ────────────────────────── */}
           <motion.div
             variants={item}
-            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-glass-subtle bg-base-900/40 backdrop-blur-sm"
+            className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 rounded-2xl sm:rounded-full border border-glass-subtle bg-base-900/40 backdrop-blur-sm max-w-full"
           >
-            <span className="text-label text-base-100/40 font-body tracking-widest uppercase">
+            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
               Writers
             </span>
             <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label text-base-100/40 font-body tracking-widest uppercase">
+            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
               Artists
             </span>
             <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label text-base-100/40 font-body tracking-widest uppercase">
+            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
               Developers
             </span>
             <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label text-base-100/40 font-body tracking-widest uppercase">
+            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
               Composers
             </span>
             <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label text-base-100/40 font-body tracking-widest uppercase">
+            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
               Community
             </span>
           </motion.div>

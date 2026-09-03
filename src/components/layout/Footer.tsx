@@ -85,10 +85,10 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
         }}
       />
 
-      <Container className="py-16 md:py-20 relative z-10">
+      <Container className="py-12 sm:py-16 md:py-20 relative z-10">
 
         {/* ── Main grid ─────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 mb-12 sm:mb-14">
 
           {/* Brand column */}
           <div className="lg:col-span-2 flex flex-col gap-4">
@@ -113,9 +113,9 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
               Official organization portal. Fictional universe lore and media live exclusively on dedicated project sites.
             </p>
 
-            {/* Social icons */}
+            {/* Social icons with 44px touch targets */}
             {socialLinks.length > 0 && (
-              <div className="flex items-center gap-2 mt-2">
+              <div className="flex flex-wrap items-center gap-2 mt-2">
                 {socialLinks.map((social) => {
                   const Icon  = socialIcons[social.platform] ?? customIcons[social.platform]
                   const label = socialLabels[social.platform] ?? social.platform
@@ -127,13 +127,13 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
                       rel="noopener noreferrer"
                       aria-label={`Eonrisia on ${label}`}
                       className={cn(
-                        'p-2.5 rounded-full border border-glass bg-base-900/60',
-                        'text-base-100/50 hover:text-base-100 hover:border-glass-hover hover:bg-base-800',
+                        'min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full border border-glass bg-base-900/60',
+                        'text-base-100/60 hover:text-base-100 hover:border-glass-hover hover:bg-base-800',
                         'transition-all duration-fast',
                       )}
                     >
                       {Icon ? (
-                        <Icon size={15} aria-hidden="true" />
+                        <Icon size={16} aria-hidden="true" />
                       ) : (
                         <span className="text-label font-body font-medium">{label.charAt(0).toUpperCase()}</span>
                       )}
@@ -145,13 +145,13 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
           </div>
 
           {/* Nav columns (span 4 cols) */}
-          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
             {columns.map((col) => (
               <nav key={col.heading} aria-label={`${col.heading} links`}>
-                <h3 className="text-label-xs font-body font-semibold text-base-100/40 uppercase tracking-widest mb-4">
+                <h3 className="text-label-xs font-body font-semibold text-base-100/40 uppercase tracking-widest mb-3.5">
                   {col.heading}
                 </h3>
-                <ul className="flex flex-col gap-3" role="list">
+                <ul className="flex flex-col gap-2.5" role="list">
                   {col.links.map((link) => (
                     <li key={link.href}>
                       <Link
@@ -159,7 +159,7 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
                         target={link.isExternal ? '_blank' : undefined}
                         rel={link.isExternal ? 'noopener noreferrer' : undefined}
                         className={cn(
-                          'text-body-sm font-body text-base-100/60',
+                          'inline-block py-1 text-body-sm font-body text-base-100/60',
                           'hover:text-base-100 transition-colors duration-fast',
                           'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-500 rounded-sm',
                         )}
@@ -175,20 +175,20 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
         </div>
 
         {/* ── Bottom bar ────────────────────────────────────────── */}
-        <div className="pt-8 border-t border-glass flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="pt-8 border-t border-glass flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-safe">
           <p className="text-label text-base-100/40 font-body">
             © {year} {legalText ?? 'Eonrisia. All rights reserved.'}
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <Link
               href="/governance"
-              className="text-label text-base-100/40 hover:text-base-100/80 transition-colors duration-fast"
+              className="text-label text-base-100/40 hover:text-base-100/80 transition-colors duration-fast py-1"
             >
               Governance & Constitution
             </Link>
             <Link
               href="/contact"
-              className="text-label text-base-100/40 hover:text-base-100/80 transition-colors duration-fast"
+              className="text-label text-base-100/40 hover:text-base-100/80 transition-colors duration-fast py-1"
             >
               Contact
             </Link>

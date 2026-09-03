@@ -135,10 +135,10 @@ export function ContactForms() {
       </div>
 
       {/* Right Column — Segmented Form */}
-      <div className="lg:col-span-7 glass-panel p-8 md:p-10">
+      <div className="lg:col-span-7 glass-panel p-5 sm:p-8 md:p-10">
 
-        {/* Category Pill Switcher */}
-        <div role="tablist" aria-label="Inquiry type" className="flex flex-wrap gap-2 mb-8 p-1.5 rounded-2xl bg-base-950/60 border border-glass">
+        {/* Category Pill Switcher: 2x2 grid on mobile */}
+        <div role="tablist" aria-label="Inquiry type" className="grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8 p-1 sm:p-1.5 rounded-2xl bg-base-950/60 border border-glass">
           {tabs.map((tab) => {
             const isSelected = activeType === tab.value
             const Icon = tab.icon
@@ -149,8 +149,10 @@ export function ContactForms() {
                 aria-selected={isSelected}
                 onClick={() => setActiveType(tab.value)}
                 className={cn(
-                  'flex items-center gap-2 px-4 py-2 rounded-xl text-body-sm font-body font-medium transition-all duration-fast select-none flex-1 justify-center min-w-[130px]',
+                  'flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-body-sm font-body font-medium transition-all duration-fast select-none justify-center min-h-[44px]',
                   isSelected
+                    ? 'bg-base-800 text-brand-300 font-semibold border border-glass shadow-sm'
+                    : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40'
                 )}
               >
                 <Icon size={14} className={isSelected ? 'text-brand-400' : 'opacity-60'} />
@@ -161,7 +163,7 @@ export function ContactForms() {
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5 sm:space-y-6">
           <input
             type="text"
             tabIndex={-1}
@@ -170,7 +172,7 @@ export function ContactForms() {
             {...register('honeypot')}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             <Input
               label="Full Name"
               required
@@ -221,7 +223,7 @@ export function ContactForms() {
             variant="primary"
             size="lg"
             isLoading={isSubmitting}
-            className="w-full"
+            className="w-full sm:w-auto min-h-[48px]"
           >
             Send Inquiry
           </Button>

@@ -128,7 +128,7 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
                 aria-label="Open navigation menu"
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
-                className="p-2.5 rounded-full bg-base-900/80 border border-glass text-base-100/70 hover:text-base-100 hover:bg-base-800 transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 rounded-full bg-base-900/80 border border-glass text-base-100/70 hover:text-base-100 hover:bg-base-800 transition-colors"
               >
                 <Menu size={20} aria-hidden="true" />
               </button>

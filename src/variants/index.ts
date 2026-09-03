@@ -123,6 +123,30 @@ export const drawerSlide: Variants = {
   },
 }
 
+// ── Bottom Sheet (mobile slide up from bottom) ────────────────
+export const bottomSheetSlide: Variants = {
+  hidden: {
+    y: '100%',
+    opacity: 0.9,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+  exit: {
+    y: '100%',
+    opacity: 0.9,
+    transition: {
+      duration: 0.25,
+      ease: [0.4, 0, 1, 1],
+    },
+  },
+}
+
 // ── Tab content transition ───────────────────────────────────
 export const tabContentVariant: Variants = {
   hidden: { opacity: 0, y: 8 },

@@ -115,23 +115,23 @@ export default async function PostDetailPage({ params }: PostPageProps) {
       />
 
       {/* Breadcrumb Bar */}
-      <div className="pt-32 pb-6 border-b border-glass bg-base-950">
+      <div className="pt-24 pb-4 sm:pt-32 sm:pb-6 border-b border-glass bg-base-950">
         <Container>
           <Link
             href="/updates"
-            className="inline-flex items-center gap-2 text-body-sm text-base-100/50 hover:text-base-100 transition-colors duration-fast"
+            className="inline-flex items-center gap-2 py-2 text-body-sm text-base-100/60 hover:text-base-100 transition-colors duration-fast min-h-[44px]"
           >
-            <ArrowLeft size={14} aria-hidden="true" />
+            <ArrowLeft size={15} aria-hidden="true" />
             <span>Back to Updates</span>
           </Link>
         </Container>
       </div>
 
       {/* Article Hero */}
-      <article className="py-12 md:py-16 bg-base-950">
+      <article className="py-8 sm:py-12 md:py-16 bg-base-950">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
               <Badge variant={categoryBadgeVariant[post.category] ?? 'default'} showDot>
                 {categoryLabelMap[post.category] ?? post.category}
               </Badge>
@@ -143,15 +143,15 @@ export default async function PostDetailPage({ params }: PostPageProps) {
               )}
             </div>
 
-            <h1 className="font-display font-extrabold text-h1 md:text-[3.25rem] text-base-100 tracking-tight leading-[1.08] mb-6">
+            <h1 className="font-display font-extrabold text-h2 sm:text-h1 md:text-[3.25rem] text-base-100 tracking-tight leading-[1.08] mb-4 sm:mb-6">
               {post.title}
             </h1>
 
-            <p className="text-body-lg text-base-100/70 leading-relaxed mb-8 border-l-2 border-brand-500 pl-4 py-1">
+            <p className="text-body sm:text-body-lg text-base-100/70 leading-relaxed mb-6 sm:mb-8 border-l-2 border-brand-500 pl-3 sm:pl-4 py-1">
               {post.excerpt}
             </p>
 
-            <div className="flex items-center gap-3 pt-4 border-t border-glass text-body-sm text-base-100/60 mb-10">
+            <div className="flex items-center gap-3 pt-4 border-t border-glass text-body-sm text-base-100/60 mb-8 sm:mb-10">
               <div className="w-8 h-8 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400 font-bold">
                 <User size={16} />
               </div>
@@ -163,7 +163,7 @@ export default async function PostDetailPage({ params }: PostPageProps) {
 
             {/* Featured Image */}
             {coverImageUrl && (
-              <div className="rounded-3xl overflow-hidden border border-glass bg-base-950 shadow-2xl relative aspect-[16/9] mb-12">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-glass bg-base-950 shadow-2xl relative aspect-[16/9] mb-8 sm:mb-12">
                 <Image
                   src={coverImageUrl}
                   alt={post.coverImage?.alt ?? post.title}
@@ -175,7 +175,7 @@ export default async function PostDetailPage({ params }: PostPageProps) {
             )}
 
             {/* Article Content */}
-            <div className="glass-panel p-8 sm:p-12 border border-glass space-y-6 text-base-100/80 text-body-lg leading-relaxed font-body">
+            <div className="glass-panel p-5 sm:p-8 md:p-12 border border-glass space-y-6 text-base-100/80 text-body sm:text-body-lg leading-relaxed font-body">
               <p>{post.excerpt}</p>
             </div>
           </div>

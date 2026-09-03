@@ -47,18 +47,18 @@ const socialIcons: Record<string, React.ComponentType<{ size?: number; 'aria-hid
 
 export function TeamGrid({ members, activeDept }: TeamGridProps) {
   return (
-    <section className="py-24 bg-base-950">
+    <section className="py-12 sm:py-16 md:py-24 bg-base-950">
       <Container>
-        <div className="mb-14">
+        <div className="mb-10 sm:mb-14">
           <DeptFilter activeDept={activeDept} basePath="/team" />
         </div>
 
         {members.length === 0 ? (
-          <div className="text-center py-20 rounded-3xl border border-dashed border-glass bg-base-900/30 max-w-xl mx-auto">
+          <div className="text-center py-16 sm:py-20 rounded-3xl border border-dashed border-glass bg-base-900/30 max-w-xl mx-auto px-4">
             <p className="text-body text-base-100/50">No team members found in this department.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {members.map((rawMember) => {
               const member = rawMember as {
                 id: string
@@ -86,10 +86,10 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
               return (
                 <div
                   key={member.id}
-                  className="group relative flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/95 via-base-900/75 to-base-950/90 backdrop-blur-xl overflow-hidden hover:border-glass-strong transition-all duration-normal hover:-translate-y-2 hover:shadow-[0_24px_48px_-15px_rgba(108,99,255,0.25)]"
+                  className="group relative flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/95 via-base-900/75 to-base-950/90 backdrop-blur-xl overflow-hidden hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-15px_rgba(108,99,255,0.25)]"
                 >
                   {/* Portrait Media Header */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-base-950 border-b border-glass">
+                  <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full overflow-hidden bg-base-950 border-b border-glass">
                     {photoUrl ? (
                       <Image
                         src={photoUrl}
@@ -113,7 +113,7 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                     />
 
                     {/* Pinned department badge */}
-                    <div className="absolute top-4 left-4 z-10">
+                    <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
                       <Badge variant={deptBadge[member.department] ?? 'default'} size="sm" showDot>
                         {deptLabel}
                       </Badge>
@@ -121,9 +121,9 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                   </div>
 
                   {/* Card Content Body */}
-                  <div className="flex flex-col flex-1 p-7 justify-between space-y-4">
+                  <div className="flex flex-col flex-1 p-5 sm:p-6 md:p-7 justify-between space-y-4">
                     <div>
-                      <h3 className="font-display font-bold text-h3 text-base-100 mb-1 group-hover:text-brand-300 transition-colors">
+                      <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-1 group-hover:text-brand-300 transition-colors">
                         {member.name}
                       </h3>
 
@@ -151,7 +151,7 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                               target="_blank"
                               rel="noopener noreferrer"
                               aria-label={`${member.name} on ${s.platform}`}
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-label font-medium bg-base-950/80 border border-glass text-base-100/60 hover:text-white hover:border-brand-400 hover:bg-brand-500/20 transition-all duration-fast"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-label font-medium bg-base-950/80 border border-glass text-base-100/60 hover:text-white hover:border-brand-400 hover:bg-brand-500/20 transition-all duration-fast min-h-[36px]"
                             >
                               <Icon size={13} aria-hidden="true" />
                               <span className="capitalize">{s.platform}</span>

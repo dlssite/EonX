@@ -43,7 +43,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
 
   return (
     <section
-      className="relative py-28 md:py-36 overflow-hidden bg-base-950"
+      className="relative py-16 sm:py-24 md:py-36 overflow-hidden bg-base-950"
       aria-labelledby="team-heading"
     >
       <div aria-hidden="true" className="section-divider absolute top-0 left-0 right-0" />
@@ -56,13 +56,13 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16 md:mb-20"
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-10 sm:mb-16 md:mb-20"
         >
           <div>
-            <p className="eyebrow mb-3">Core Stewards & Leadership</p>
+            <p className="eyebrow mb-2 sm:mb-3">Core Stewards & Leadership</p>
             <h2
               id="team-heading"
-              className="font-display font-extrabold text-h1 text-base-100 tracking-tight"
+              className="font-display font-extrabold text-h2 sm:text-h1 text-base-100 tracking-tight"
             >
               The people behind{' '}
               <span className="gradient-text">Eonrisia.</span>
@@ -71,13 +71,13 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           <Link
             href="/team"
             className={cn(
-              'inline-flex items-center gap-2 shrink-0',
+              'inline-flex items-center gap-2 shrink-0 py-1.5',
               'text-body-sm font-body font-semibold',
-              'text-base-100/60 hover:text-brand-300',
+              'text-base-100/70 hover:text-brand-300',
               'transition-colors duration-fast',
             )}
           >
-            Meet the entire team
+            <span>Meet the entire team</span>
             <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </motion.div>
@@ -89,7 +89,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {members.map((member) => {
             const photoUrl   = payloadImageUrl(member.photo as Parameters<typeof payloadImageUrl>[0])
@@ -109,10 +109,10 @@ export function TeamPreview({ members }: TeamPreviewProps) {
               <motion.li
                 key={member.id}
                 variants={item}
-                className="group relative flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/95 via-base-900/75 to-base-950/90 backdrop-blur-md overflow-hidden hover:border-glass-strong transition-all duration-normal hover:-translate-y-2 hover:shadow-[0_24px_48px_-15px_rgba(108,99,255,0.25)]"
+                className="group relative flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/95 via-base-900/75 to-base-950/90 backdrop-blur-md overflow-hidden hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-15px_rgba(108,99,255,0.25)]"
               >
                 {/* Portrait Image Header */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-base-950 border-b border-glass">
+                <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full overflow-hidden bg-base-950 border-b border-glass">
                   {photoUrl ? (
                     <Image
                       src={photoUrl}
@@ -137,7 +137,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
 
                   {/* Pinned Department Badge */}
                   {department && (
-                    <div className="absolute top-4 left-4 z-10">
+                    <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
                       <Badge variant={deptBadge[department] ?? 'default'} size="sm" showDot>
                         {deptLabel}
                       </Badge>
@@ -146,9 +146,9 @@ export function TeamPreview({ members }: TeamPreviewProps) {
                 </div>
 
                 {/* Profile Details */}
-                <div className="p-6 sm:p-7 flex flex-col justify-between flex-1">
+                <div className="p-5 sm:p-6 md:p-7 flex flex-col justify-between flex-1">
                   <div>
-                    <h3 className="font-display font-bold text-h3 text-base-100 leading-tight mb-1 group-hover:text-brand-300 transition-colors">
+                    <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 leading-tight mb-1 group-hover:text-brand-300 transition-colors">
                       {name}
                     </h3>
 

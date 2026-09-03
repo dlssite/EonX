@@ -72,7 +72,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
             </Link>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {opportunities.map((opp) => {
               const skills = (opp.skills as Skill[]) ?? []
               const dept = opp.department as string
@@ -84,37 +84,37 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
               return (
                 <div
                   key={opp.id}
-                  className="group relative p-6 sm:p-8 rounded-3xl border border-glass bg-gradient-to-r from-base-900/90 via-base-900/70 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal shadow-sm hover:shadow-[0_16px_40px_-15px_rgba(108,99,255,0.2)]"
+                  className="group relative p-5 sm:p-7 md:p-8 rounded-3xl border border-glass bg-gradient-to-r from-base-900/90 via-base-900/70 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal shadow-sm hover:shadow-[0_16px_40px_-15px_rgba(108,99,255,0.2)]"
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 lg:gap-6">
                     <div className="flex-1">
-                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
                         <Badge variant={deptBadge[dept] ?? 'default'} size="sm" showDot>
                           {deptLabel}
                         </Badge>
                         {Boolean(opp.isRemote) && (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-xs sm:text-label font-body bg-base-950 border border-glass text-base-100/60">
                             <MapPin size={11} aria-hidden="true" className="text-brand-400" /> Remote / Flexible
                           </span>
                         )}
                         {opp.timeCommitment ? (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-xs sm:text-label font-body bg-base-950 border border-glass text-base-100/60">
                             <Clock size={11} aria-hidden="true" className="text-brand-400" />
                             {String(opp.timeCommitment)}
                           </span>
                         ) : null}
                       </div>
 
-                      <h3 className="font-display font-bold text-h3 text-base-100 mb-3 group-hover:text-brand-300 transition-colors duration-fast">
+                      <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-2 sm:mb-3 group-hover:text-brand-300 transition-colors duration-fast">
                         {opp.title as string}
                       </h3>
 
                       {skills.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                           {skills.map(({ skill }) => (
                             <span
                               key={skill}
-                              className="px-3 py-1 text-label font-body font-medium rounded-full bg-base-950 border border-glass text-base-100/70"
+                              className="px-2.5 sm:px-3 py-0.5 sm:py-1 text-[0.75rem] sm:text-label font-body font-medium rounded-full bg-base-950 border border-glass text-base-100/70"
                             >
                               {skill}
                             </span>
@@ -123,10 +123,10 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-glass">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-glass">
                       <button
                         onClick={() => setSelectedOpp(opp)}
-                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-body-sm font-body font-medium text-base-100 border border-glass bg-base-950/60 hover:bg-base-800/80 transition-all duration-fast"
+                        className="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-5 py-3 sm:py-2.5 rounded-full text-body-sm font-body font-medium text-base-100 border border-glass bg-base-950/60 hover:bg-base-800/80 transition-all duration-fast min-h-[44px]"
                       >
                         <Eye size={14} aria-hidden="true" />
                         <span>Role Details</span>
@@ -134,7 +134,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
 
                       <Link
                         href={(opp.applyUrl as string) || '/contact'}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_20px_0_rgba(108,99,255,0.35)] sheen-sweep"
+                        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_20px_0_rgba(108,99,255,0.35)] sheen-sweep min-h-[44px]"
                       >
                         <span>Apply</span>
                         <ArrowRight size={14} aria-hidden="true" />

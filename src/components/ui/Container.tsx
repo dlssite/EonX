@@ -13,7 +13,7 @@ export function Container({ as: Tag = 'div', className, children, ...props }: Co
     <Tag
       className={cn(
         'w-full max-w-container mx-auto',
-        'px-6 md:px-10 xl:px-20',
+        'px-4 sm:px-6 md:px-10 xl:px-20',
         className,
       )}
       {...props}

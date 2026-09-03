@@ -107,20 +107,20 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
       />
 
       {/* Category Filter Bar */}
-      <section className="py-6 bg-base-950 border-b border-glass sticky top-16 z-20 backdrop-blur-md">
+      <section className="py-3 sm:py-5 bg-base-950/90 border-b border-glass sticky top-16 z-20 backdrop-blur-md">
         <Container>
-          <div className="flex items-center justify-between gap-4 overflow-x-auto pb-2 sm:pb-0 no-scrollbar">
-            <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center justify-between gap-4 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar edge-fade-x">
+            <div className="flex items-center gap-2 shrink-0 py-1">
               {CATEGORIES.map((cat) => {
                 const isActive = category === cat.value
                 return (
                   <Link
                     key={cat.value}
                     href={cat.value === 'all' ? '/updates' : `/updates?category=${cat.value}`}
-                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all duration-fast shrink-0 whitespace-nowrap ${
+                    className={`px-4 sm:px-5 py-2 rounded-full text-body-sm font-medium transition-all duration-fast shrink-0 whitespace-nowrap min-h-[44px] flex items-center ${
                       isActive
-                        ? 'bg-brand-500 text-white shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
-                        : 'bg-base-900 border border-glass text-base-100/60 hover:text-base-100 hover:border-glass-strong'
+                        ? 'bg-brand-500 text-white shadow-[0_0_16px_0_rgba(108,99,255,0.4)] font-semibold'
+                        : 'bg-base-900/80 border border-glass text-base-100/60 hover:text-base-100 hover:border-glass-strong'
                     }`}
                   >
                     {cat.label}
@@ -133,26 +133,26 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
             <Link
               href="/feed.xml"
               target="_blank"
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-label font-medium bg-base-900 border border-glass text-base-100/60 hover:text-brand-400 hover:border-glass-strong transition-colors shrink-0"
-              title="Subscribe via RSS 2.0"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-label font-body bg-base-900/60 border border-glass text-base-100/60 hover:text-base-100 transition-colors shrink-0 min-h-[36px]"
             >
-              <Rss size={13} className="text-brand-400" />
-              <span>RSS Feed</span>
+              <span>RSS</span>
+              <Rss size={13} aria-hidden="true" />
             </Link>
           </div>
         </Container>
       </section>
 
       {/* Content Section */}
-      <section className="py-16 md:py-24 bg-base-950">
+      <section className="py-12 sm:py-16 md:py-24 bg-base-950">
         <Container>
           {/* Featured Post Card */}
           {featuredPost && (
-            <div className="mb-16">
-              <p className="eyebrow mb-4">Featured Highlight</p>
+            <div className="mb-12 sm:mb-16">
+              <p className="eyebrow mb-3 sm:mb-4">Featured Highlight</p>
               <Link
                 href={`/updates/${featuredPost.slug}`}
-                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/70 to-base-950/90 p-6 sm:p-8 md:p-10 hover:border-glass-strong transition-all duration-normal shadow-2xl overflow-hidden"
+                className="group grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/70 to-base-950/90 p-5 sm:p-8 md:p-10 hover:border-glass-strong transition-all duration-normal shadow-2xl overflow-hidden"
               >
                 {/* Cover Image */}
                 <div className="lg:col-span-7 relative aspect-[16/9] rounded-2xl overflow-hidden bg-base-950 border border-glass">
@@ -172,9 +172,9 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                 </div>
 
                 {/* Content */}
-                <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-4 sm:space-y-6">
                   <div>
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
                       <Badge
                         variant={categoryBadgeVariant[featuredPost.category] ?? 'default'}
                         showDot
@@ -189,11 +189,11 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                       )}
                     </div>
 
-                    <h2 className="font-display font-bold text-h2 text-base-100 group-hover:text-brand-300 transition-colors leading-tight mb-4">
+                    <h2 className="font-display font-bold text-h3 sm:text-h2 text-base-100 group-hover:text-brand-300 transition-colors leading-tight mb-3 sm:mb-4">
                       {featuredPost.title}
                     </h2>
 
-                    <p className="text-body text-base-100/70 line-clamp-4 leading-relaxed">
+                    <p className="text-body-sm sm:text-body text-base-100/70 line-clamp-3 sm:line-clamp-4 leading-relaxed">
                       {featuredPost.excerpt}
                     </p>
                   </div>
@@ -215,13 +215,13 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
           {/* Posts Grid */}
           {postsList.length > 0 ? (
             <div>
-              {featuredPost && <h3 className="font-display font-bold text-h3 text-base-100 mb-8">All Updates</h3>}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredPost && <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-6 sm:mb-8">All Updates</h3>}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {postsList.map((post) => (
                   <Link
                     key={post.id}
                     href={`/updates/${post.slug}`}
-                    className="group flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/60 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(108,99,255,0.2)] overflow-hidden"
+                    className="group flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/60 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_rgba(108,99,255,0.2)] overflow-hidden"
                   >
                     {/* Thumbnail */}
                     <div className="relative aspect-[16/9] bg-base-950 border-b border-glass overflow-hidden">
@@ -241,7 +241,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                     </div>
 
                     {/* Card Content */}
-                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                       <div>
                         <div className="flex items-center gap-3 mb-3">
                           <Badge

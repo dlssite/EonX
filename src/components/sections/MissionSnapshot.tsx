@@ -75,7 +75,7 @@ export function MissionSnapshot() {
 
   return (
     <section
-      className="relative py-28 md:py-36 overflow-hidden bg-base-950"
+      className="relative py-16 sm:py-24 md:py-36 overflow-hidden bg-base-950"
       aria-labelledby="mission-heading"
     >
       {/* Top divider */}
@@ -96,25 +96,25 @@ export function MissionSnapshot() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-20"
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-16 md:mb-20"
         >
           <div>
-            <p className="eyebrow mb-3.5">Ecosystem Architecture</p>
+            <p className="eyebrow mb-2 sm:mb-3.5">Ecosystem Architecture</p>
             <h2
               id="mission-heading"
-              className="font-display font-extrabold text-h1 text-base-100 tracking-tight"
+              className="font-display font-extrabold text-h2 sm:text-h1 text-base-100 tracking-tight"
             >
               Three connected layers.{' '}
               <span className="gradient-text">One living mission.</span>
             </h2>
           </div>
-          <p className="text-body text-base-100/60 max-w-md leading-relaxed">
+          <p className="text-body-sm sm:text-body text-base-100/60 max-w-md leading-relaxed">
             Eonrisia separates organizational stewardship from creative worlds, ensuring both thrive sustainably without compromising either.
           </p>
         </motion.div>
 
         {/* ── Interactive 3-Layer Tab Switcher ─────────────────── */}
-        <div className="flex items-center gap-2 p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md max-w-xl mx-auto mb-12 shadow-md">
+        <div className="flex items-center gap-1 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md max-w-xl mx-auto mb-8 sm:mb-12 shadow-md">
           {ecosystemLayers.map((layer, index) => {
             const isSelected = activeTab === index
             return (
@@ -124,15 +124,15 @@ export function MissionSnapshot() {
                 aria-selected={isSelected}
                 role="tab"
                 className={cn(
-                  'relative flex-1 py-3 px-4 rounded-full text-body-sm font-body font-medium transition-all duration-fast text-center select-none',
+                  'relative flex-1 py-2.5 sm:py-3 px-2 sm:px-4 rounded-full text-label sm:text-body-sm font-body font-medium transition-all duration-fast text-center select-none min-h-[44px]',
                   isSelected
                     ? 'text-base-100 font-semibold'
                     : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
                 )}
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
+                <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
                   <span className="text-label-xs font-mono opacity-60">{layer.number}</span>
-                  <span>{layer.name}</span>
+                  <span className="truncate">{layer.name}</span>
                 </span>
                 {isSelected && (
                   <motion.div
@@ -147,7 +147,7 @@ export function MissionSnapshot() {
         </div>
 
         {/* ── Interactive Layer Stage ───────────────────────────── */}
-        <div className="glass-panel p-8 sm:p-12 md:p-14 relative overflow-hidden">
+        <div className="glass-panel p-5 sm:p-8 md:p-14 relative overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeLayer.id}
@@ -155,47 +155,47 @@ export function MissionSnapshot() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
             >
               {/* Left Column: Headline, Subtitle, Description */}
               <div className="lg:col-span-7 flex flex-col">
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4 sm:mb-6">
                   <span className="px-3.5 py-1 rounded-full text-label font-body font-semibold uppercase tracking-widest bg-brand-500/10 text-brand-400 dark:text-brand-300 border border-brand-500/30">
                     Layer {activeLayer.number} · {activeLayer.badge}
                   </span>
                 </div>
 
-                <h3 className="font-display font-extrabold text-h2 text-base-100 tracking-tight mb-3">
+                <h3 className="font-display font-extrabold text-h3 sm:text-h2 text-base-100 tracking-tight mb-2 sm:mb-3">
                   {activeLayer.name}
                 </h3>
-                <p className="text-body-lg text-brand-400 font-medium mb-6">
+                <p className="text-body sm:text-body-lg text-brand-400 font-medium mb-4 sm:mb-6">
                   {activeLayer.subtitle}
                 </p>
-                <p className="text-body text-base-100/70 leading-relaxed mb-8 max-w-xl">
+                <p className="text-body-sm sm:text-body text-base-100/70 leading-relaxed mb-6 sm:mb-8 max-w-xl">
                   {activeLayer.description}
                 </p>
 
                 <Link
                   href={activeLayer.ctaHref}
-                  className="inline-flex items-center gap-2 w-fit px-6 py-3 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 active:scale-[0.97] transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.35)] sheen-sweep"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-fit px-6 py-3.5 sm:py-3 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 active:scale-[0.97] transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.35)] sheen-sweep min-h-[44px]"
                 >
-                  {activeLayer.ctaText}
+                  <span>{activeLayer.ctaText}</span>
                   <ArrowRight size={15} aria-hidden="true" />
                 </Link>
               </div>
 
               {/* Right Column: Key Focus Areas Glass Box */}
-              <div className="lg:col-span-5 p-7 md:p-8 rounded-2xl border border-glass bg-base-950/60 backdrop-blur-md">
-                <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-glass">
-                  <Layers size={18} className="text-brand-400" aria-hidden="true" />
-                  <h4 className="font-display font-bold text-h4 text-base-100">
+              <div className="lg:col-span-5 p-5 sm:p-7 md:p-8 rounded-2xl border border-glass bg-base-950/60 backdrop-blur-md">
+                <div className="flex items-center gap-2.5 mb-5 pb-3 sm:mb-6 sm:pb-4 border-b border-glass">
+                  <Layers size={18} className="text-brand-400 shrink-0" aria-hidden="true" />
+                  <h4 className="font-display font-bold text-body-lg sm:text-h4 text-base-100">
                     Key Operations & Outputs
                   </h4>
                 </div>
 
-                <ul className="space-y-4" role="list">
+                <ul className="space-y-3 sm:space-y-4" role="list">
                   {activeLayer.responsibilities.map((resp, i) => (
-                    <li key={i} className="flex items-start gap-3 text-body-sm text-base-100/75 leading-relaxed">
+                    <li key={i} className="flex items-start gap-2.5 sm:gap-3 text-body-sm text-base-100/75 leading-relaxed">
                       <span className="w-1.5 h-1.5 rounded-full bg-brand-400 mt-2 shrink-0 shadow-[0_0_6px_0_rgba(108,99,255,0.8)]" />
                       <span>{resp}</span>
                     </li>

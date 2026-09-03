@@ -55,7 +55,7 @@ export function StatsRow({
 
   return (
     <section
-      className="relative py-24 md:py-32 bg-base-950 border-y border-glass overflow-hidden"
+      className="relative py-14 sm:py-20 md:py-32 bg-base-950 border-y border-glass overflow-hidden"
       aria-label="Organization statistics"
     >
       {/* Background ambient lighting */}
@@ -75,16 +75,16 @@ export function StatsRow({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-10 sm:mb-16"
         >
-          <p className="eyebrow mb-3">{eyebrow}</p>
-          <h2 className="font-display font-extrabold text-h2 text-base-100 tracking-tight">
+          <p className="eyebrow mb-2 sm:mb-3">{eyebrow}</p>
+          <h2 className="font-display font-extrabold text-h3 sm:text-h2 text-base-100 tracking-tight">
             {headline}
           </h2>
         </motion.div>
 
-        {/* ── Stats Grid ───────────────────────────────────────── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* ── Stats Grid: 2-cols on mobile for compact app-like scanning ─── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -93,16 +93,16 @@ export function StatsRow({
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: i * 0.08 }}
-              className="p-8 rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md relative overflow-hidden group hover:border-glass-hover transition-all duration-normal"
+              className="p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md relative overflow-hidden group hover:border-glass-hover transition-all duration-normal flex flex-col justify-between"
             >
               {/* Top hairline specular accent */}
               <div
                 aria-hidden="true"
-                className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-base-700/60 to-transparent"
+                className="absolute top-0 left-4 sm:left-6 right-4 sm:right-6 h-px bg-gradient-to-r from-transparent via-base-700/60 to-transparent"
               />
 
               {/* Number */}
-              <div className="font-display font-extrabold text-[3.25rem] md:text-[3.75rem] leading-none mb-3 text-base-100 group-hover:text-brand-300 transition-colors duration-fast">
+              <div className="font-display font-extrabold text-[2.25rem] sm:text-[2.75rem] md:text-[3.5rem] leading-none mb-2 sm:mb-3 text-base-100 group-hover:text-brand-300 transition-colors duration-fast">
                 <AnimatedCounter
                   value={stat.value}
                   prefix={stat.prefix}
@@ -111,17 +111,19 @@ export function StatsRow({
                 />
               </div>
 
-              {/* Label */}
-              <h3 className="font-display font-bold text-body text-base-100 mb-1">
-                {stat.label}
-              </h3>
+              <div>
+                {/* Label */}
+                <h3 className="font-display font-bold text-body-sm sm:text-body text-base-100 mb-0.5 sm:mb-1">
+                  {stat.label}
+                </h3>
 
-              {/* Sublabel */}
-              {stat.sublabel && (
-                <p className="text-body-sm text-base-100/50 leading-relaxed">
-                  {stat.sublabel}
-                </p>
-              )}
+                {/* Sublabel */}
+                {stat.sublabel && (
+                  <p className="text-label-xs sm:text-body-sm text-base-100/50 leading-relaxed line-clamp-2">
+                    {stat.sublabel}
+                  </p>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
