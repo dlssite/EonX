@@ -3,6 +3,12 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
+  access: {
+    read: () => true,
+    create: ({ req }) => req.user !== null,
+    update: ({ req }) => req.user !== null,
+    delete: ({ req }) => req.user !== null,
+  },
   admin: {
     useAsTitle: 'title',
     group: 'Content',

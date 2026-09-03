@@ -55,9 +55,15 @@ export function absoluteUrl(path: string): string {
  */
 export function payloadImageUrl(
   input: { url?: string | null } | string | null | undefined,
+  input: { url?: string | null; filename?: string | null } | string | null | undefined,
 ): string | undefined {
   if (!input) return undefined
   const raw = typeof input === 'string' ? input : input.url
+  if (typeof input === 'string') {
+    if (!input.startsWith('/') && !input.startsWith('http')) return undefined
+    return input.replace(/^https?:\/\/[^/]+/, '')
+  }
+  const raw = input.url || (input.filename ? `/api/media/file/${input.filename}` : undefined)
   if (!raw) return undefined
   // Strip absolute origin (https://eonrisia.org/...) → /...
   return raw.replace(/^https?:\/\/[^/]+/, '')
