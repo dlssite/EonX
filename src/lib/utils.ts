@@ -49,22 +49,28 @@ export function absoluteUrl(path: string): string {
 /**
  * Normalise a Payload CMS media URL for use with next/image.
  *
- * Payload v3 serves uploads via /api/media/file/[filename]. This helper
- * accepts either a raw URL string or a Payload media object and always
- * returns a root-relative path by stripping any absolute same-origin prefix.
+ * Payload v3 can return either:
+ *   - An object with { url, filename } populated
+ *   - A plain string (the URL itself)
+ *   - An unpopulated relationship ID string (which we must ignore)
+ *
+ * Always returns a root-relative path, stripping the absolute same-origin
+ * prefix so Next.js can serve it directly without re-proxying.
  */
 export function payloadImageUrl(
-  input: { url?: string | null } | string | null | undefined,
-  input: { url?: string | null; filename?: string | null } | string | null | undefined,
+  media: { url?: string | null; filename?: string | null } | string | null | undefined,
 ): string | undefined {
-  if (!input) return undefined
-  const raw = typeof input === 'string' ? input : input.url
-  if (typeof input === 'string') {
-    if (!input.startsWith('/') && !input.startsWith('http')) return undefined
-    return input.replace(/^https?:\/\/[^/]+/, '')
+  if (!media) return undefined
+
+  if (typeof media === 'string') {
+    // Unpopulated relationship IDs don't start with / or http
+    if (!media.startsWith('/') && !media.startsWith('http')) return undefined
+    return media.replace(/^https?:\/\/[^/]+/, '')
   }
-  const raw = input.url || (input.filename ? `/api/media/file/${input.filename}` : undefined)
+
+  const raw =
+    media.url ?? (media.filename ? `/api/media/file/${media.filename}` : undefined)
+
   if (!raw) return undefined
-  // Strip absolute origin (https://eonrisia.org/...) → /...
   return raw.replace(/^https?:\/\/[^/]+/, '')
 }

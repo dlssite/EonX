@@ -85,6 +85,27 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                 </button>
               )
             })}
+          <div className="overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="flex items-center gap-2 p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-fit shadow-md min-w-full sm:min-w-0">
+              {STATUS_OPTIONS.map(({ value, label }) => {
+                const isSelected = activeStatus === value
+                return (
+                  <button
+                    key={value}
+                    onClick={() => handleStatusFilter(value)}
+                    aria-pressed={isSelected}
+                    className={cn(
+                      'px-5 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none shrink-0 whitespace-nowrap',
+                      isSelected
+                        ? 'bg-brand-500 text-white font-semibold shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
+                        : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
+                    )}
+                  >
+                    {label}
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </nav>
 

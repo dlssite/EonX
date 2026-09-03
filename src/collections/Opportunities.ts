@@ -3,12 +3,6 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Opportunities: CollectionConfig = {
   slug: 'opportunities',
-  access: {
-    read: () => true,
-    create: ({ req }) => req.user !== null,
-    update: ({ req }) => req.user !== null,
-    delete: ({ req }) => req.user !== null,
-  },
   admin: {
     useAsTitle: 'title',
     group: 'Content',

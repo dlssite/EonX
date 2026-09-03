@@ -68,6 +68,8 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
 
   try {
     const payload = await getPayload()
+
+    // Build where conditions — isPublished is the canonical published flag
     const conditions: Where[] = [{ isPublished: { equals: true } }]
 
     if (category && category !== 'all') {
@@ -79,12 +81,15 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
       where: { and: conditions },
       sort: '-publishedAt',
       limit: 100,
+      depth: 1,
     })
 
     const typed = docs as unknown as Post[]
     featuredPost = typed.find((p) => p.isFeatured) ?? typed[0] ?? null
     postsList = featuredPost ? typed.filter((p) => p.id !== featuredPost?.id) : typed
   } catch {
+  } catch (err) {
+    console.error('[UpdatesPage] Failed to load posts:', err)
     // Database fallback — empty list handled gracefully
   }
 

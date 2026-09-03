@@ -2,12 +2,6 @@ import type { CollectionConfig } from 'payload'
 
 export const Team: CollectionConfig = {
   slug: 'team',
-  access: {
-    read: () => true,
-    create: ({ req }) => req.user !== null,
-    update: ({ req }) => req.user !== null,
-    delete: ({ req }) => req.user !== null,
-  },
   admin: {
     useAsTitle: 'name',
     group: 'Content',
