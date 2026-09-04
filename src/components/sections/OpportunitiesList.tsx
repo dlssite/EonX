@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { MapPin, Clock, ArrowRight, Eye, Briefcase, CheckCircle2 } from 'lucide-react'
+import type { SerializedEditorState } from 'lexical'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { Drawer } from '@/components/ui/Drawer'
+import { RichText } from '@/components/ui/RichText'
 import { DeptFilter } from './DeptFilter'
 
 type Skill = {
@@ -160,7 +162,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
             {/* Meta Tags */}
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant={deptBadge[String(selectedOpp.department)] ?? 'default'} showDot>
-                {String(selectedOpp.department)}
+                {selectedOpp.department as string}
               </Badge>
               {Boolean(selectedOpp.isRemote) && (
                 <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label font-body bg-base-950 border border-glass text-base-100/60">
@@ -174,16 +176,16 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
               )}
             </div>
 
-            {/* Role Purpose */}
-            <div className="p-6 rounded-2xl border border-glass bg-base-950/60 space-y-3">
-              <div className="flex items-center gap-2 text-label font-body font-semibold uppercase tracking-widest text-brand-400">
-                <Briefcase size={14} />
-                <span>What You Will Do</span>
+            {/* Role Description */}
+            {selectedOpp.description != null && (
+              <div className="p-6 rounded-2xl border border-glass bg-base-950/60 space-y-3">
+                <div className="flex items-center gap-2 text-label font-body font-semibold uppercase tracking-widest text-brand-400">
+                  <Briefcase size={14} />
+                  <span>About This Role</span>
+                </div>
+                <RichText content={selectedOpp.description as SerializedEditorState} />
               </div>
-              <p className="text-body-sm text-base-100/75 leading-relaxed">
-                As a volunteer in the {String(selectedOpp.department)} division, you will collaborate directly with our core stewards and fellow creators, building real assets, software, or narrative frameworks for active projects.
-              </p>
-            </div>
+            )}
 
             {/* Contributor Benefits */}
             <div className="p-6 rounded-2xl border border-glass bg-base-950/60 space-y-3">
