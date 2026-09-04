@@ -2,13 +2,11 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Compass, Sparkles, Users } from 'lucide-react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { heroStaggerContainer, fadeUp, fadeIn } from '@/variants'
 
 const disciplineChips = [
-  { icon: Compass,  label: 'Original Universes' },
-  { icon: Users,    label: 'Community Ecosystem' },
   { icon: Sparkles, label: 'Games · Comics · Software' },
 ]
 

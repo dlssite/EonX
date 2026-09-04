@@ -11,6 +11,7 @@ import { getPayload } from '@/lib/payload'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { RichText } from '@/components/ui/RichText'
 import { CtaBand } from '@/components/sections/CtaBand'
 
 export const revalidate = 60
@@ -151,18 +152,22 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             <h2 className="font-display font-bold text-h3 sm:text-h2 text-base-100 mb-4 sm:mb-6">
               Overview & Objectives
             </h2>
-            <div className="glass-panel p-5 sm:p-8 md:p-10 space-y-4 text-base-100/75 text-body-sm sm:text-body leading-relaxed">
-              <p>
-                {project.description
-                  ? String(project.description)
-                  : String(project.tagline)}
-              </p>
+            <div className="glass-panel p-5 sm:p-8 md:p-10">
+              {project.description ? (
+                <RichText
+                  content={project.description as import('lexical').SerializedEditorState}
+                />
+              ) : (
+                <p className="text-base-100/75 text-body-sm sm:text-body leading-relaxed">
+                  {project.tagline as string}
+                </p>
+              )}
             </div>
 
-            {Boolean(project.externalUrl) && (
+            {Boolean(project.projectUrl) && (
               <div className="mt-6 sm:mt-8 flex items-center gap-4">
                 <Button
-                  href={String(project.externalUrl)}
+                  href={String(project.projectUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="primary"

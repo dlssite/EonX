@@ -114,7 +114,8 @@ export function MissionSnapshot() {
         </motion.div>
 
         {/* ── Interactive 3-Layer Tab Switcher ─────────────────── */}
-        <div className="flex items-center gap-1 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md max-w-xl mx-auto mb-8 sm:mb-12 shadow-md">
+        <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 sm:mx-0 sm:px-0 mb-8 sm:mb-12">
+          <div className="flex items-center gap-1 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-max sm:w-auto sm:max-w-xl mx-auto shadow-md min-w-full sm:min-w-0">
           {ecosystemLayers.map((layer, index) => {
             const isSelected = activeTab === index
             return (
@@ -124,7 +125,7 @@ export function MissionSnapshot() {
                 aria-selected={isSelected}
                 role="tab"
                 className={cn(
-                  'relative flex-1 py-2.5 sm:py-3 px-2 sm:px-4 rounded-full text-label sm:text-body-sm font-body font-medium transition-all duration-fast text-center select-none min-h-[44px]',
+                  'relative shrink-0 sm:flex-1 py-2.5 sm:py-3 px-4 sm:px-4 rounded-full text-label sm:text-body-sm font-body font-medium transition-all duration-fast text-center select-none min-h-[44px]',
                   isSelected
                     ? 'text-base-100 font-semibold'
                     : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
@@ -144,6 +145,7 @@ export function MissionSnapshot() {
               </button>
             )
           })}
+          </div>
         </div>
 
         {/* ── Interactive Layer Stage ───────────────────────────── */}
