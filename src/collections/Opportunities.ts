@@ -26,6 +26,7 @@ export const Opportunities: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
+        { label: 'Leadership', value: 'leadership' },
         { label: 'Engineering', value: 'engineering' },
         { label: 'Design', value: 'design' },
         { label: 'Writing', value: 'writing' },

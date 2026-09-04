@@ -10,6 +10,7 @@ import { absoluteUrl, formatDate, payloadImageUrl } from '@/lib/utils'
 import { getPayload } from '@/lib/payload'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
+import { RichText } from '@/components/ui/RichText'
 import { CtaBand } from '@/components/sections/CtaBand'
 import type { Post } from '../page'
 
@@ -175,8 +176,12 @@ export default async function PostDetailPage({ params }: PostPageProps) {
             )}
 
             {/* Article Content */}
-            <div className="glass-panel p-5 sm:p-8 md:p-12 border border-glass space-y-6 text-base-100/80 text-body sm:text-body-lg leading-relaxed font-body">
-              <p>{post.excerpt}</p>
+            <div className="glass-panel p-5 sm:p-8 md:p-12 border border-glass">
+              {post.content ? (
+                <RichText content={post.content} />
+              ) : (
+                <p className="text-base-100/75 text-body-sm sm:text-body leading-relaxed">{post.excerpt}</p>
+              )}
             </div>
           </div>
         </Container>

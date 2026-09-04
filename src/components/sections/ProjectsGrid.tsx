@@ -5,10 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter, usePathname } from 'next/navigation'
 import { ArrowRight, ArrowUpRight, Eye, FolderOpen, Layers, Tag as TagIcon } from 'lucide-react'
+import type { SerializedEditorState } from 'lexical'
 import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { Badge } from '@/components/ui/Badge'
 import { Drawer } from '@/components/ui/Drawer'
+import { RichText } from '@/components/ui/RichText'
 
 type Project = {
   id: string
@@ -344,9 +346,15 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                 <Layers size={14} aria-hidden="true" />
                 <span>Overview</span>
               </div>
-              <p className="text-body-sm text-base-100/70 leading-relaxed">
-                {String(selectedProject.tagline)}
-              </p>
+              {selectedProject.description ? (
+                <RichText
+                  content={selectedProject.description as SerializedEditorState}
+                />
+              ) : (
+                <p className="text-body-sm text-base-100/70 leading-relaxed">
+                  {String(selectedProject.tagline)}
+                </p>
+              )}
             </div>
 
             {/* Action buttons */}

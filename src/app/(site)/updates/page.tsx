@@ -28,6 +28,7 @@ export type Post = {
   slug: string
   excerpt: string
   category: 'org-updates' | 'community' | 'projects' | 'thoughts'
+  content?: import('lexical').SerializedEditorState
   coverImage?: { url?: string; alt?: string; width?: number; height?: number } | null
   author?: { name?: string; email?: string } | null
   publishedAt?: string | null
