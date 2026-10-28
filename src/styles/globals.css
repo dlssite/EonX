@@ -338,13 +338,18 @@
     color: rgb(250 247 238);
   }
 
-  [data-theme="light"] .glass-panel .text-base-100,
-  [data-theme="light"] .card-surface .text-base-100,
-  [data-theme="light"] .atlas-card .text-base-100,
-  [data-theme="light"] .glass-panel .text-base-50,
-  [data-theme="light"] .card-surface .text-base-50,
-  [data-theme="light"] .atlas-card .text-base-50 {
+  [data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class~="text-base-100"],
+  [data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class~="text-base-50"] {
     color: rgb(250 247 238) !important;
+  }
+
+  [data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-base-100/"],
+  [data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-base-50/"] {
+    color: rgb(250 247 238 / 0.78) !important;
+  }
+
+  [data-theme="light"] .atlas-card:hover {
+    background-color: rgb(20 39 30);
   }
 
   /* Interactive Sheen sweep */
@@ -868,6 +873,116 @@ main button[class*="rounded-full"] {
   background-color: rgb(var(--color-base-900));
 }
 
+.atlas-featured-project {
+  border-color: rgb(215 239 124 / 0.28);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(34 111 72 / 0.22), transparent 38%),
+    rgb(15 29 23);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.22);
+}
+
+.atlas-featured-project__media {
+  min-height: 15rem;
+  border: 1px solid rgb(250 247 238 / 0.16);
+  background-color: rgb(8 18 13);
+}
+
+.atlas-featured-project__media::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(8 18 13 / 0.35), transparent 35%, rgb(8 18 13 / 0.68));
+  content: '';
+  pointer-events: none;
+}
+
+.atlas-featured-project__stamp,
+.atlas-featured-project__image-caption {
+  position: absolute;
+  z-index: 2;
+  color: rgb(250 247 238);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.atlas-featured-project__stamp {
+  top: 1rem;
+  left: 1rem;
+  border: 1px solid rgb(250 247 238 / 0.38);
+  background: rgb(15 29 23 / 0.72);
+  padding: 0.45rem 0.65rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(8px);
+}
+
+.atlas-featured-project__image-caption {
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+}
+
+.atlas-featured-project__details {
+  min-width: 0;
+}
+
+.atlas-featured-project__eyebrow {
+  margin-bottom: 1.25rem;
+  color: rgb(215 239 124);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.atlas-featured-project__tag {
+  border: 1px solid rgb(215 239 124 / 0.3);
+  background: rgb(215 239 124 / 0.08);
+  padding: 0.3rem 0.6rem;
+  color: rgb(215 239 124);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+
+.atlas-featured-project__title {
+  color: rgb(250 247 238);
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.atlas-featured-project:hover .atlas-featured-project__title {
+  color: rgb(215 239 124);
+}
+
+.atlas-featured-project__summary {
+  max-width: 38rem;
+  color: rgb(250 247 238 / 0.78);
+  font-size: clamp(0.94rem, 1.15vw, 1.05rem);
+  line-height: 1.75;
+}
+
+.atlas-featured-project__actions {
+  border-color: rgb(250 247 238 / 0.16);
+}
+
+.atlas-featured-project__quick-view {
+  border: 1px solid rgb(250 247 238 / 0.28);
+  background: rgb(250 247 238 / 0.06);
+  color: rgb(250 247 238);
+  transition:
+    border-color var(--duration-fast) var(--ease-default),
+    background-color var(--duration-fast) var(--ease-default);
+}
+
+.atlas-featured-project__quick-view:hover {
+  border-color: rgb(215 239 124 / 0.7);
+  background: rgb(215 239 124 / 0.1);
+}
+
 .atlas-card--opportunity {
   border-left: 3px solid rgb(var(--color-brand-400) / 0.65);
 }
@@ -881,4 +996,25 @@ main button[class*="rounded-full"] {
 
 .sheen-sweep::after {
   display: none;
+}
+
+/* Keep dark card surfaces dark in light mode, even when utility classes apply a token background. */
+html[data-theme="light"] .glass-panel,
+html[data-theme="light"] .card-surface,
+html[data-theme="light"] .atlas-card {
+  background-color: rgb(15 29 23);
+  color: rgb(250 247 238);
+}
+
+html[data-theme="light"] .atlas-card:hover {
+  background-color: rgb(20 39 30);
+}
+
+html[data-theme="light"] .atlas-featured-project {
+  background-color: rgb(15 29 23);
+}
+
+html[data-theme="light"] .atlas-project-card__title:hover h3,
+html[data-theme="light"] .atlas-featured-project:hover .atlas-featured-project__title {
+  color: rgb(215 239 124) !important;
 }

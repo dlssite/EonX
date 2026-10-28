@@ -93,11 +93,11 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
             <p className="eyebrow mb-3 sm:mb-4">Flagship Initiative</p>
             <div
               className={cn(
-                'atlas-card atlas-card--featured group relative grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 p-5 sm:p-8 md:p-10',
+                'atlas-card atlas-card--featured atlas-featured-project group relative grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 p-5 sm:p-8 md:p-10',
               )}
             >
               {/* Media preview */}
-              <div className="atlas-card__media lg:col-span-7 aspect-[16/10]">
+              <div className="atlas-card__media atlas-featured-project__media lg:col-span-7 aspect-[16/10]">
                 {(featured.coverImage as { url?: string })?.url ? (
                   <Image
                     src={payloadImageUrl((featured.coverImage as { url: string }).url)!}
@@ -115,11 +115,18 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                     </span>
                   </div>
                 )}
+                <span className="atlas-featured-project__stamp">
+                  FEATURED / 01
+                </span>
+                <span className="atlas-featured-project__image-caption">
+                  A world in progress
+                </span>
               </div>
 
               {/* Info Column */}
-              <div className="lg:col-span-5 flex flex-col justify-between py-1 sm:py-2 z-10">
+              <div className="atlas-featured-project__details lg:col-span-5 flex flex-col justify-between py-1 sm:py-2 z-10">
                 <div>
+                  <p className="atlas-featured-project__eyebrow">On the atlas · Featured work</p>
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                     <Badge
                       variant={statusVariant[featured.status as string] ?? 'default'}
@@ -127,21 +134,21 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                     >
                       {featured.status as string}
                     </Badge>
-                    {Array.isArray(featured.tags) && featured.tags.length > 0 && (
-                      <span className="px-3 py-1 rounded-full text-label font-medium bg-base-950/80 border border-glass text-base-100/65">
-                        {String((featured.tags[0] as { tag?: string })?.tag ?? '')}
+                    {Array.isArray(featured.tags) && featured.tags.slice(0, 2).map((tag) => (
+                      <span key={String((tag as { tag?: string })?.tag ?? '')} className="atlas-featured-project__tag">
+                        {String((tag as { tag?: string })?.tag ?? '')}
                       </span>
-                    )}
+                    ))}
                   </div>
-                  <h2 className="font-display font-extrabold text-h3 sm:text-h2 md:text-[2.25rem] text-base-100 tracking-tight leading-tight mb-3 sm:mb-4 group-hover:text-brand-300 transition-colors">
+                  <h2 className="atlas-featured-project__title font-display font-extrabold text-h3 sm:text-h2 md:text-[2.25rem] text-base-100 tracking-tight leading-tight mb-3 sm:mb-4">
                     {featured.name as string}
                   </h2>
-                  <p className="text-body-sm sm:text-body text-base-100/70 leading-relaxed mb-6 sm:mb-8">
+                  <p className="atlas-featured-project__summary text-body-sm sm:text-body text-base-100/70 leading-relaxed mb-6 sm:mb-8">
                     {featured.tagline as string}
                   </p>
                 </div>
 
-                <div className="atlas-card__footer flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-5 sm:pt-6">
+                <div className="atlas-card__footer atlas-featured-project__actions flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-5 sm:pt-6">
                   <Link
                     href={`/projects/${featured.slug as string}`}
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-sm text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm min-h-[44px]"
@@ -151,7 +158,7 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                   </Link>
                   <button
                     onClick={() => setSelectedProject(featured)}
-                    className="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-5 py-3.5 sm:py-3 rounded-full text-body-sm font-body font-medium text-base-100 border border-glass bg-base-950/60 hover:bg-base-800/80 transition-all duration-fast min-h-[44px]"
+                    className="atlas-featured-project__quick-view inline-flex items-center justify-center gap-1.5 w-full sm:w-auto px-5 py-3.5 sm:py-3 text-body-sm font-body font-medium text-base-100 min-h-[44px]"
                   >
                     <Eye size={14} aria-hidden="true" />
                     <span>Quick View</span>
