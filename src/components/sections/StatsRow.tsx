@@ -2,7 +2,6 @@
 
 import { motion, useReducedMotion } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
-import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 import { fadeUp } from '@/variants'
 
 export type StatItem = {
@@ -15,28 +14,24 @@ export type StatItem = {
 
 const defaultStats: StatItem[] = [
   {
-    value: 50,
-    suffix: '+',
-    label: 'Global Contributors',
-    sublabel: 'Writers, artists & developers',
+    value: 1,
+    label: 'Community first',
+    sublabel: 'The people who build the ecosystem come first.',
+  },
+  {
+    value: 2,
+    label: 'Transparency',
+    sublabel: 'Decisions, resources, and accountability stay visible.',
   },
   {
     value: 3,
-    suffix: '',
-    label: 'Core Disciplines',
-    sublabel: 'Narrative, code & illustration',
+    label: 'Quality over speed',
+    sublabel: 'We release work when it is ready.',
   },
   {
-    value: 100,
-    suffix: '%',
-    label: 'Open & Transparent',
-    sublabel: 'Community-owned ecosystems',
-  },
-  {
-    value: 1,
-    suffix: '',
-    label: 'Flagship Universe',
-    sublabel: 'Sanctyria & expanding worlds',
+    value: 4,
+    label: 'Shared ownership',
+    sublabel: 'We build with open tools and community trust.',
   },
 ]
 
@@ -48,43 +43,31 @@ type StatsRowProps = {
 
 export function StatsRow({
   stats = defaultStats,
-  eyebrow = 'By The Numbers',
-  headline = 'Scale built on genuine collective participation.',
+  eyebrow = 'What Guides Us',
+  headline = 'Principles for work that belongs to everyone.',
 }: StatsRowProps) {
   const prefersReduced = useReducedMotion()
 
   return (
     <section
-      className="relative py-14 sm:py-20 md:py-32 bg-base-950 border-y border-glass overflow-hidden"
-      aria-label="Organization statistics"
+      className="relative border-y border-glass bg-base-950 py-16 sm:py-20 md:py-24"
+      aria-label="Organization principles"
     >
-      {/* Background ambient lighting */}
-      <div
-        aria-hidden="true"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] pointer-events-none rounded-full blur-[140px] opacity-20"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(108,99,255,0.22) 0%, transparent 70%)',
-        }}
-      />
-
-      <Container className="relative z-10">
-
-        {/* Section Header */}
+      <Container>
         <motion.div
           variants={prefersReduced ? {} : fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-60px' }}
-          className="text-center max-w-2xl mx-auto mb-10 sm:mb-16"
+          className="mb-10 max-w-3xl sm:mb-14"
         >
-          <p className="eyebrow mb-2 sm:mb-3">{eyebrow}</p>
-          <h2 className="font-display font-extrabold text-h3 sm:text-h2 text-base-100 tracking-tight">
+          <p className="eyebrow mb-3">{eyebrow}</p>
+          <h2 className="font-display text-h3 font-semibold tracking-tight text-base-100 sm:text-h2">
             {headline}
           </h2>
         </motion.div>
 
-        {/* ── Stats Grid: 2-cols on mobile for compact app-like scanning ─── */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+        <div className="grid grid-cols-1 border-t border-glass sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -93,33 +76,17 @@ export function StatsRow({
               whileInView="visible"
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: i * 0.08 }}
-              className="p-5 sm:p-7 md:p-8 rounded-2xl sm:rounded-3xl border border-glass bg-base-900/60 backdrop-blur-md relative overflow-hidden group hover:border-glass-hover transition-all duration-normal flex flex-col justify-between"
+              className="border-b border-glass py-5 sm:border-r sm:px-6 sm:py-7 lg:border-b-0"
             >
-              {/* Top hairline specular accent */}
-              <div
-                aria-hidden="true"
-                className="absolute top-0 left-4 sm:left-6 right-4 sm:right-6 h-px bg-gradient-to-r from-transparent via-base-700/60 to-transparent"
-              />
-
-              {/* Number */}
-              <div className="font-display font-extrabold text-[2.25rem] sm:text-[2.75rem] md:text-[3.5rem] leading-none mb-2 sm:mb-3 text-base-100 group-hover:text-brand-300 transition-colors duration-fast">
-                <AnimatedCounter
-                  value={stat.value}
-                  prefix={stat.prefix}
-                  suffix={stat.suffix}
-                  duration={1.6}
-                />
+              <div className="mb-6 font-mono text-label tracking-widest text-brand-300">
+                {stat.prefix}{String(stat.value).padStart(2, '0')}{stat.suffix}
               </div>
-
               <div>
-                {/* Label */}
-                <h3 className="font-display font-bold text-body-sm sm:text-body text-base-100 mb-0.5 sm:mb-1">
+                <h3 className="mb-1 font-display text-body font-semibold text-base-100">
                   {stat.label}
                 </h3>
-
-                {/* Sublabel */}
                 {stat.sublabel && (
-                  <p className="text-label-xs sm:text-body-sm text-base-100/50 leading-relaxed line-clamp-2">
+                  <p className="text-body-sm leading-relaxed text-base-100/60">
                     {stat.sublabel}
                   </p>
                 )}

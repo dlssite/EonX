@@ -21,8 +21,8 @@ const variantClasses: Record<BadgeVariant, string> = {
 
 const dotClasses: Record<BadgeVariant, string> = {
   default: 'bg-base-100/40',
-  brand:   'bg-brand-400 shadow-[0_0_6px_0_rgba(108,99,255,0.8)]',
-  accent:  'bg-accent-400 shadow-[0_0_6px_0_rgba(255,107,53,0.8)]',
+  brand:   'bg-brand-400',
+  accent:  'bg-accent-400',
   success: 'bg-emerald-400 shadow-[0_0_6px_0_rgba(52,211,153,0.8)]',
   warning: 'bg-amber-400 shadow-[0_0_6px_0_rgba(251,191,36,0.8)]',
   error:   'bg-rose-400 shadow-[0_0_6px_0_rgba(244,63,94,0.8)]',

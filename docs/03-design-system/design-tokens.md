@@ -19,50 +19,22 @@ src/styles/
 See [`../01-brand/color-system.md`](../01-brand/color-system.md) for the full color palette rationale.
 
 ```css
-/* src/styles/tokens.css */
+/* Values are RGB triplets so Tailwind opacity utilities can use them. */
 :root {
-  /* Base */
-  --color-base-950: #0A0A0F;
-  --color-base-900: #111118;
-  --color-base-800: #1A1A26;
-  --color-base-700: #252535;
-  --color-base-100: #F4F4F8;
-  --color-base-50:  #FAFAFD;
-
-  /* Brand */
-  --color-brand-600: #5148D4;
-  --color-brand-500: #6C63FF;
-  --color-brand-400: #8A83FF;
-  --color-brand-300: #A9A4FF;
-
-  /* Accent */
-  --color-accent-500: #FF6B35;
-  --color-accent-400: #FF8A5C;
-
-  /* Semantic */
-  --color-success: #22C55E;
-  --color-warning: #F59E0B;
-  --color-error:   #EF4444;
-  --color-info:    #3B82F6;
-
-  /* Text */
-  --color-text-primary:   #F4F4F8;
-  --color-text-secondary: #9494A8;
-  --color-text-tertiary:  #5C5C70;
-  --color-text-inverse:   #0A0A0F;
-}
-
-[data-theme="light"] {
-  --color-base-950: #FAFAFD;
-  --color-base-900: #F4F4F8;
-  --color-base-800: #E8E8F0;
-  --color-base-700: #D0D0E0;
-  --color-text-primary:   #0A0A0F;
-  --color-text-secondary: #3C3C50;
-  --color-text-tertiary:  #6C6C80;
-  --color-text-inverse:   #F4F4F8;
+  --color-base-950: 15 29 23;      /* forest ink */
+  --color-base-900: 25 42 33;
+  --color-base-800: 43 59 47;
+  --color-base-700: 67 82 68;
+  --color-base-100: 242 239 226;   /* warm paper ink */
+  --color-base-50: 250 247 238;
+  --color-brand-500: 34 111 72;    /* forest green */
+  --color-brand-400: 179 220 92;   /* lime */
+  --color-brand-300: 215 239 124;
+  --color-accent-500: 230 101 74;  /* vermilion */
 }
 ```
+
+The complete palette and light-mode overrides live in `src/styles/tokens.css`.
 
 ---
 
@@ -141,7 +113,7 @@ See [`../01-brand/typography.md`](../01-brand/typography.md) for typeface ration
   --shadow-md:  0 4px 12px 0 rgba(0,0,0,0.5);
   --shadow-lg:  0 8px 24px 0 rgba(0,0,0,0.6);
   --shadow-xl:  0 16px 40px 0 rgba(0,0,0,0.7);
-  --shadow-brand: 0 0 24px 0 rgba(108,99,255,0.3);
+  --shadow-brand: 0 8px 20px 0 rgba(10,36,24,0.24);
 }
 ```
 
@@ -194,5 +166,19 @@ Every value in a component must reference a token:
 <div className="bg-base-900 text-text-primary p-6 rounded-lg">
 
 /* ❌ Wrong */
-<div style={{ backgroundColor: '#111118', padding: '24px' }}>
+<div className="bg-base-900 p-6">
 ```
+
+---
+
+## Composition Direction
+
+The public site currently uses the proposed Field Notes / Living Atlas direction: Fraunces
+editorial headlines, DM Sans body copy, warm paper and forest-ink surfaces, and restrained
+lime and vermilion accents. The proposal is pending formal ratification; do not amend
+constitutional brand law as part of this website implementation.
+
+- Use one clear primary action per section and keep secondary actions visually quieter.
+- Use cards to group related information, not as the default treatment for every section.
+- Present organizational impact only when it is supported by current, verifiable information.
+- Keep motion subtle and respect the user's reduced-motion preference.

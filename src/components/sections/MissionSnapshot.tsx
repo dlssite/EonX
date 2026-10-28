@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Shield, Users, ArrowRight, Layers, Compass } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
 import { fadeUp, tabContentVariant } from '@/variants'
 
@@ -15,14 +14,13 @@ const ecosystemLayers = [
     name: 'Organization',
     subtitle: 'The Foundation & Governance',
     description:
-      'Eonrisia operates as the central non-profit steward. We direct resources, organize legal and community governance, build developer tooling, recruit volunteers, and protect the integrity of the creative commons.',
+      'Eonrisia is an independent organization that coordinates projects, supports community governance, builds creative tools, and brings contributors together.',
     icon: Shield,
-    accentGlow: 'rgba(108,99,255,0.18)',
     badge: 'Stewardship',
     responsibilities: [
       'Resource management & transparent allocation',
       'Open-source software & infrastructure development',
-      'Community governance & contributor token economy',
+      'Community governance & contributor recognition',
       'Brand stewardship & external partnerships',
     ],
     ctaText: 'Learn About Governance',
@@ -36,7 +34,6 @@ const ecosystemLayers = [
     description:
       'The creative universes we build together — starting with Sanctyria. Fictional lore, original game engines, interactive web apps, comic series, and orchestral scores all root in deep, community-owned narrative worlds.',
     icon: Compass,
-    accentGlow: 'rgba(255,107,53,0.18)',
     badge: 'Flagship IP',
     responsibilities: [
       'Original fictional lore & narrative continuity',
@@ -55,12 +52,11 @@ const ecosystemLayers = [
     description:
       'The lifeblood of the entire ecosystem. Writers, digital artists, software engineers, composers, and moderators collaborate across disciplines, earning recognition and rewards for shaping worlds.',
     icon: Users,
-    accentGlow: 'rgba(52,211,153,0.18)',
     badge: 'Collective Power',
     responsibilities: [
       'Global remote volunteer collaboration',
       'Peer mentorship & creative skill-building',
-      'Transparent contributor token distribution',
+      'Clear contributor credits and recognition',
       'Community-led events, game jams, and workshops',
     ],
     ctaText: 'Join the Community',
@@ -80,13 +76,6 @@ export function MissionSnapshot() {
     >
       {/* Top divider */}
       <div aria-hidden="true" className="section-divider absolute top-0 left-0 right-0" />
-
-      {/* Ambient background glow */}
-      <div
-        aria-hidden="true"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] pointer-events-none rounded-full blur-[160px] opacity-25"
-        style={{ background: activeLayer.accentGlow }}
-      />
 
       <Container className="relative z-10">
 
@@ -115,33 +104,40 @@ export function MissionSnapshot() {
 
         {/* ── Interactive 3-Layer Tab Switcher ─────────────────── */}
         <div className="overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden -mx-4 px-4 sm:mx-0 sm:px-0 mb-8 sm:mb-12">
-          <div className="flex items-center gap-1 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-max sm:w-auto sm:max-w-xl mx-auto shadow-md min-w-full sm:min-w-0">
+          <div
+            role="tablist"
+            aria-label="Eonrisia ecosystem layers"
+            className="atlas-selector mx-auto sm:max-w-xl"
+          >
           {ecosystemLayers.map((layer, index) => {
             const isSelected = activeTab === index
             return (
               <button
                 key={layer.id}
+                id={`ecosystem-tab-${layer.id}`}
                 onClick={() => setActiveTab(index)}
                 aria-selected={isSelected}
+                aria-controls="ecosystem-panel"
                 role="tab"
-                className={cn(
-                  'relative shrink-0 sm:flex-1 py-2.5 sm:py-3 px-4 sm:px-4 rounded-full text-label sm:text-body-sm font-body font-medium transition-all duration-fast text-center select-none min-h-[44px]',
-                  isSelected
-                    ? 'text-base-100 font-semibold'
-                    : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
-                )}
+                tabIndex={isSelected ? 0 : -1}
+                onKeyDown={(event) => {
+                  const keyActions: Record<string, number> = {
+                    ArrowRight: (index + 1) % ecosystemLayers.length,
+                    ArrowLeft: (index - 1 + ecosystemLayers.length) % ecosystemLayers.length,
+                    Home: 0,
+                    End: ecosystemLayers.length - 1,
+                  }
+                  const nextIndex = keyActions[event.key]
+                  if (nextIndex !== undefined) {
+                    event.preventDefault()
+                    setActiveTab(nextIndex)
+                    document.getElementById(`ecosystem-tab-${ecosystemLayers[nextIndex].id}`)?.focus()
+                  }
+                }}
+                className="atlas-selector__item sm:flex-1"
               >
-                <span className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2">
-                  <span className="text-label-xs font-mono opacity-60">{layer.number}</span>
-                  <span className="truncate">{layer.name}</span>
-                </span>
-                {isSelected && (
-                  <motion.div
-                    layoutId="activeEcosystemLayer"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    className="absolute inset-0 bg-base-800/80 border border-glass-subtle rounded-full z-0 pointer-events-none"
-                  />
-                )}
+                <span className="text-label-xs font-mono opacity-60">{layer.number}</span>
+                <span className="truncate">{layer.name}</span>
               </button>
             )
           })}
@@ -153,6 +149,10 @@ export function MissionSnapshot() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeLayer.id}
+              id="ecosystem-panel"
+              role="tabpanel"
+              aria-labelledby={`ecosystem-tab-${activeLayer.id}`}
+              tabIndex={0}
               variants={prefersReduced ? {} : tabContentVariant}
               initial="hidden"
               animate="visible"
@@ -179,7 +179,7 @@ export function MissionSnapshot() {
 
                 <Link
                   href={activeLayer.ctaHref}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-fit px-6 py-3.5 sm:py-3 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 active:scale-[0.97] transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.35)] sheen-sweep min-h-[44px]"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-fit px-6 py-3.5 sm:py-3 rounded-sm text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm min-h-[44px]"
                 >
                   <span>{activeLayer.ctaText}</span>
                   <ArrowRight size={15} aria-hidden="true" />
@@ -198,7 +198,7 @@ export function MissionSnapshot() {
                 <ul className="space-y-3 sm:space-y-4" role="list">
                   {activeLayer.responsibilities.map((resp, i) => (
                     <li key={i} className="flex items-start gap-2.5 sm:gap-3 text-body-sm text-base-100/75 leading-relaxed">
-                      <span className="w-1.5 h-1.5 rounded-full bg-brand-400 mt-2 shrink-0 shadow-[0_0_6px_0_rgba(108,99,255,0.8)]" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-400 mt-2 shrink-0" />
                       <span>{resp}</span>
                     </li>
                   ))}

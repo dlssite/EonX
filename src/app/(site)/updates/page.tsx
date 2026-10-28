@@ -110,25 +110,24 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
       {/* Category Filter Bar */}
       <section className="py-3 sm:py-5 bg-base-950/90 border-b border-glass sticky top-16 z-20 backdrop-blur-md">
         <Container>
-          <div className="flex items-center justify-between gap-4 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar edge-fade-x">
-            <div className="flex items-center gap-2 shrink-0 py-1">
-              {CATEGORIES.map((cat) => {
-                const isActive = category === cat.value
-                return (
-                  <Link
-                    key={cat.value}
-                    href={cat.value === 'all' ? '/updates' : `/updates?category=${cat.value}`}
-                    className={`px-4 sm:px-5 py-2 rounded-full text-body-sm font-medium transition-all duration-fast shrink-0 whitespace-nowrap min-h-[44px] flex items-center ${
-                      isActive
-                        ? 'bg-brand-500 text-white shadow-[0_0_16px_0_rgba(108,99,255,0.4)] font-semibold'
-                        : 'bg-base-900/80 border border-glass text-base-100/60 hover:text-base-100 hover:border-glass-strong'
-                    }`}
-                  >
-                    {cat.label}
-                  </Link>
-                )
-              })}
-            </div>
+          <div className="flex items-center justify-between gap-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+            <nav aria-label="Filter updates by category" className="min-w-0 flex-1 overflow-x-auto no-scrollbar edge-fade-x">
+              <div className="atlas-selector">
+                {CATEGORIES.map((cat) => {
+                  const isActive = category === cat.value
+                  return (
+                    <Link
+                      key={cat.value}
+                      href={cat.value === 'all' ? '/updates' : `/updates?category=${cat.value}`}
+                      aria-current={isActive ? 'page' : undefined}
+                      className="atlas-selector__item"
+                    >
+                      {cat.label}
+                    </Link>
+                  )
+                })}
+              </div>
+            </nav>
 
             {/* RSS Feed Badge */}
             <Link
@@ -153,23 +152,22 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
               <p className="eyebrow mb-3 sm:mb-4">Featured Highlight</p>
               <Link
                 href={`/updates/${featuredPost.slug}`}
-                className="group grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/70 to-base-950/90 p-5 sm:p-8 md:p-10 hover:border-glass-strong transition-all duration-normal shadow-2xl overflow-hidden"
+                className="atlas-card atlas-card--featured group grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 p-5 sm:p-8 md:p-10"
               >
                 {/* Cover Image */}
-                <div className="lg:col-span-7 relative aspect-[16/9] rounded-2xl overflow-hidden bg-base-950 border border-glass">
+                <div className="atlas-card__media lg:col-span-7 aspect-[16/9]">
                   {featuredPost.coverImage?.url ? (
                     <Image
                       src={payloadImageUrl(featuredPost.coverImage.url) ?? ''}
                       alt={featuredPost.coverImage.alt ?? featuredPost.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-slow"
+                      className="atlas-card__image"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/30 to-base-950 text-base-100/30">
                       <Tag size={48} strokeWidth={1} />
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-base-950/80 via-transparent to-transparent" />
                 </div>
 
                 {/* Content */}
@@ -222,27 +220,26 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                   <Link
                     key={post.id}
                     href={`/updates/${post.slug}`}
-                    className="group flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/90 via-base-900/60 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_rgba(108,99,255,0.2)] overflow-hidden"
+                    className="atlas-card atlas-card--story group flex flex-col"
                   >
                     {/* Thumbnail */}
-                    <div className="relative aspect-[16/9] bg-base-950 border-b border-glass overflow-hidden">
+                    <div className="atlas-card__media">
                       {post.coverImage?.url ? (
                         <Image
                           src={payloadImageUrl(post.coverImage.url) ?? ''}
                           alt={post.coverImage.alt ?? post.title}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-slow"
+                          className="atlas-card__image"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-base-950 text-base-100/20">
                           <Tag size={36} strokeWidth={1} />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-base-950/70 via-transparent to-transparent" />
                     </div>
 
                     {/* Card Content */}
-                    <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                    <div className="atlas-card__body space-y-4">
                       <div>
                         <div className="flex items-center gap-3 mb-3">
                           <Badge
@@ -267,7 +264,7 @@ export default async function UpdatesPage({ searchParams }: UpdatesPageProps) {
                         </p>
                       </div>
 
-                      <div className="pt-4 border-t border-glass flex items-center justify-between text-label text-base-100/50">
+                      <div className="atlas-card__footer mt-4 pt-4 flex items-center justify-between text-label text-base-100/50">
                         <span className="flex items-center gap-1">
                           <User size={12} className="text-brand-400" />
                           <span>{post.author?.name ?? 'Eonrisia'}</span>

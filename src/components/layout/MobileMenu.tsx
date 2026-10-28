@@ -56,7 +56,7 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
             animate="visible"
             exit="exit"
             onClick={onClose}
-            className="fixed inset-0 bg-base-950/80 backdrop-blur-sm z-overlay"
+            className="fixed inset-0 bg-base-950/80 z-overlay"
             aria-hidden="true"
           />
 
@@ -70,7 +70,7 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed top-0 right-0 h-full w-[min(340px,90vw)] bg-base-900 border-l border-glass z-modal flex flex-col pt-safe pb-safe shadow-2xl"
+            className="fixed top-0 right-0 h-full w-[min(340px,90vw)] bg-base-900 border-l border-glass z-modal flex flex-col pt-safe pb-safe shadow-xl"
           >
             {/* Header row */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-glass shrink-0">
@@ -113,7 +113,7 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
                         rel={link.isExternal ? 'noopener noreferrer' : undefined}
                         aria-current={isActive ? 'page' : undefined}
                         className={cn(
-                          'flex items-center justify-between px-4 py-3.5 rounded-2xl min-h-[48px]',
+                          'flex items-center justify-between px-4 py-3.5 rounded-md min-h-[48px]',
                           'text-body font-body font-medium transition-all duration-fast',
                           isActive
                             ? 'bg-base-800 text-brand-400 font-semibold border border-glass'
@@ -122,7 +122,7 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
                       >
                         <span>{link.label}</span>
                         {isActive && (
-                          <span className="w-2 h-2 rounded-full bg-brand-400 shadow-[0_0_8px_0_rgba(108,99,255,0.8)]" />
+                          <span className="w-2 h-2 rounded-full bg-brand-400" />
                         )}
                       </Link>
                     </li>
@@ -150,12 +150,12 @@ export function MobileMenu({ isOpen, onClose, links, ctaLabel, ctaHref }: Mobile
                 onClick={onClose}
                 className={cn(
                   'flex items-center justify-center gap-2 w-full min-h-[48px]',
-                  'px-6 py-3.5 rounded-full',
+                  'px-6 py-3.5 rounded-sm',
                   'text-body font-body font-semibold',
                   'bg-brand-500 text-white',
                   'hover:bg-brand-400',
                   'active:scale-[0.97]',
-                  'transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.35)] sheen-sweep',
+                  'transition-all duration-fast shadow-sm',
                   'focus-visible:outline-2 focus-visible:outline-brand-500 focus-visible:outline-offset-2',
                 )}
               >

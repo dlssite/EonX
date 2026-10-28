@@ -9,7 +9,7 @@ import { TeamPreview } from '@/components/sections/TeamPreview'
 import type { TeamMember } from '@/components/sections/TeamPreview'
 import { CtaBand } from '@/components/sections/CtaBand'
 import { Container } from '@/components/ui/Container'
-import { Shield, Sparkles, Scale, Heart, Compass, Cpu } from 'lucide-react'
+import { Users, Eye, Clock3, KeyRound, Lightbulb } from 'lucide-react'
 
 export const revalidate = 60
 
@@ -22,40 +22,34 @@ export const metadata: Metadata = generateMetadata({
 
 const values = [
   {
-    icon: Sparkles,
-    title: 'Creative Autonomy',
+    icon: Users,
+    title: 'Community First',
     description:
-      'We empower independent authors, illustrators, and developers with open tools and uncompromised creative ownership.',
+      'We put the people who build the ecosystem first, protecting their trust, access, and experience in every decision.',
   },
   {
-    icon: Scale,
-    title: 'Constitutional Governance',
+    icon: Eye,
+    title: 'Transparency',
     description:
-      'Every operation, grant, and project roadmap is governed by transparent constitutional bylaws rather than top-down executive whim.',
+      'We make decisions, resource use, and accountability visible so the community can understand how the organization works.',
   },
   {
-    icon: Shield,
-    title: 'Perpetual Commons',
+    icon: Clock3,
+    title: 'Quality Over Speed',
     description:
-      'Our worlds and tools are designed for generational longevity, protected against speculative privatization or corporate enclosure.',
+      'We release work when it is ready, with care for the quality and durability of what we put into the world.',
   },
   {
-    icon: Cpu,
-    title: 'Technical Rigor',
+    icon: KeyRound,
+    title: 'Ownership',
     description:
-      'We treat software craft as an art form — prioritizing lightweight architectures, open protocols, and zero bloat.',
+      'We take responsibility for our tools, data, and decisions, choosing open and self-hosted solutions where practical.',
   },
   {
-    icon: Heart,
-    title: 'Contributor First',
+    icon: Lightbulb,
+    title: 'Originality',
     description:
-      'Authentic contributors earn recognized tokens and public credits on all releases, sharing directly in the value they create.',
-  },
-  {
-    icon: Compass,
-    title: 'Living Lore',
-    description:
-      'Worlds that grow organically through collective storytelling, maintaining coherent internal logic across books, games, and web media.',
+      'We build original creative ecosystems and give each project its own identity, without borrowing another world’s visual language.',
   },
 ]
 
@@ -86,7 +80,7 @@ export default async function AboutPage() {
       <PageHero
         eyebrow="Who We Are"
         headline="An organization built to endure."
-        lead="Eonrisia is a non-profit collective bridging imaginative world-building, digital engineering, and open governance."
+        lead="Eonrisia is an independent community-driven organization bridging imaginative world-building, digital engineering, and open governance."
       />
 
       {/* ── Our Core Values Grid ───────────────────────────────── */}

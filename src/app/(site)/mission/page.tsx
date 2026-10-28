@@ -6,12 +6,12 @@ import { absoluteUrl } from '@/lib/utils'
 import { PageHero } from '@/components/sections/PageHero'
 import { CtaBand } from '@/components/sections/CtaBand'
 import { Container } from '@/components/ui/Container'
-import { Coins, Users, Zap } from 'lucide-react'
+import { Users, ShieldCheck, Award } from 'lucide-react'
 
 export const metadata: Metadata = generateMetadata({
   title: 'Mission & Vision | Eonrisia',
   description:
-    'Discover Eonrisia’s multi-phase roadmap, non-speculative token economy, and generational creative mandate.',
+    'Discover Eonrisia’s mission, community principles, and roadmap for building original creative worlds together.',
   canonical: '/mission',
 })
 
@@ -27,9 +27,9 @@ const phases = [
       'Roll out the Sanctyria sub-sites, serialized web fiction chapters, interactive faction world maps, character bibles, and initial web games.',
   },
   {
-    title: 'Phase 3: Contributor Token System & Marketplace',
+    title: 'Phase 3: Contributor Recognition & Participation',
     description:
-      'Activate non-speculative internal credit and token cycles, rewarding verified creators with governance participation and official project credits.',
+      'Make clear contributor credits, review practices, and community participation part of how projects are maintained.',
   },
   {
     title: 'Phase 4: Decentralized Collective Governance',
@@ -38,24 +38,24 @@ const phases = [
   },
 ]
 
-const tokenSteps = [
+const contributionSteps = [
   {
     icon: Users,
-    title: 'Authentic Contribution',
+    title: 'Contribute',
     description:
-      'Writers, artists, sound designers, and developers complete bounties or submit canon content.',
+      'Writers, artists, developers, and other contributors bring original work and skills to shared projects.',
   },
   {
-    icon: Coins,
-    title: 'Verified Minting',
+    icon: ShieldCheck,
+    title: 'Review',
     description:
-      'Lead stewards review and approve work. Non-speculative contributor tokens are minted to creator wallets.',
+      'Stewards review submissions against the goals and guidelines of each project.',
   },
   {
-    icon: Zap,
-    title: 'Ecosystem Utility',
+    icon: Award,
+    title: 'Recognize',
     description:
-      'Tokens grant voting weight on lore proposals, exclusive print merch drops, and direct creator revenue shares.',
+      'Accepted contributors receive clear credit, with opportunities to take part in the community around the work.',
   },
 ]
 
@@ -82,14 +82,14 @@ export default function MissionPage() {
             <h2 className="font-display font-extrabold text-h1 md:text-[3.25rem] text-base-100 tracking-tight leading-[1.08] mb-8">
               Open worldbuilding.
               <br />
-              <span className="text-gradient">No corporate capture.</span>
+              <span className="text-accent-400 italic">Built together.</span>
             </h2>
             <div className="space-y-6 text-body-lg text-base-100/75 leading-relaxed">
               <p>
-                Modern entertainment is dominated by monolithic studios that commodify fictional universes, lock creative contributions behind restrictive NDAs, and prioritize speculative monetization over storytelling depth.
+                Creative work can span many forms, but contributors do not always have a meaningful voice in how shared worlds are stewarded. Eonrisia is building a community-centered alternative grounded in original work and transparent governance.
               </p>
               <p>
-                Eonrisia was founded as an intentional counterweight: a transparent, constitutionally-governed organization where fictional worlds belong to the collective imagination and every contributor receives immutable credit and fair recognition.
+                Our constitution puts community trust, transparency, and quality ahead of speed. We build with creators and keep the organization distinct from the fictional worlds it supports.
               </p>
             </div>
           </div>
@@ -136,21 +136,21 @@ export default function MissionPage() {
         </Container>
       </section>
 
-      {/* ── Contributor Token Economy Loop ────────────────────── */}
+      {/* ── Contributor Recognition ──────────────────────────── */}
       <section className="py-24 md:py-32 bg-base-950">
         <Container>
           <div className="max-w-4xl mx-auto">
-            <p className="eyebrow mb-3">Incentive Architecture</p>
+            <p className="eyebrow mb-3">Contributor Recognition</p>
             <h2 className="font-display font-extrabold text-h2 md:text-[2.75rem] text-base-100 tracking-tight mb-6">
               Contribution has genuine value.
             </h2>
             <p className="text-body-lg text-base-100/70 leading-relaxed mb-12">
-              We reward authentic participation over financial speculation. Contributors earn governance tokens and internal credits by shipping assets, reviewing submissions, moderating channels, and engineering code.
+              Contributors should understand how their work is reviewed, how it will be credited, and how they can participate in the community around each project.
             </p>
 
             {/* 3-Step Cyclical Flow */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-              {tokenSteps.map((step, i) => {
+              {contributionSteps.map((step, i) => {
                 const Icon = step.icon
                 return (
                   <div
@@ -180,7 +180,7 @@ export default function MissionPage() {
       </section>
 
       <CtaBand
-        headline="Ready to build the future of fiction?"
+        headline="Make room for more voices."
         subtext="Join our community of artists, writers, and developers crafting open worlds."
         primaryLabel="Explore Volunteer Roles"
         primaryHref="/volunteer"

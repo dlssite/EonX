@@ -23,10 +23,10 @@ type IndicatorItem = {
 }
 
 const DEFAULT_INDICATORS: IndicatorItem[] = [
-  { icon: Globe,  label: 'Global Community' },
-  { icon: Layers, label: 'Living Universes' },
-  { icon: Heart,  label: 'Community-Owned' },
-  { icon: Zap,    label: 'Open Standards' },
+  { icon: Globe,  label: 'Independent' },
+  { icon: Layers, label: 'Open tools' },
+  { icon: Heart,  label: 'Community first' },
+  { icon: Zap,    label: 'Transparent' },
 ]
 
 export function CtaBand({
@@ -44,42 +44,29 @@ export function CtaBand({
 
   return (
     <section
-      className="relative overflow-hidden bg-base-950 py-16 sm:py-24 md:py-36 border-t border-glass"
+      className="relative overflow-hidden bg-base-950 py-16 sm:py-24 md:py-28"
       aria-label="Call to action"
     >
-      {/* ── Background glows ──────────────────────────────────── */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute rounded-full blur-[140px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] opacity-25"
-          style={{
-            background: 'radial-gradient(ellipse, rgba(108,99,255,0.3) 0%, rgba(255,107,53,0.12) 50%, transparent 75%)',
-          }}
-        />
-      </div>
-
       <Container className="relative z-10">
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          className="max-w-4xl mx-auto text-center"
+          className="mx-auto max-w-6xl rounded-3xl border border-glass bg-base-900/70 p-6 text-left shadow-lg sm:p-10 md:p-14"
         >
-
-          {/* ── Trust indicator badge row ──────────────────────── */}
           <motion.div
             variants={item}
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-8 sm:mb-10"
+            className="mb-8 flex flex-wrap items-center gap-2 sm:gap-2.5"
           >
             {indicators.map(({ icon: Icon, label }) => (
               <span
                 key={label}
                 className={cn(
                   'inline-flex items-center gap-2',
-                  'px-3.5 sm:px-4 py-1.5 rounded-full',
+                  'px-3 py-1.5 rounded-full',
                   'text-label font-body font-medium',
-                  'border border-glass bg-base-900/80 text-base-100/70',
-                  'backdrop-blur-md shadow-sm',
+                  'border border-glass bg-base-950/60 text-base-100/70',
                 )}
               >
                 <Icon size={12} aria-hidden="true" className="text-brand-400 shrink-0" />
@@ -88,64 +75,59 @@ export function CtaBand({
             ))}
           </motion.div>
 
-          {/* ── Headline ──────────────────────────────────────────── */}
-          <motion.h2
-            variants={item}
-            className="font-display font-extrabold text-h2 sm:text-h1 md:text-[3.25rem] text-base-100 tracking-tight leading-[1.08] mb-4 sm:mb-6"
-          >
-            {headline}
-          </motion.h2>
-
-          {/* ── Subtext ───────────────────────────────────────────── */}
-          {subtext && (
-            <motion.p
-              variants={item}
-              className="text-body sm:text-body-lg text-base-100/65 mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed"
-            >
-              {subtext}
-            </motion.p>
-          )}
-
-          {/* ── CTA buttons ───────────────────────────────────────── */}
-          <motion.div
-            variants={item}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-md sm:max-w-none mx-auto"
-          >
-            <Link
-              href={primaryHref}
-              className={cn(
-                'inline-flex items-center justify-center gap-2.5 w-full sm:w-auto min-h-[48px]',
-                'px-8 sm:px-9 py-3.5 sm:py-4 rounded-full',
-                'text-body font-body font-semibold text-white',
-                'bg-brand-500 hover:bg-brand-400 active:bg-brand-600',
-                'shadow-[0_0_32px_0_rgba(108,99,255,0.45)] sheen-sweep',
-                'active:scale-[0.97] hover:scale-[1.02]',
-                'transition-all duration-fast',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
-              )}
-            >
-              <span>{primaryLabel}</span>
-              <ArrowRight size={17} aria-hidden="true" />
-            </Link>
-
-            {secondaryLabel && secondaryHref && (
-              <Link
-                href={secondaryHref}
-                className={cn(
-                  'inline-flex items-center justify-center gap-2.5 w-full sm:w-auto min-h-[48px]',
-                  'px-8 sm:px-9 py-3.5 sm:py-4 rounded-full',
-                  'text-body font-body font-semibold text-base-100',
-                  'border border-glass bg-base-900/60 hover:bg-base-800/80 hover:border-brand-500/50 hover:text-white',
-                  'backdrop-blur-md active:scale-[0.97]',
-                  'transition-all duration-fast',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
-                )}
+          <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+              <motion.p variants={item} className="eyebrow mb-3">
+                Make something that lasts
+              </motion.p>
+              <motion.h2
+                variants={item}
+                className="max-w-3xl font-display text-h2 font-extrabold leading-tight tracking-tight text-base-100 sm:text-h1"
               >
-                {secondaryLabel}
-              </Link>
-            )}
-          </motion.div>
+                {headline}
+              </motion.h2>
+            </div>
+            <div>
+              {subtext && (
+                <motion.p
+                  variants={item}
+                  className="mb-7 text-body-sm leading-relaxed text-base-100/65 sm:text-body"
+                >
+                  {subtext}
+                </motion.p>
+              )}
+              <motion.div variants={item} className="flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href={primaryHref}
+                  className={cn(
+                    'inline-flex min-h-[48px] w-full items-center justify-center gap-2.5 rounded-full px-6 py-3 sm:w-auto',
+                    'text-body font-body font-semibold text-white',
+                    'bg-brand-500 hover:bg-brand-400 active:bg-brand-600',
+                    'transition-colors duration-fast',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
+                  )}
+                >
+                  <span>{primaryLabel}</span>
+                  <ArrowRight size={17} aria-hidden="true" />
+                </Link>
 
+                {secondaryLabel && secondaryHref && (
+                  <Link
+                    href={secondaryHref}
+                    className={cn(
+                      'inline-flex min-h-[48px] w-full items-center justify-center gap-2.5 rounded-full border border-glass bg-base-900/60 px-6 py-3 sm:w-auto',
+                      'text-body font-body font-semibold text-base-100',
+                      'hover:border-brand-500/50 hover:bg-base-800/80 hover:text-white',
+                      'transition-colors duration-fast',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
+                    )}
+                  >
+                    {secondaryLabel}
+                  </Link>
+                )}
+              </motion.div>
+            </div>
+          </div>
         </motion.div>
       </Container>
     </section>

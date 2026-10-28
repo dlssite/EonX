@@ -14,16 +14,16 @@ Used by: `/`
 ┌─────────────────────────────────┐
 │           HEADER                │  sticky, transparent → opaque
 ├─────────────────────────────────┤
-│           HERO                  │  full-viewport, dual CTA
-│  headline + subheadline + CTAs  │
+│           HERO                  │  editorial split, org purpose + CTAs
+│  direct headline + ecosystem map│
 ├─────────────────────────────────┤
-│        MISSION SNAPSHOT         │  3-column value props
+│        MISSION SNAPSHOT         │  organization / universe / community
 ├─────────────────────────────────┤
 │        PROJECTS TEASER          │  featured projects grid
 ├─────────────────────────────────┤
 │         TEAM PREVIEW            │  4-6 team members
 ├─────────────────────────────────┤
-│          STATS ROW              │  3-4 key org numbers
+│       GUIDING PRINCIPLES        │  community, transparency, quality, ownership
 ├─────────────────────────────────┤
 │           CTA BAND              │  full-width CTA block
 ├─────────────────────────────────┤
@@ -32,9 +32,10 @@ Used by: `/`
 ```
 
 **Notes:**
-- Hero uses `min-h-screen` with a dark gradient overlay on a background image/video
-- All sections animate in on scroll with staggered `fadeUp` variants
-- CTA Band at bottom has a brand gradient background
+- Hero uses an editorial text-and-diagram composition; avoid invented organizational metrics or unverified impact claims.
+- Section order explains the organization first, then its work and people, before reinforcing its principles.
+- Motion is restrained and respects reduced-motion preferences.
+- CTA Band uses a contained surface and one clear primary action.
 
 ---
 
@@ -46,7 +47,7 @@ Used by: About, Mission & Vision, Governance, Partnerships, Press, Donate
 ┌─────────────────────────────────┐
 │           HEADER                │
 ├─────────────────────────────────┤
-│          PAGE HERO              │  eyebrow + headline + lead text
+│          PAGE HERO              │  eyebrow + oversized headline + lead text
 │     (no full-screen height)     │  py-32 max
 ├─────────────────────────────────┤
 │       FLEXIBLE BLOCKS           │  CMS-assembled content blocks

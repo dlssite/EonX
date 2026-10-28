@@ -58,7 +58,7 @@
 
 - [ ] Multi-language support (if community growth demands it)
 - [ ] Dark/light mode toggle (dark is default; light mode already supported in tokens)
-- [ ] Community portal (login, token balance, contribution history)
+- [ ] Community portal (login, contributor recognition, contribution history)
 - [ ] Event listing page
 - [ ] Newsletter integration
 - [ ] Advanced analytics (conversion tracking, funnel analysis)

@@ -27,7 +27,7 @@ const pressResources = [
     icon: FileText,
     title: 'Fact Sheet & Backgrounder',
     description:
-      'Key organizational milestones, leadership biographies, contributor statistics, and mission overview documents.',
+      'Publicly verified organizational milestones, leadership biographies, and mission overview materials.',
   },
   {
     icon: MessageSquare,
@@ -96,7 +96,7 @@ export default function PressPage() {
             </p>
             <Link
               href="/contact?inquiry=press"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-sm text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm"
             >
               <span>Contact Press Desk</span>
             </Link>

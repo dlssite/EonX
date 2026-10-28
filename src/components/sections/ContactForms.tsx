@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { CheckCircle, Mail, Handshake, Newspaper, Users } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
@@ -137,23 +136,36 @@ export function ContactForms() {
       {/* Right Column — Segmented Form */}
       <div className="lg:col-span-7 glass-panel p-5 sm:p-8 md:p-10">
 
-        {/* Category Pill Switcher: 2x2 grid on mobile */}
-        <div role="tablist" aria-label="Inquiry type" className="grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8 p-1 sm:p-1.5 rounded-2xl bg-base-950/60 border border-glass">
+        {/* Inquiry category index */}
+        <div role="tablist" aria-label="Inquiry type" className="atlas-selector atlas-selector--grid mb-6 sm:mb-8">
           {tabs.map((tab) => {
             const isSelected = activeType === tab.value
             const Icon = tab.icon
             return (
               <button
                 key={tab.value}
+                id={`inquiry-tab-${tab.value}`}
                 role="tab"
                 aria-selected={isSelected}
+                aria-controls="inquiry-panel"
+                tabIndex={isSelected ? 0 : -1}
                 onClick={() => setActiveType(tab.value)}
-                className={cn(
-                  'flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl text-body-sm font-body font-medium transition-all duration-fast select-none justify-center min-h-[44px]',
-                  isSelected
-                    ? 'bg-base-800 text-brand-300 font-semibold border border-glass shadow-sm'
-                    : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40'
-                )}
+                onKeyDown={(event) => {
+                  const currentIndex = tabs.findIndex((item) => item.value === activeType)
+                  const keyActions: Record<string, number> = {
+                    ArrowRight: (currentIndex + 1) % tabs.length,
+                    ArrowLeft: (currentIndex - 1 + tabs.length) % tabs.length,
+                    Home: 0,
+                    End: tabs.length - 1,
+                  }
+                  const nextIndex = keyActions[event.key]
+                  if (nextIndex !== undefined) {
+                    event.preventDefault()
+                    setActiveType(tabs[nextIndex].value)
+                    document.getElementById(`inquiry-tab-${tabs[nextIndex].value}`)?.focus()
+                  }
+                }}
+                className="atlas-selector__item"
               >
                 <Icon size={14} className={isSelected ? 'text-brand-400' : 'opacity-60'} />
                 <span>{tab.label}</span>
@@ -163,7 +175,14 @@ export function ContactForms() {
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5 sm:space-y-6">
+        <form
+          id="inquiry-panel"
+          role="tabpanel"
+          aria-labelledby={`inquiry-tab-${activeType}`}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="space-y-5 sm:space-y-6"
+        >
           <input
             type="text"
             tabIndex={-1}

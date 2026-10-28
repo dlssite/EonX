@@ -1,29 +1,6 @@
 import type { Metadata } from 'next'
-import { Syne, Inter, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { generateMetadata } from '@/lib/metadata'
-
-// ── Fonts ──────────────────────────────────────────────────
-const syne = Syne({
-  subsets: ['latin'],
-  weight: ['700', '800'],
-  variable: '--font-display',
-  display: 'swap',
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-body',
-  display: 'swap',
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
-})
 
 // ── Default site metadata ──────────────────────────────────
 export const metadata: Metadata = generateMetadata()
@@ -47,7 +24,6 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
       {children}
     </html>

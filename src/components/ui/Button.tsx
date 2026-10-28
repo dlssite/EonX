@@ -30,9 +30,9 @@ type ButtonProps = AsButton | AsLink
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-brand-500 text-white hover:bg-brand-400 active:bg-brand-600 shadow-[0_0_28px_0_rgba(108,99,255,0.38)] sheen-sweep',
+    'bg-brand-500 text-white hover:bg-brand-400 active:bg-brand-600 shadow-sm',
   secondary:
-    'border border-glass bg-base-900/60 text-base-100 hover:border-glass-hover hover:bg-base-800/80 hover:text-base-100 backdrop-blur-md shadow-sm',
+    'border border-glass bg-base-900 text-base-100 hover:border-glass-hover hover:bg-base-800 hover:text-base-100 shadow-sm',
   ghost:
     'text-base-100/65 hover:text-base-100 hover:bg-base-800/60',
   destructive:
@@ -40,9 +40,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-body-sm rounded-full',
-  md: 'px-6 py-2.5 text-body-sm font-semibold rounded-full',
-  lg: 'px-8 py-3.5 text-body font-semibold rounded-full',
+  sm: 'px-4 py-2 text-body-sm rounded-sm',
+  md: 'px-6 py-2.5 text-body-sm font-semibold rounded-sm',
+  lg: 'px-8 py-3.5 text-body font-semibold rounded-sm',
 }
 
 const baseClasses =
@@ -50,7 +50,7 @@ const baseClasses =
   'transition-all duration-fast ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950 ' +
   'disabled:opacity-50 disabled:cursor-not-allowed ' +
-  'hover:scale-[1.02] active:scale-[0.97]'
+  'active:translate-y-px'
 
 export function Button(props: ButtonProps) {
   const { variant = 'primary', size = 'md', isLoading = false, className, children } = props

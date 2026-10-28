@@ -66,7 +66,7 @@ export function StickyBottomBar({
                 'px-5 py-2.5 rounded-full',
                 'text-body-sm font-body font-semibold text-white',
                 'bg-brand-500 hover:bg-brand-400 active:scale-[0.97]',
-                'shadow-[0_0_20px_0_rgba(108,99,255,0.4)] sheen-sweep',
+                'shadow-sm',
                 'transition-all duration-fast',
               )}
             >

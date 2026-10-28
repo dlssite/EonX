@@ -27,7 +27,7 @@ const partnershipTracks = [
     icon: Sparkles,
     title: 'Tool & Infrastructure Sponsors',
     description:
-      'Provide hosting, hardware grants, or developer tooling licenses to empower our non-profit collective of creators.',
+      'Provide hosting, hardware, or developer tooling to support an independent creative organization.',
   },
   {
     icon: Globe,
@@ -95,7 +95,7 @@ export default function PartnershipsPage() {
             </p>
             <Link
               href="/contact?inquiry=partner"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-sm text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm"
             >
               <span>Initiate Partnership Inquiry</span>
             </Link>

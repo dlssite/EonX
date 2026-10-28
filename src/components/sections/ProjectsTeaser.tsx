@@ -145,7 +145,7 @@ export function ProjectsTeaser({ projects }: ProjectsTeaserProps) {
               <Link
                 href={`/projects/${String(selectedProject.slug)}`}
                 onClick={() => setSelectedProject(null)}
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.35)] sheen-sweep min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-sm text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm min-h-[44px]"
               >
                 <span>View Full Project Page</span>
                 <ArrowRight size={15} aria-hidden="true" />
@@ -175,34 +175,26 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
   return (
     <div
       className={cn(
-        'group relative flex flex-col rounded-3xl overflow-hidden',
-        'border border-glass bg-gradient-to-b from-base-900/90 via-base-900/60 to-base-950/80 backdrop-blur-md',
-        'hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_20px_40px_-15px_rgba(108,99,255,0.2)]',
+        'atlas-card atlas-card--project group relative flex flex-col',
       )}
     >
       {/* Cover image */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-base-950 border-b border-glass">
+      <div className="atlas-card__media">
         {coverUrl ? (
           <Image
             src={coverUrl}
             alt={cover?.alt ?? (project.name as string)}
             fill
-            className="object-cover group-hover:scale-[1.06] transition-transform duration-slow"
+            className="atlas-card__image"
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/20 to-base-950">
+          <div className="absolute inset-0 flex items-center justify-center">
             <span className="font-display font-extrabold text-[4rem] text-base-800 select-none">
               {(project.name as string).charAt(0)}
             </span>
           </div>
         )}
-
-        {/* Gradient overlay */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-base-950/90 via-base-950/30 to-transparent"
-        />
 
         {/* Status badge pinned top-left */}
         <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
@@ -219,7 +211,7 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
         <button
           onClick={onQuickView}
           aria-label={`Quick view ${project.name as string}`}
-          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-2 sm:py-1.5 rounded-full text-label font-body font-semibold text-white bg-base-950/90 border border-glass backdrop-blur-md opacity-100 md:opacity-0 md:group-hover:opacity-100 hover:bg-brand-500 hover:border-brand-400 transition-all duration-fast shadow-md min-h-[36px]"
+          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-2 text-label font-body font-semibold text-base-100 bg-base-950 border border-glass hover:border-brand-400 transition-colors min-h-[36px]"
         >
           <Eye size={13} aria-hidden="true" />
           <span>Quick View</span>
@@ -227,7 +219,7 @@ function ProjectCard({ project, onQuickView }: ProjectCardProps) {
       </div>
 
       {/* Text block */}
-      <div className="flex flex-col flex-1 p-5 sm:p-6 md:p-7 justify-between">
+      <div className="atlas-card__body">
         <div>
           {tags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">

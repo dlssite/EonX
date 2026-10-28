@@ -86,31 +86,25 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
               return (
                 <div
                   key={member.id}
-                  className="group relative flex flex-col rounded-3xl border border-glass bg-gradient-to-b from-base-900/95 via-base-900/75 to-base-950/90 backdrop-blur-xl overflow-hidden hover:border-glass-strong transition-all duration-normal hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-15px_rgba(108,99,255,0.25)]"
+                  className="atlas-card atlas-card--person group relative flex flex-col"
                 >
                   {/* Portrait Media Header */}
-                  <div className="relative aspect-[16/11] sm:aspect-[4/3] w-full overflow-hidden bg-base-950 border-b border-glass">
+                  <div className="atlas-card__media w-full">
                     {photoUrl ? (
                       <Image
                         src={photoUrl}
                         alt={photoAlt}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-slow"
+                        className="atlas-card__image"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
                       />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-900/30 via-base-900 to-base-950">
+                      <div className="absolute inset-0 flex items-center justify-center">
                         <span className="font-display font-extrabold text-[5rem] text-brand-300/40 select-none">
                           {member.name.charAt(0)}
                         </span>
                       </div>
                     )}
-
-                    {/* Gradient overlay fading image into card body */}
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 bg-gradient-to-t from-base-950/90 via-base-950/20 to-transparent"
-                    />
 
                     {/* Pinned department badge */}
                     <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
@@ -121,8 +115,9 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                   </div>
 
                   {/* Card Content Body */}
-                  <div className="flex flex-col flex-1 p-5 sm:p-6 md:p-7 justify-between space-y-4">
+                  <div className="atlas-card__body space-y-4">
                     <div>
+                      <p className="eyebrow mb-2">{deptLabel}</p>
                       <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-1 group-hover:text-brand-300 transition-colors">
                         {member.name}
                       </h3>
@@ -140,7 +135,7 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
 
                     {/* Social Link Pill Bar */}
                     {socials.length > 0 && (
-                      <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-glass">
+                      <div className="atlas-card__footer flex flex-wrap items-center gap-2 pt-4">
                         {socials.map((s) => {
                           const Icon = socialIcons[s.platform]
                           if (!Icon) return null

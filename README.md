@@ -1,18 +1,18 @@
-# Eonrisen — Official Organization Website
+# Eonrisia — Official Organization Website
 
-The official website of **Eonrisen**, the organization behind the community-driven creative ecosystem and the fictional universe **Sanctyria**.
+The official website of **Eonrisia**, the organization behind the community-driven creative ecosystem and the fictional universe **Sanctyria**.
 
-This repository contains the full source code, documentation, and constitutional rules for the Eonrisen organization website at [eonrisen.org](https://eonrisen.org).
+This repository contains the full source code, documentation, and constitutional rules for the Eonrisia organization website at [eonrisen.org](https://eonrisen.org).
 
 ---
 
 ## What This Site Is
 
-The Eonrisen organization website is the institutional face of the organization. It is **not** the Sanctyria universe website. It exists to:
+The Eonrisia organization website is the institutional face of the organization. It is **not** the Sanctyria universe website. It exists to:
 
 - Attract and onboard **partners and donors**
 - Recruit **volunteers and contributors**
-- Surface Eonrisen as a capable team available for **creative-tech commissions**
+- Surface Eonrisia as a capable team available for **creative-tech commissions**
 - Communicate the organization's **mission, vision, governance, and team**
 
 ---
@@ -86,4 +86,4 @@ See [`docs/07-development/contributing.md`](./docs/07-development/contributing.m
 
 ---
 
-*Eonrisen — Building immersive worlds, together.*
+*Eonrisia — Building immersive worlds, together.*

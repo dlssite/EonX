@@ -12,7 +12,7 @@ import { CheckCircle2, ArrowRight } from 'lucide-react'
 export const metadata: Metadata = generateMetadata({
   title: 'Donate & Support | Eonrisia',
   description:
-    'Support Eonrisia directly. 100% transparent funding model empowering open world-building and indie creative tools.',
+    'Support Eonrisia’s community-driven projects, creative tools, and independent work.',
   canonical: '/donate',
 })
 
@@ -64,36 +64,33 @@ export default function DonatePage() {
       <PageHero
         eyebrow="Direct Patronage"
         headline="Fund independent creativity."
-        lead="Eonrisia operates without advertising trackers or speculative crypto schemes. Your donations directly sponsor open tools, creator stipends, and accessible fictional worlds."
+        lead="Your support can help maintain shared creative tools, make room for creator work, and sustain community projects."
       />
 
-      {/* ── Donation Allocations & Tiers ─────────────────────────── */}
+      {/* ── Support Priorities & Tiers ─────────────────────────── */}
       <section className="py-24 md:py-32 bg-base-950">
         <Container>
           {/* Transparency Statement */}
           <div className="max-w-4xl mx-auto mb-20">
             <p className="eyebrow mb-3">Our Stewardship Pledge</p>
             <h2 className="font-display font-extrabold text-h2 md:text-[2.75rem] text-base-100 tracking-tight leading-tight mb-8">
-              Where your donation actually goes.
+              Where your support can help.
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
               <div className="p-7 rounded-2xl border border-glass bg-base-900/60 backdrop-blur-md text-center">
-                <div className="font-display font-extrabold text-h2 text-brand-400 mb-1">70%</div>
                 <div className="text-body-sm font-display font-bold text-base-100 mb-1">Creator Grants</div>
-                <p className="text-label-xs text-base-100/50">Direct compensation to writers, artists, and developers</p>
+                <p className="text-label-xs text-base-100/50">Support for writers, artists, and developers</p>
               </div>
 
               <div className="p-7 rounded-2xl border border-glass bg-base-900/60 backdrop-blur-md text-center">
-                <div className="font-display font-extrabold text-h2 text-accent-400 mb-1">20%</div>
                 <div className="text-body-sm font-display font-bold text-base-100 mb-1">Infrastructure</div>
-                <p className="text-label-xs text-base-100/50">Servers, domain assets, open developer tool licenses</p>
+                <p className="text-label-xs text-base-100/50">Hosting, software, and shared creative tools</p>
               </div>
 
               <div className="p-7 rounded-2xl border border-glass bg-base-900/60 backdrop-blur-md text-center">
-                <div className="font-display font-extrabold text-h2 text-emerald-400 mb-1">10%</div>
-                <div className="text-body-sm font-display font-bold text-base-100 mb-1">Legal & Reserve</div>
-                <p className="text-label-xs text-base-100/50">Copyright protections and operational contingency</p>
+                <div className="text-body-sm font-display font-bold text-base-100 mb-1">Community</div>
+                <p className="text-label-xs text-base-100/50">Activities and support that help contributors work together</p>
               </div>
             </div>
           </div>
@@ -113,7 +110,7 @@ export default function DonatePage() {
                   key={tier.name}
                   className={`p-6 sm:p-8 md:p-10 rounded-3xl border flex flex-col justify-between transition-all duration-normal ${
                     tier.featured
-                      ? 'border-brand-500/50 bg-base-900 shadow-[0_0_40px_0_rgba(108,99,255,0.15)] relative scale-100 lg:scale-105 z-10'
+                      ? 'border-brand-500/50 bg-base-900 shadow-md relative scale-100 lg:scale-105 z-10'
                       : 'border-glass bg-base-900/60 backdrop-blur-md hover:border-glass-hover'
                   }`}
                 >
@@ -148,7 +145,7 @@ export default function DonatePage() {
                     href={`/contact?inquiry=partner&tier=${encodeURIComponent(tier.name)}`}
                     className={`w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full text-body-sm font-body font-semibold transition-all duration-fast ${
                       tier.featured
-                        ? 'bg-brand-500 text-white hover:bg-brand-400 shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep'
+                        ? 'bg-brand-500 text-white hover:bg-brand-400 shadow-sm'
                         : 'border border-glass bg-base-950/60 text-base-100 hover:bg-base-800'
                     }`}
                   >
@@ -164,7 +161,7 @@ export default function DonatePage() {
 
       <CtaBand
         headline="Prefer custom or corporate sponsorship?"
-        subtext="We offer tax-deductible institutional partnerships and custom matching grant opportunities."
+        subtext="Talk with us about sponsorship, shared projects, or other ways to support the work."
         primaryLabel="Inquire About Sponsorships"
         primaryHref="/contact?inquiry=partner"
         secondaryLabel="Explore Partnerships"

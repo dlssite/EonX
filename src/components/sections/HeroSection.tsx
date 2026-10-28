@@ -2,223 +2,98 @@
 
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Sparkles } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { heroStaggerContainer, fadeUp, fadeIn } from '@/variants'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { Container } from '@/components/ui/Container'
 
-const disciplineChips = [
-  { icon: Sparkles, label: 'Games · Comics · Software' },
-]
+const disciplines = ['Writing', 'Art', 'Technology', 'Community']
 
 export function HeroSection() {
-  const prefersReduced = useReducedMotion()
-
-  const container = prefersReduced ? {} : heroStaggerContainer
-  const item      = prefersReduced ? {} : fadeUp
-  const fade      = prefersReduced ? {} : fadeIn
+  const reduceMotion = useReducedMotion()
 
   return (
-    <section
-      className="relative min-h-[100svh] flex flex-col justify-center overflow-hidden bg-base-950"
-      aria-label="Hero"
-    >
-      {/* ── Ambient Mesh Lighting ─────────────────────────────────── */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Central luminous brand bloom */}
-        <div
-          className="absolute rounded-full blur-[150px]"
-          style={{
-            width: '900px',
-            height: '600px',
-            top: '-120px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'radial-gradient(ellipse, rgba(108,99,255,0.24) 0%, rgba(108,99,255,0.05) 50%, transparent 75%)',
-          }}
-        />
-        {/* Accent warm ember glow */}
-        <div
-          className="absolute rounded-full blur-[120px]"
-          style={{
-            width: '600px',
-            height: '450px',
-            bottom: '0%',
-            right: '-10%',
-            background: 'radial-gradient(ellipse, rgba(255,107,53,0.14) 0%, transparent 70%)',
-          }}
-        />
-        {/* Soft cyan-purple counter-balance */}
-        <div
-          className="absolute rounded-full blur-[130px]"
-          style={{
-            width: '500px',
-            height: '450px',
-            bottom: '5%',
-            left: '-10%',
-            background: 'radial-gradient(ellipse, rgba(81,72,212,0.12) 0%, transparent 70%)',
-          }}
-        />
-      </div>
-
-      {/* ── Precision dot grid texture ───────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage: 'radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1px)',
-          backgroundSize: '36px 36px',
-        }}
-      />
-
-      {/* ── Top hairline accent ──────────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background: 'linear-gradient(90deg, transparent, rgba(108,99,255,0.8) 50%, transparent)',
-        }}
-      />
-
-      {/* ── Content ──────────────────────────────────────────────── */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-4 sm:px-6 md:px-10 xl:px-20 pt-28 pb-16 sm:pt-36 sm:pb-20">
+    <section className="atlas-hero relative overflow-hidden" aria-labelledby="home-heading">
+      <Container className="relative z-10 grid min-h-[min(880px,100svh)] items-center gap-12 py-32 sm:py-36 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
         <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="w-full max-w-5xl mx-auto text-center"
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-10"
         >
-
-          {/* ── Eyebrow Pill Row ─────────────────────────────────── */}
-          <motion.div
-            variants={item}
-            className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-6 sm:mb-8 md:mb-10"
+          <p className="atlas-kicker mb-6">
+            <span className="atlas-kicker__mark" aria-hidden="true" />
+            Independent creative organization · Community-built
+          </p>
+          <h1
+            id="home-heading"
+            className="max-w-3xl font-display text-[clamp(3.75rem,8vw,7.75rem)] font-medium leading-[0.88] tracking-[-0.065em] text-base-100"
           >
-            {disciplineChips.map(({ icon: Icon, label }) => (
-              <span
-                key={label}
-                className={cn(
-                  'inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full',
-                  'text-label font-body font-medium',
-                  'border border-glass bg-base-900/80 text-base-100/80',
-                  'backdrop-blur-md shadow-sm',
-                )}
-              >
-                <Icon size={13} aria-hidden="true" className="shrink-0 text-brand-400" />
-                <span>{label}</span>
+            Big worlds.
+            <br />
+            <span className="atlas-hero__italic">Many hands.</span>
+          </h1>
+          <p className="mt-8 max-w-xl text-base leading-8 text-base-100/70 sm:text-lg">
+            Eonrisia brings writers, artists, developers, and communities together to create
+            original fictional universes—and the tools, games, and stories that let people shape
+            them.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Link href="/volunteer" className="atlas-button atlas-button--primary">
+              Join the collective
+              <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+            <Link href="/projects" className="atlas-button atlas-button--secondary">
+              Explore our work
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-glass pt-5">
+            <span className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-base-100/45">
+              Made across
+            </span>
+            {disciplines.map((discipline) => (
+              <span key={discipline} className="atlas-discipline">
+                {discipline}
               </span>
             ))}
-          </motion.div>
-
-          {/* ── Main Headline ────────────────────────────────────── */}
-          <motion.h1
-            variants={item}
-            className={cn(
-              'font-display font-extrabold text-base-100 mb-6 sm:mb-8',
-              'leading-[1.06] tracking-tightest',
-              'text-[clamp(2.125rem,6vw,4.5rem)]',
-            )}
-          >
-            Building immersive{' '}
-            <span className="gradient-text">
-              worlds,
-            </span>{' '}
-            together.
-          </motion.h1>
-
-          {/* ── Lead Paragraph ───────────────────────────────────── */}
-          <motion.p
-            variants={item}
-            className="text-body sm:text-body-lg md:text-[1.25rem] text-base-100/65 max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed px-2 sm:px-0"
-          >
-            Eonrisia is the community-driven organization building living fictional universes —
-            and the software, games, comics, and collective tools that bring them to life.
-          </motion.p>
-
-          {/* ── Dual Pill CTA Group ──────────────────────────────── */}
-          <motion.div
-            variants={item}
-            className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 w-full max-w-md sm:max-w-none mx-auto"
-          >
-            <Link
-              href="/volunteer"
-              className={cn(
-                'inline-flex items-center justify-center gap-2.5 w-full sm:w-auto',
-                'px-8 sm:px-9 py-3.5 sm:py-4 rounded-full min-h-[48px]',
-                'text-body font-body font-semibold text-white',
-                'bg-brand-500 hover:bg-brand-400 active:bg-brand-600',
-                'shadow-[0_0_32px_0_rgba(108,99,255,0.45)] sheen-sweep',
-                'active:scale-[0.97] hover:scale-[1.02]',
-                'transition-all duration-fast',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
-              )}
-            >
-              <span>Get Involved</span>
-              <ArrowRight size={17} aria-hidden="true" />
-            </Link>
-
-            <Link
-              href="/projects"
-              className={cn(
-                'inline-flex items-center justify-center gap-2.5 w-full sm:w-auto',
-                'px-8 sm:px-9 py-3.5 sm:py-4 rounded-full min-h-[48px]',
-                'text-body font-body font-semibold text-base-100',
-                'border border-glass bg-base-900/60 hover:bg-base-800/80 hover:border-glass-hover hover:text-base-100',
-                'backdrop-blur-md active:scale-[0.97]',
-                'transition-all duration-fast',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
-              )}
-            >
-              <span>See Our Work</span>
-            </Link>
-          </motion.div>
-
-          {/* ── Disciplines Marquee Ribbon ────────────────────────── */}
-          <motion.div
-            variants={item}
-            className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 rounded-2xl sm:rounded-full border border-glass-subtle bg-base-900/40 backdrop-blur-sm max-w-full"
-          >
-            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
-              Writers
-            </span>
-            <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
-              Artists
-            </span>
-            <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
-              Developers
-            </span>
-            <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
-              Composers
-            </span>
-            <span className="w-1 h-1 rounded-full bg-brand-500/50" />
-            <span className="text-label-xs sm:text-label text-base-100/50 font-body tracking-widest uppercase">
-              Community
-            </span>
-          </motion.div>
-
+          </div>
         </motion.div>
-      </div>
 
-      {/* ── Scroll Indicator ────────────────────────────────────── */}
-      <motion.div
-        variants={fade}
-        initial="hidden"
-        animate="visible"
-        aria-hidden="true"
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 pointer-events-none"
-      >
-        <div
-          className="w-px h-10"
-          style={{
-            background: 'linear-gradient(to bottom, rgba(255,255,255,0.25), transparent)',
-          }}
-        />
-        <span className="text-label-xs text-base-100/30 uppercase tracking-[0.25em] font-body">
-          Explore
-        </span>
-      </motion.div>
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, delay: 0.1 }}
+          className="atlas-poster"
+          role="img"
+          aria-label="An abstract map connecting stories, tools, and the people who make them"
+        >
+          <div className="atlas-poster__header">
+            <span>Field notes</span>
+            <span>001 — Eonrisia</span>
+          </div>
+          <div className="atlas-poster__art" aria-hidden="true">
+            <svg viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="atlas-poster__route" d="M92 310C165 265 198 124 302 173s131 153 240 65" />
+              <path className="atlas-poster__route atlas-poster__route--secondary" d="M118 105c95 67 156 203 261 177s107-117 169-164" />
+              <circle cx="92" cy="310" r="13" className="atlas-poster__node atlas-poster__node--coral" />
+              <circle cx="118" cy="105" r="9" className="atlas-poster__node atlas-poster__node--lime" />
+              <circle cx="302" cy="173" r="18" className="atlas-poster__node atlas-poster__node--lime" />
+              <circle cx="379" cy="282" r="11" className="atlas-poster__node atlas-poster__node--coral" />
+              <circle cx="542" cy="238" r="14" className="atlas-poster__node atlas-poster__node--lime" />
+              <circle cx="548" cy="118" r="8" className="atlas-poster__node atlas-poster__node--coral" />
+              <path d="M303 74v44m-22-22h44" className="atlas-poster__cross" />
+              <path d="M444 345v28m-14-14h28" className="atlas-poster__cross atlas-poster__cross--small" />
+            </svg>
+            <span className="atlas-poster__annotation atlas-poster__annotation--one">Ideas</span>
+            <span className="atlas-poster__annotation atlas-poster__annotation--two">People</span>
+            <span className="atlas-poster__annotation atlas-poster__annotation--three">Worlds</span>
+          </div>
+          <div className="atlas-poster__caption">
+            <p>One shared universe.<br /><em>Endless ways in.</em></p>
+            <span>Story / Software / Community</span>
+          </div>
+        </motion.div>
+      </Container>
+      <div className="atlas-hero__index" aria-hidden="true">01</div>
     </section>
   )
 }

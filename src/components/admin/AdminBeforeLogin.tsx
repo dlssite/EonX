@@ -16,7 +16,7 @@ export function AdminBeforeLogin() {
           fontWeight: 700,
           letterSpacing: '0.15em',
           textTransform: 'uppercase',
-          color: '#A9A4FF',
+          color: '#D7EF7C',
           display: 'block',
           marginBottom: '0.25rem',
         }}
@@ -26,4 +26,3 @@ export function AdminBeforeLogin() {
     </div>
   )
 }
-

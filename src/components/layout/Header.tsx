@@ -46,8 +46,8 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
         className={cn(
           'fixed top-0 left-0 right-0 z-sticky transition-all duration-normal',
           scrolled
-            ? 'bg-base-950/85 backdrop-blur-xl border-b border-glass shadow-lg py-2.5 md:py-3.5'
-            : 'bg-transparent py-4 md:py-6',
+            ? 'bg-base-950/90 backdrop-blur-xl border-b border-glass shadow-md py-2.5 md:py-3'
+            : 'bg-transparent py-4 md:py-5',
         )}
       >
         <Container>
@@ -59,14 +59,15 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
               aria-label="Eonrisia — go to homepage"
               className="flex items-center group shrink-0 select-none"
             >
-              <span className="font-display font-extrabold text-[1.3rem] tracking-tight text-base-100 group-hover:text-brand-400 transition-colors duration-fast">
+              <span className="site-mark mr-3" aria-hidden="true" />
+              <span className="font-display text-[1.3rem] font-extrabold tracking-tight text-base-100 transition-colors duration-fast group-hover:text-brand-300">
                 Eonrisia
               </span>
             </Link>
 
-            {/* Desktop Navigation Pill Island */}
-            <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-1 bg-base-900/60 border border-glass px-2 py-1.5 rounded-full backdrop-blur-md">
-              <ul className="flex items-center gap-1" role="list">
+            {/* Primary navigation */}
+            <nav aria-label="Primary navigation" className="hidden md:flex items-center gap-1">
+              <ul className="flex items-center gap-1.5" role="list">
                 {links.map((link) => {
                   const isActive =
                     activePath === link.href ||
@@ -80,10 +81,10 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
                         rel={link.isExternal ? 'noopener noreferrer' : undefined}
                         aria-current={isActive ? 'page' : undefined}
                         className={cn(
-                          'relative z-10 block px-4 py-1.5 rounded-full text-body-sm font-body font-medium transition-colors duration-fast',
+                          'relative z-10 block px-3 py-2 text-body-sm font-body font-medium transition-colors duration-fast',
                           isActive
                             ? 'text-base-100 font-semibold'
-                            : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
+                            : 'text-base-100/60 hover:text-base-100',
                         )}
                       >
                         {link.label}
@@ -92,7 +93,7 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
                         <motion.div
                           layoutId="activeNavIndicator"
                           transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                          className="absolute inset-0 bg-base-800/80 border border-glass-subtle rounded-full z-0 pointer-events-none"
+                          className="absolute inset-x-3 bottom-0 h-px bg-brand-400 z-0 pointer-events-none"
                         />
                       )}
                     </li>
@@ -108,11 +109,9 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
                 href={ctaHref}
                 className={cn(
                   'inline-flex items-center justify-center',
-                  'px-5 py-2 rounded-full text-body-sm font-body font-semibold',
+                  'px-5 py-2.5 rounded-sm text-body-sm font-body font-semibold',
                   'bg-brand-500 text-white hover:bg-brand-400',
-                  'shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep',
-                  'active:scale-[0.97] hover:scale-[1.02]',
-                  'transition-all duration-fast',
+                  'transition-colors duration-fast',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950',
                 )}
               >
@@ -128,7 +127,7 @@ export function Header({ links, ctaLabel, ctaHref, currentPath: propPath = '' }:
                 aria-label="Open navigation menu"
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 rounded-full bg-base-900/80 border border-glass text-base-100/70 hover:text-base-100 hover:bg-base-800 transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2.5 rounded-sm bg-base-900 border border-glass text-base-100/70 hover:text-base-100 hover:bg-base-800 transition-colors"
               >
                 <Menu size={20} aria-hidden="true" />
               </button>

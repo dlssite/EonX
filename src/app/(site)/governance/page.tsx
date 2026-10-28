@@ -38,7 +38,7 @@ const articles = [
     code: 'ART-04',
     title: 'Anti-Speculation Standard',
     description:
-      'Eonrisia explicitly rejects speculative financial engineering, token sales, and pay-to-win mechanics in all official tools, lore frameworks, and games.',
+      'Eonrisia designs its projects around creative participation rather than financial speculation or pay-to-win mechanics.',
   },
   {
     code: 'ART-05',
@@ -96,7 +96,7 @@ export default function GovernancePage() {
               Rules codified for generational durability.
             </h2>
             <p className="text-body sm:text-body-lg text-base-100/70 leading-relaxed px-2 sm:px-0">
-              Unlike traditional studios that centralize power or Web3 DAOs plagued by speculation, Eonrisia pairs benevolent open stewardship with strict constitutional bylaws. Every member, lead, and founder is bound by these operational charters.
+              The constitution defines how decisions are made and how Eonrisia stewards its work. It sets shared expectations for accountability, community participation, and clear decision-making.
             </p>
           </div>
 
@@ -121,7 +121,7 @@ export default function GovernancePage() {
                 Fair Attribution
               </h3>
               <p className="text-body-sm text-base-100/60 leading-relaxed">
-                Every volunteer and creator receives immutable public credit and non-speculative contributor tokens.
+                Accepted contributors receive public recognition for their work, following the credit guidelines for each project.
               </p>
             </div>
 

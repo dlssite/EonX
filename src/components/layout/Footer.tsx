@@ -73,19 +73,10 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
 
   return (
     <footer
-      className="bg-base-950 border-t border-glass relative overflow-hidden"
+      className="relative overflow-hidden border-t border-glass-strong bg-base-900"
       role="contentinfo"
     >
-      {/* Ambient background glow */}
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] pointer-events-none opacity-20"
-        style={{
-          background: 'radial-gradient(ellipse at bottom, rgba(108,99,255,0.18) 0%, transparent 70%)',
-        }}
-      />
-
-      <Container className="py-12 sm:py-16 md:py-20 relative z-10">
+      <Container className="relative z-10 py-16 sm:py-20 md:py-24">
 
         {/* ── Main grid ─────────────────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8 mb-12 sm:mb-14">
@@ -97,8 +88,8 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
               aria-label="Eonrisia homepage"
               className="inline-flex items-center gap-2 group w-fit"
             >
-              <span className="w-2 h-2 rounded-full bg-brand-400 group-hover:scale-125 transition-transform duration-fast shadow-[0_0_8px_0_rgba(108,99,255,0.8)]" />
-              <span className="font-display font-extrabold text-[1.3rem] tracking-tight text-base-100 group-hover:text-brand-400 transition-colors duration-fast">
+              <span className="h-px w-8 bg-brand-400 transition-all duration-fast group-hover:w-12" aria-hidden="true" />
+              <span className="font-display text-[1.3rem] font-extrabold tracking-tight text-base-100 transition-colors duration-fast group-hover:text-brand-300">
                 Eonrisia
               </span>
             </Link>
@@ -148,7 +139,7 @@ export function Footer({ tagline, columns, socialLinks, legalText }: FooterProps
           <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
             {columns.map((col) => (
               <nav key={col.heading} aria-label={`${col.heading} links`}>
-                <h3 className="text-label-xs font-body font-semibold text-base-100/40 uppercase tracking-widest mb-3.5">
+                <h3 className="mb-3.5 font-mono text-label-xs font-medium uppercase tracking-widest text-base-100/45">
                   {col.heading}
                 </h3>
                 <ul className="flex flex-col gap-2.5" role="list">

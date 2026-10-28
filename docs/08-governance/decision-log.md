@@ -140,3 +140,17 @@ This file records all significant architectural, design, and strategic decisions
 **Files updated:** `src/payload.config.ts`, `src/migrations/20260829_000000_initial.ts`, `src/migrations/index.ts`
 
 **Decided by:** Engineering review, 2026-08-29
+
+---
+
+### 2026-08-29 — Website Visual Redesign Proposal
+
+**Decision:** Implement the website's proposed Field Notes / Living Atlas direction using forest-ink and warm-paper surfaces, Fraunces and DM Sans typography, and restrained lime and vermilion accents.
+
+**Context:** The previous visual treatment did not meet the request for a distinctive, complete redesign.
+
+**Rationale:** An editorial system with tactile color and flatter surfaces gives the organization a distinct visual identity without relying on generic glow, glass, or gradient effects.
+
+**Consequences:** Treat this as a website prototype pending formal ratification. The constitution's brand law remains unchanged until its required amendment process is completed. Public copy must not imply legal nonprofit registration or frame contributor recognition as token or cryptocurrency rewards.
+
+**Decided by:** Website redesign review, 2026-08-29

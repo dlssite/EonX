@@ -1,7 +1,6 @@
 'use client'
 
 import { useRouter, usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
 
 const DEPT_OPTIONS = [
   { value: 'all', label: 'All Disciplines' },
@@ -18,21 +17,22 @@ type DeptFilterProps = {
   basePath?: string
 }
 
-export function DeptFilter({ activeDept }: DeptFilterProps) {
+export function DeptFilter({ activeDept, basePath }: DeptFilterProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const targetPath = basePath ?? pathname
 
   function handleSelect(value: string) {
     const params = new URLSearchParams()
     if (value !== 'all') params.set('dept', value)
     const query = params.toString()
-    router.push(query ? `${pathname}?${query}` : pathname)
+    router.push(query ? `${targetPath}?${query}` : targetPath)
   }
 
   return (
     <nav aria-label="Filter by department" className="w-full">
       <div className="overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 edge-fade-x">
-        <div className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-full bg-base-900/80 border border-glass backdrop-blur-md w-fit shadow-md min-w-full sm:min-w-0">
+        <div className="atlas-selector">
           {DEPT_OPTIONS.map(({ value, label }) => {
             const isSelected = activeDept === value
             return (
@@ -40,12 +40,7 @@ export function DeptFilter({ activeDept }: DeptFilterProps) {
                 key={value}
                 onClick={() => handleSelect(value)}
                 aria-pressed={isSelected}
-                className={cn(
-                  'px-4 sm:px-5 py-2 rounded-full text-body-sm font-body font-medium transition-all duration-fast select-none shrink-0 whitespace-nowrap min-h-[44px] flex items-center',
-                  isSelected
-                    ? 'bg-brand-500 text-white font-semibold shadow-[0_0_16px_0_rgba(108,99,255,0.4)]'
-                    : 'text-base-100/60 hover:text-base-100 hover:bg-base-800/40',
-                )}
+                className="atlas-selector__item"
               >
                 {label}
               </button>

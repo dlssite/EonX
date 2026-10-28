@@ -41,10 +41,11 @@ Fonts loaded via `next/font` — they are downloaded once, self-hosted, and inli
 
 ```ts
 // app/layout.tsx
-import { Syne, Inter } from 'next/font/google'
+import { DM_Mono, DM_Sans, Fraunces } from 'next/font/google'
 
-const syne = Syne({ subsets: ['latin'], weight: ['700', '800'], variable: '--font-display' })
-const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-body' })
+const fraunces = Fraunces({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-display' })
+const dmSans = DM_Sans({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-body' })
+const dmMono = DM_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono' })
 ```
 
 ### 4. Code Splitting

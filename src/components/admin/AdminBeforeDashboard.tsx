@@ -8,10 +8,9 @@ export function AdminBeforeDashboard() {
       style={{
         marginBottom: '2rem',
         padding: '1.75rem 2rem',
-        borderRadius: '16px',
-        background: 'linear-gradient(135deg, rgba(108, 99, 255, 0.15) 0%, rgba(15, 15, 25, 0.9) 100%)',
-        border: '1px solid rgba(108, 99, 255, 0.25)',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+        borderRadius: '10px',
+        background: '#192A21',
+        border: '1px solid #435244',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -26,8 +25,7 @@ export function AdminBeforeDashboard() {
               width: '8px',
               height: '8px',
               borderRadius: '9999px',
-              background: '#6C63FF',
-              boxShadow: '0 0 12px #6C63FF',
+              background: '#E6654A',
             }}
           />
           <span
@@ -36,25 +34,25 @@ export function AdminBeforeDashboard() {
               fontWeight: 700,
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              color: '#A9A4FF',
+              color: '#D7EF7C',
             }}
           >
-            Content Studio Studio
+            Content Studio
           </span>
         </div>
         <h2
           style={{
-            fontFamily: 'Syne, sans-serif',
+            fontFamily: 'var(--font-display), Georgia, serif',
             fontSize: '1.5rem',
-            fontWeight: 800,
-            color: '#F4F4F8',
+            fontWeight: 600,
+            color: '#F2EFE2',
             margin: 0,
             letterSpacing: '-0.02em',
           }}
         >
           Eonrisia Administration
         </h2>
-        <p style={{ color: 'rgba(244, 244, 248, 0.6)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
+        <p style={{ color: 'rgba(242, 239, 226, 0.68)', fontSize: '0.875rem', margin: '0.25rem 0 0 0' }}>
           Manage project universes, team profiles, opportunities, and published updates.
         </p>
       </div>
@@ -69,10 +67,10 @@ export function AdminBeforeDashboard() {
             alignItems: 'center',
             gap: '0.5rem',
             padding: '0.5rem 1rem',
-            borderRadius: '8px',
-            background: 'rgba(255, 255, 255, 0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            color: '#F4F4F8',
+            borderRadius: '6px',
+            background: '#F2EFE2',
+            border: '1px solid #F2EFE2',
+            color: '#0F1D17',
             fontSize: '0.8125rem',
             fontWeight: 600,
             textDecoration: 'none',
@@ -85,4 +83,3 @@ export function AdminBeforeDashboard() {
     </div>
   )
 }
-

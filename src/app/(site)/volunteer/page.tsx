@@ -32,9 +32,9 @@ const whyVolunteer = [
       'Your work is permanently credited. We never obscure contributor names behind corporate masks or lock assets in private repositories.',
   },
   {
-    title: 'Collaborative Governance',
+    title: 'A Voice in the Work',
     description:
-      'Contributors earn non-speculative governance weight. Your voice directly guides project roadmaps, charter amendments, and grant disbursements.',
+      'Share feedback and take part in conversations about the projects you help build, guided by Eonrisia’s governance process.',
   },
 ]
 
@@ -75,7 +75,7 @@ export default async function VolunteerPage({ searchParams }: VolunteerPageProps
       <PageHero
         eyebrow="Join the Collective"
         headline="Build worlds with us."
-        lead="Eonrisia runs on the talent and dedication of a global contributor collective. Whether you write, illustrate, engineer, compose, or moderate — there is a permanent place for you here."
+        lead="Eonrisia is built with contributors across writing, illustration, engineering, music, and community work. Bring your skills to original projects and help shape what we build next."
       />
 
       {/* ── Why Volunteer ──────────────────────────────────────── */}
@@ -110,23 +110,23 @@ export default async function VolunteerPage({ searchParams }: VolunteerPageProps
         <OpportunitiesList opportunities={opportunities} activeDept={dept ?? 'all'} />
       </div>
 
-      {/* ── Token System ───────────────────────────────────────── */}
+      {/* ── Contributor Recognition ────────────────────────────── */}
       <section className="py-14 sm:py-20 md:py-32 bg-base-950 border-t border-glass">
         <Container>
           <div className="glass-panel p-6 sm:p-8 md:p-12 max-w-4xl mx-auto border border-brand-500/30">
             <p className="eyebrow mb-2 sm:mb-3">Contributor Rewards</p>
             <h2 className="font-display font-extrabold text-h3 sm:text-h2 text-base-100 mb-3 sm:mb-4">
-              Earn tokens for your contributions.
+              Your work deserves clear credit.
             </h2>
             <p className="text-body-sm sm:text-body text-base-100/70 leading-relaxed mb-6 sm:mb-8 max-w-2xl">
-              Every accepted contribution earns non-speculative tokens that unlock ecosystem benefits, official release credits, exclusive merchandise, and community governance voting weight.
+              We recognize accepted contributions with clear project credits and opportunities to participate in the community around the work. The expectations and review process should be clear before you begin.
             </p>
             <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-2xl sm:rounded-full bg-base-950 border border-glass text-body-sm text-base-100/70 font-body">
               <span className="font-semibold text-base-100">Contribute</span>
               <span className="text-brand-400">→</span>
-              <span className="font-semibold text-base-100">Earn Verified Tokens</span>
+              <span className="font-semibold text-base-100">Get credited</span>
               <span className="text-brand-400">→</span>
-              <span className="font-semibold text-base-100">Unlock Rewards & Governance</span>
+              <span className="font-semibold text-base-100">Shape what comes next</span>
             </div>
           </div>
         </Container>

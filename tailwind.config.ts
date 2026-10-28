@@ -31,7 +31,7 @@ const config: Config = {
           800: 'rgb(var(--color-surface-800) / <alpha-value>)',
           900: 'rgb(var(--color-surface-900) / <alpha-value>)',
         },
-        // ── Brand purple (same in both modes) ─────────────────────────────
+        // ── Brand forest and lime accents ─────────────────────────────────
         brand: {
           300: 'rgb(var(--color-brand-300) / <alpha-value>)',
           400: 'rgb(var(--color-brand-400) / <alpha-value>)',
@@ -39,7 +39,7 @@ const config: Config = {
           600: 'rgb(var(--color-brand-600) / <alpha-value>)',
           700: 'rgb(var(--color-brand-700) / <alpha-value>)',
         },
-        // ── Accent orange (same in both modes) ────────────────────────────
+        // ── Vermilion editorial accent ────────────────────────────────────
         accent: {
           400: 'rgb(var(--color-accent-400) / <alpha-value>)',
           500: 'rgb(var(--color-accent-500) / <alpha-value>)',
@@ -57,9 +57,9 @@ const config: Config = {
         'glass-strong': 'var(--border-glass-strong)',
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Syne', 'sans-serif'],
-        body:    ['var(--font-body)',    'Inter', 'sans-serif'],
-        mono:    ['var(--font-mono)',    'JetBrains Mono', 'monospace'],
+        display: ['var(--font-display)', 'Fraunces', 'Georgia', 'serif'],
+        body:    ['var(--font-body)',    'DM Sans', 'system-ui', 'sans-serif'],
+        mono:    ['var(--font-mono)',    'DM Mono', 'monospace'],
       },
       fontSize: {
         'display':  ['clamp(2.125rem, 6vw, 5.5rem)',     { lineHeight: '1.04', letterSpacing: '-0.03em' }],
@@ -87,8 +87,8 @@ const config: Config = {
         md:          '0 4px 12px 0 rgba(0,0,0,0.5)',
         lg:          '0 8px 24px 0 rgba(0,0,0,0.6)',
         xl:          '0 16px 40px 0 rgba(0,0,0,0.7)',
-        brand:       '0 0 24px 0 rgba(108,99,255,0.35)',
-        'brand-lg':  '0 0 48px 0 rgba(108,99,255,0.25)',
+        brand:       'var(--shadow-brand)',
+        'brand-lg':  'var(--shadow-brand-lg)',
         'light-sm':  '0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.06)',
         'light-md':  '0 4px 12px 0 rgba(0,0,0,0.08)',
         'light-lg':  '0 8px 24px 0 rgba(0,0,0,0.10)',

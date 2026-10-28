@@ -4,87 +4,99 @@
    Loaded after @payloadcms/next/css so these always win.
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&display=swap');
 
 :root {
-  --color-base-0:    rgb(250, 250, 253);
-  --color-base-50:   rgb(244, 244, 248);
-  --color-base-100:  rgb(232, 232, 240);
-  --color-base-150:  rgb(208, 208, 224);
-  --color-base-200:  rgb(180, 180, 210);
-  --color-base-250:  rgb(148, 148, 184);
-  --color-base-300:  rgb(115, 115, 160);
-  --color-base-350:  rgb(88,  88,  135);
-  --color-base-400:  rgb(70,  70,  115);
-  --color-base-450:  rgb(55,  55,   88);
-  --color-base-500:  rgb(44,  44,   70);
-  --color-base-550:  rgb(36,  36,   52);
-  --color-base-600:  rgb(28,  28,   42);
-  --color-base-650:  rgb(24,  24,   36);
-  --color-base-700:  rgb(20,  20,   30);
-  --color-base-750:  rgb(16,  16,   24);
-  --color-base-800:  rgb(13,  13,   19);
-  --color-base-850:  rgb(10,  10,   15);
-  --color-base-900:  rgb( 8,   8,   12);
-  --color-base-950:  rgb( 5,   5,    8);
-  --color-base-1000: rgb( 0,   0,    0);
+  --color-base-0:    rgb(252, 249, 241);
+  --color-base-50:   rgb(242, 239, 226);
+  --color-base-100:  rgb(227, 230, 216);
+  --color-base-150:  rgb(211, 214, 197);
+  --color-base-200:  rgb(191, 198, 180);
+  --color-base-250:  rgb(169, 180, 158);
+  --color-base-300:  rgb(145, 159, 134);
+  --color-base-350:  rgb(124, 139, 116);
+  --color-base-400:  rgb(104, 120, 98);
+  --color-base-450:  rgb(86, 100, 80);
+  --color-base-500:  rgb(67, 82, 68);
+  --color-base-550:  rgb(53, 70, 56);
+  --color-base-600:  rgb(43, 59, 47);
+  --color-base-650:  rgb(34, 50, 39);
+  --color-base-700:  rgb(25, 42, 33);
+  --color-base-750:  rgb(21, 36, 28);
+  --color-base-800:  rgb(15, 29, 23);
+  --color-base-850:  rgb(12, 24, 19);
+  --color-base-900:  rgb(8, 18, 14);
+  --color-base-950:  rgb(5, 12, 9);
+  --color-base-1000: rgb(0, 0, 0);
 }
 
 /* ── Dark theme overrides ─────────────────────────────────────── */
 html[data-theme=dark] {
-  --theme-bg:           #0A0A0F;
-  --theme-input-bg:     #111118;
-  --theme-text:         #E8E8F0;
+  --theme-bg:           #0F1D17;
+  --theme-input-bg:     #192A21;
+  --theme-text:         #E3E6D8;
 
-  --theme-elevation-0:   #0A0A0F;
-  --theme-elevation-50:  #0E0E14;
-  --theme-elevation-100: #111118;
-  --theme-elevation-150: #161620;
-  --theme-elevation-200: #1A1A26;
-  --theme-elevation-250: #1E1E2C;
-  --theme-elevation-300: #252535;
-  --theme-elevation-350: #2D2D48;
-  --theme-elevation-400: #6B6B88;
-  --theme-elevation-450: #8080A0;
-  --theme-elevation-500: #9494B0;
-  --theme-elevation-550: #AAAAC0;
-  --theme-elevation-600: #BDBDD0;
-  --theme-elevation-650: #CECEE0;
-  --theme-elevation-700: #D8D8E8;
-  --theme-elevation-750: #E0E0EE;
-  --theme-elevation-800: #E8E8F0;
-  --theme-elevation-850: #F0F0F6;
-  --theme-elevation-900: #F4F4F8;
-  --theme-elevation-950: #F8F8FC;
-  --theme-elevation-1000:#FFFFFF;
+  --theme-elevation-0:   #0F1D17;
+  --theme-elevation-50:  #13231A;
+  --theme-elevation-100: #192A21;
+  --theme-elevation-150: #22352A;
+  --theme-elevation-200: #2B3B2F;
+  --theme-elevation-250: #354636;
+  --theme-elevation-300: #435244;
+  --theme-elevation-350: #566450;
+  --theme-elevation-400: #687862;
+  --theme-elevation-450: #7C8B74;
+  --theme-elevation-500: #909D86;
+  --theme-elevation-550: #A4AE98;
+  --theme-elevation-600: #B6BEA9;
+  --theme-elevation-650: #C6CCB9;
+  --theme-elevation-700: #D2D7C6;
+  --theme-elevation-750: #DBDFD0;
+  --theme-elevation-800: #E3E6D8;
+  --theme-elevation-850: #EAEBDD;
+  --theme-elevation-900: #F2EFE2;
+  --theme-elevation-950: #F7F4EA;
+  --theme-elevation-1000:#FCF9F1;
 
-  --theme-border-color:  #1A1A26;
+  --theme-border-color:  #2B3B2F;
 
-  --theme-success-50:  rgba(108, 99, 255, 0.06);
-  --theme-success-100: rgba(108, 99, 255, 0.10);
-  --theme-success-150: rgba(108, 99, 255, 0.15);
-  --theme-success-200: rgba(108, 99, 255, 0.20);
-  --theme-success-250: rgba(108, 99, 255, 0.30);
-  --theme-success-300: rgba(108, 99, 255, 0.40);
-  --theme-success-350: rgba(108, 99, 255, 0.50);
-  --theme-success-400: #6C63FF;
-  --theme-success-450: #7B73FF;
-  --theme-success-500: #8A83FF;
-  --theme-success-550: #9590FF;
-  --theme-success-600: #A09DFF;
-  --theme-success-650: #B0AEFF;
-  --theme-success-700: #C0BEFF;
-  --theme-success-750: #D0CEFF;
-  --theme-success-800: #E0DEFF;
-  --theme-success-850: #EEEEFF;
-  --theme-success-900: #F5F5FF;
-  --theme-success-950: #FAFAFF;
+  --theme-success-50:  rgba(34, 111, 72, 0.06);
+  --theme-success-100: rgba(34, 111, 72, 0.10);
+  --theme-success-150: rgba(34, 111, 72, 0.15);
+  --theme-success-200: rgba(34, 111, 72, 0.20);
+  --theme-success-250: rgba(34, 111, 72, 0.30);
+  --theme-success-300: rgba(34, 111, 72, 0.40);
+  --theme-success-350: rgba(34, 111, 72, 0.50);
+  --theme-success-400: #226F48;
+  --theme-success-450: #287B53;
+  --theme-success-500: #358B5E;
+  --theme-success-550: #4B9D6C;
+  --theme-success-600: #67AA7C;
+  --theme-success-650: #82B78E;
+  --theme-success-700: #9DC4A1;
+  --theme-success-750: #B8D1B5;
+  --theme-success-800: #C9DCCA;
+  --theme-success-850: #D8E6D9;
+  --theme-success-900: #EAF1E9;
+  --theme-success-950: #F5F8F2;
 }
 
 /* ── Typography ──────────────────────────────────────────────── */
 html {
-  --font-body:    'Inter', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Fraunces';
+  --font-body: 'DM Sans';
+  --font-mono: 'DM Mono';
+}
+
+html,
+html body {
+  font-family: var(--font-body), system-ui, sans-serif !important;
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono), monospace !important;
 }
 
 .dashboard__label,
@@ -94,25 +106,25 @@ html {
 .render-title h1,
 .render-title h2,
 .nav__label {
-  font-family: 'Syne', sans-serif !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.02em !important;
+  font-family: var(--font-display), Georgia, serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
 }
 
 /* ── Nav sidebar ────────────────────────────────────────────── */
 html[data-theme=dark] .nav,
 html[data-theme=dark] .nav__scroll {
-  background-color: #0A0A0F !important;
+  background-color: #0F1D17 !important;
 }
 
 html[data-theme=dark] .nav {
-  border-right: 1px solid #1A1A26 !important;
+  border-right: 1px solid #2B3B2F !important;
 }
 
 html[data-theme=dark] .nav__link {
   padding: 8px 12px !important;
   border-radius: 8px !important;
-  color: rgba(244, 244, 248, 0.6) !important;
+  color: rgba(242, 239, 226, 0.65) !important;
   text-decoration: none !important;
   font-size: 0.8125rem !important;
   font-weight: 500 !important;
@@ -121,14 +133,14 @@ html[data-theme=dark] .nav__link {
 
 html[data-theme=dark] a.nav__link:hover,
 html[data-theme=dark] a.nav__link:focus-visible {
-  background-color: #1A1A26 !important;
-  color: #F4F4F8 !important;
+  background-color: #2B3B2F !important;
+  color: #F2EFE2 !important;
 }
 
 html[data-theme=dark] .nav__link.active,
 html[data-theme=dark] .nav__link:has(.nav__link-indicator) {
-  background-color: rgba(108, 99, 255, 0.15) !important;
-  color: #A9A4FF !important;
+  background-color: rgba(215, 239, 124, 0.12) !important;
+  color: #D7EF7C !important;
   font-weight: 600 !important;
 }
 
@@ -138,12 +150,12 @@ html[data-theme=dark] .nav__link-indicator {
   width: 6px !important;
   height: 6px !important;
   border-radius: 9999px !important;
-  background: #6C63FF !important;
+  background: #E6654A !important;
   margin-right: 8px !important;
 }
 
 html[data-theme=dark] .nav-group__toggle {
-  color: rgba(244, 244, 248, 0.35) !important;
+  color: rgba(242, 239, 226, 0.45) !important;
   font-size: 0.6875rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.1em !important;
@@ -155,21 +167,21 @@ html[data-theme=dark] .nav-group__toggle {
 
 /* ── Dashboard cards ─────────────────────────────────────────── */
 html[data-theme=dark] .dashboard__card-list .card {
-  background-color: #111118 !important;
-  border: 1px solid #1A1A26 !important;
-  border-radius: 16px !important;
+  background-color: #192A21 !important;
+  border: 1px solid #2B3B2F !important;
+  border-radius: 12px !important;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 html[data-theme=dark] .dashboard__card-list .card:hover {
-  border-color: rgba(108, 99, 255, 0.4) !important;
+  border-color: rgba(179, 220, 92, 0.5) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* ── Buttons ─────────────────────────────────────────────────── */
 html[data-theme=dark] .btn--style-primary {
-  background-color: #6C63FF !important;
+  background-color: #226F48 !important;
   color: #FFFFFF !important;
   border-radius: 8px !important;
   font-weight: 600 !important;
@@ -177,21 +189,21 @@ html[data-theme=dark] .btn--style-primary {
 }
 
 html[data-theme=dark] .btn--style-primary:hover {
-  background-color: #8A83FF !important;
+  background-color: #195638 !important;
   transform: translateY(-1px) !important;
 }
 
 html[data-theme=dark] .btn--style-secondary {
-  border: 1px solid #252535 !important;
-  color: rgba(244, 244, 248, 0.75) !important;
+  border: 1px solid #435244 !important;
+  color: rgba(242, 239, 226, 0.8) !important;
   background: transparent !important;
   border-radius: 8px !important;
   transition: border-color 0.15s ease, color 0.15s ease !important;
 }
 
 html[data-theme=dark] .btn--style-secondary:hover {
-  border-color: #6C63FF !important;
-  color: #A9A4FF !important;
+  border-color: #B3DC5C !important;
+  color: #D7EF7C !important;
 }
 
 /* ── Form Inputs ─────────────────────────────────────────────── */
@@ -199,59 +211,56 @@ html[data-theme=dark] input,
 html[data-theme=dark] textarea,
 html[data-theme=dark] select,
 html[data-theme=dark] .rs__control {
-  background-color: #111118 !important;
-  border-color: #1A1A26 !important;
-  border-radius: 8px !important;
-  color: #F4F4F8 !important;
+  background-color: #192A21 !important;
+  border-color: #2B3B2F !important;
+  border-radius: 6px !important;
+  color: #F2EFE2 !important;
 }
 
 html[data-theme=dark] input:focus,
 html[data-theme=dark] textarea:focus,
 html[data-theme=dark] .rs__control--is-focused {
-  border-color: #6C63FF !important;
-  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.25) !important;
+  border-color: #B3DC5C !important;
+  box-shadow: 0 0 0 2px rgba(179, 220, 92, 0.25) !important;
 }
 
 /* ── Table Rows ──────────────────────────────────────────────── */
 html[data-theme=dark] .table thead th {
-  color: rgba(244, 244, 248, 0.4) !important;
+  color: rgba(242, 239, 226, 0.5) !important;
   font-size: 0.6875rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
-  border-bottom: 1px solid #1A1A26 !important;
+  border-bottom: 1px solid #2B3B2F !important;
 }
 
 html[data-theme=dark] .table tbody td {
-  border-bottom: 1px solid #161620 !important;
-  color: rgba(244, 244, 248, 0.85) !important;
+  border-bottom: 1px solid #22352A !important;
+  color: rgba(242, 239, 226, 0.85) !important;
 }
 
 html[data-theme=dark] .table tbody tr:hover td {
-  background-color: #111118 !important;
+  background-color: #192A21 !important;
 }
 
 /* ── Login Page Accent ───────────────────────────────────────── */
 html[data-theme=dark] .login {
-  background-color: #0A0A0F !important;
-  background-image:
-    radial-gradient(ellipse 800px 500px at 50% -80px, rgba(108, 99, 255, 0.18) 0%, transparent 70%),
-    radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.04) 1px, transparent 1px) !important;
-  background-size: auto, 32px 32px !important;
+  background-color: #0F1D17 !important;
+  background-image: none !important;
 }
 
 html[data-theme=dark] .login__form {
-  background-color: #111118 !important;
-  border: 1px solid #1A1A26 !important;
-  border-radius: 20px !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6) !important;
+  background-color: #192A21 !important;
+  border: 1px solid #2B3B2F !important;
+  border-radius: 10px !important;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35) !important;
 }
 
 /* ── Scrollbar ───────────────────────────────────────────────── */
 html[data-theme=dark] ::-webkit-scrollbar { width: 6px; height: 6px; }
-html[data-theme=dark] ::-webkit-scrollbar-track { background: #0A0A0F; }
-html[data-theme=dark] ::-webkit-scrollbar-thumb { background: #252535; border-radius: 9999px; }
-html[data-theme=dark] ::-webkit-scrollbar-thumb:hover { background: #6C63FF; }
+html[data-theme=dark] ::-webkit-scrollbar-track { background: #0F1D17; }
+html[data-theme=dark] ::-webkit-scrollbar-thumb { background: #435244; border-radius: 9999px; }
+html[data-theme=dark] ::-webkit-scrollbar-thumb:hover { background: #B3DC5C; }
 
 /* Top Accent Gradient Bar */
 html[data-theme=dark] body::before {
@@ -261,7 +270,7 @@ html[data-theme=dark] body::before {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #6C63FF 40%, #FF6B35 70%, transparent 100%);
+  background: #E6654A;
   z-index: 9999;
   pointer-events: none;
 }

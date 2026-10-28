@@ -29,7 +29,7 @@ A self-serve press kit for journalists, content creators, and media outlets. Red
 
 ### 4. Key Facts
 - Founded: [Year]
-- Status: Active nonprofit / creative organization
+- Status: Creative organization; not legally registered as a nonprofit
 - Core team size: ~[N] people
 - Community size: ~[N] contributors
 - Active projects: [N]

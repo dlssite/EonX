@@ -51,10 +51,10 @@ export default async function HomePage() {
     <>
       <JsonLd schema={breadcrumbSchema([{ name: 'Home', url: 'https://eonrisia.org' }])} />
       <HeroSection />
-      <StatsRow />
       <MissionSnapshot />
       {featuredProjects.length > 0 && <ProjectsTeaser projects={featuredProjects} />}
       {teamMembers.length > 0 && <TeamPreview members={teamMembers} />}
+      <StatsRow />
       <CtaBand
         headline="Ready to build something that lasts?"
         subtext="Join writers, artists, and developers in crafting original living universes with transparent governance and open rewards."

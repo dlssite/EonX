@@ -86,7 +86,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
               return (
                 <div
                   key={opp.id}
-                  className="group relative p-5 sm:p-7 md:p-8 rounded-3xl border border-glass bg-gradient-to-r from-base-900/90 via-base-900/70 to-base-950/80 backdrop-blur-md hover:border-glass-strong transition-all duration-normal shadow-sm hover:shadow-[0_16px_40px_-15px_rgba(108,99,255,0.2)]"
+                  className="atlas-card atlas-card--opportunity group relative p-5 sm:p-7 md:p-8"
                 >
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 lg:gap-6">
                     <div className="flex-1">
@@ -136,7 +136,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
 
                       <Link
                         href={(opp.applyUrl as string) || '/contact'}
-                        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-full text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_20px_0_rgba(108,99,255,0.35)] sheen-sweep min-h-[44px]"
+                        className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 sm:py-2.5 rounded-sm text-body-sm font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm min-h-[44px]"
                       >
                         <span>Apply</span>
                         <ArrowRight size={14} aria-hidden="true" />
@@ -200,7 +200,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span>Eonrisia contributor tokens unlocking ecosystem benefits</span>
+                  <span>Community participation around the work</span>
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
@@ -214,7 +214,7 @@ export function OpportunitiesList({ opportunities, activeDept }: OpportunitiesLi
               <Link
                 href={(selectedOpp.applyUrl as string) || `/contact?inquiry=volunteer&role=${encodeURIComponent(String(selectedOpp.title))}`}
                 onClick={() => setSelectedOpp(null)}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-all duration-fast shadow-[0_0_24px_0_rgba(108,99,255,0.4)] sheen-sweep"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-sm text-body font-body font-semibold text-white bg-brand-500 hover:bg-brand-400 transition-colors duration-fast shadow-sm"
               >
                 <span>Apply for This Role</span>
                 <ArrowRight size={16} aria-hidden="true" />

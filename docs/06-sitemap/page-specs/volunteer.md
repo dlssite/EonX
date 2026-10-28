@@ -34,7 +34,7 @@ Recruit contributors. This is the most important conversion page for building th
 
 ### 2. Why Volunteer (3-column block)
 - Column 1: What you'll work on (real projects, real impact)
-- Column 2: What you'll get (experience, community, token rewards)
+- Column 2: What you'll get (experience, community, and contributor recognition)
 - Column 3: How it works (flexible, async, no minimum hours required)
 
 ### 3. Open Roles (Opportunities Grid)
@@ -44,10 +44,9 @@ Recruit contributors. This is the most important conversion page for building th
 - Only `isOpen: true` opportunities visible
 - Empty state: "No open roles right now — check back soon or reach out."
 
-### 4. Token System Teaser
-- Brief section: "Earn tokens for your contributions"
-- Explains the contribution → token → benefit loop in 3 simple steps
-- "Learn more about how tokens work →" (links to /mission or a dedicated section)
+### 4. Contributor Recognition
+- Explain how contributors are recognized and supported.
+- Describe available benefits only when they are confirmed and accurately documented.
 
 ### 5. FAQ (optional, Phase 2)
 - 4–6 common volunteer questions
