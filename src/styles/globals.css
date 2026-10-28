@@ -317,7 +317,8 @@
   }
 
   [data-theme="light"] .glass-panel {
-    @apply bg-base-50;
+    background-color: rgb(15 29 23);
+    color: rgb(250 247 238);
   }
 
   /* ── Card surface ─────────────────────────────────────────── */
@@ -331,8 +332,19 @@
     border-color: var(--border-glass-hover);
   }
 
-  [data-theme="light"] .card-surface {
-    @apply bg-base-50;
+  [data-theme="light"] .card-surface,
+  [data-theme="light"] .atlas-card {
+    background-color: rgb(15 29 23);
+    color: rgb(250 247 238);
+  }
+
+  [data-theme="light"] .glass-panel .text-base-100,
+  [data-theme="light"] .card-surface .text-base-100,
+  [data-theme="light"] .atlas-card .text-base-100,
+  [data-theme="light"] .glass-panel .text-base-50,
+  [data-theme="light"] .card-surface .text-base-50,
+  [data-theme="light"] .atlas-card .text-base-50 {
+    color: rgb(250 247 238) !important;
   }
 
   /* Interactive Sheen sweep */
@@ -591,11 +603,260 @@ main button[class*="rounded-full"] {
 }
 
 .atlas-card--person .atlas-card__media {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 6;
+}
+
+.atlas-person-card {
+  border-radius: var(--radius-md);
+}
+
+.atlas-person-card .atlas-card__media::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(15 29 23 / 0.46), transparent 30%),
+    linear-gradient(0deg, rgb(15 29 23 / 0.68), transparent 48%);
+  content: '';
+  pointer-events: none;
+}
+
+.atlas-person-card .atlas-card__image {
+  filter: saturate(0.82);
+}
+
+.atlas-person-card:hover .atlas-card__image {
+  filter: saturate(1);
+}
+
+.atlas-person-card__department,
+.atlas-person-card__index,
+.atlas-person-card__portrait-label {
+  position: absolute;
+  z-index: 2;
+  color: rgb(250 247 238);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.atlas-person-card__department {
+  top: 1rem;
+  left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgb(250 247 238 / 0.32);
+  background: rgb(15 29 23 / 0.58);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(8px);
+}
+
+.atlas-person-card__mark {
+  width: 0.42rem;
+  height: 0.42rem;
+  background-color: rgb(215 239 124);
+  transform: rotate(45deg);
+}
+
+.atlas-person-card__index {
+  top: 1.2rem;
+  right: 1rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+}
+
+.atlas-person-card__portrait-label {
+  bottom: 1rem;
+  left: 1rem;
+  color: rgb(250 247 238 / 0.68);
+  font-size: 0.56rem;
+  letter-spacing: 0.22em;
+}
+
+.atlas-person-card .atlas-card__body {
+  gap: 1.25rem;
+  padding: 1.35rem 1.4rem 1.5rem;
+}
+
+.atlas-person-card__role {
+  margin-bottom: 0.45rem;
+  color: rgb(215 239 124);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.atlas-person-card__name {
+  margin-bottom: 0.65rem;
+  color: rgb(250 247 238);
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 2vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.atlas-person-card:hover .atlas-person-card__name {
+  color: rgb(215 239 124);
+}
+
+.atlas-person-card__bio {
+  color: rgb(250 247 238 / 0.68);
+  font-size: var(--text-body-sm);
+  line-height: 1.7;
+}
+
+.atlas-person-card .atlas-card__footer {
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+.atlas-person-card__social {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgb(250 247 238 / 0.16);
+  padding: 0.4rem 0.65rem;
+  color: rgb(250 247 238 / 0.66);
+  font-size: var(--text-label);
+  font-weight: 500;
+  transition:
+    color var(--duration-fast) var(--ease-default),
+    border-color var(--duration-fast) var(--ease-default),
+    background-color var(--duration-fast) var(--ease-default);
+}
+
+.atlas-person-card__social:hover {
+  border-color: rgb(215 239 124 / 0.6);
+  background-color: rgb(215 239 124 / 0.1);
+  color: rgb(215 239 124);
 }
 
 .atlas-card--project .atlas-card__media {
   aspect-ratio: 16 / 10;
+}
+
+.atlas-project-card {
+  border-radius: var(--radius-md);
+}
+
+.atlas-project-card .atlas-card__media::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(15 29 23 / 0.38), transparent 42%, rgb(15 29 23 / 0.28));
+  content: '';
+  pointer-events: none;
+}
+
+.atlas-project-card__index {
+  position: absolute;
+  z-index: 2;
+  top: 1rem;
+  right: 1rem;
+  border: 1px solid rgb(250 247 238 / 0.38);
+  background: rgb(15 29 23 / 0.58);
+  padding: 0.45rem 0.6rem;
+  color: rgb(250 247 238);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  backdrop-filter: blur(8px);
+}
+
+.atlas-project-card__quick-view {
+  position: absolute;
+  z-index: 2;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 0.45rem;
+  border: 1px solid rgb(250 247 238 / 0.36);
+  background: rgb(15 29 23 / 0.74);
+  padding: 0.5rem 0.75rem;
+  color: rgb(250 247 238);
+  font-size: var(--text-label);
+  font-weight: 600;
+  transition:
+    border-color var(--duration-fast) var(--ease-default),
+    background-color var(--duration-fast) var(--ease-default);
+}
+
+.atlas-project-card__quick-view:hover {
+  border-color: rgb(215 239 124 / 0.75);
+  background: rgb(15 29 23 / 0.94);
+}
+
+.atlas-project-card__body {
+  gap: 1rem;
+  padding: 1.35rem 1.4rem 1.45rem;
+}
+
+.atlas-project-card__tag {
+  border: 1px solid rgb(215 239 124 / 0.25);
+  background: rgb(215 239 124 / 0.08);
+  padding: 0.3rem 0.55rem;
+  color: rgb(215 239 124);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.atlas-project-card__title h3 {
+  color: rgb(250 247 238);
+  font-size: clamp(1.2rem, 1.65vw, 1.45rem);
+  letter-spacing: -0.025em;
+}
+
+.atlas-project-card__title:hover h3 {
+  color: rgb(215 239 124);
+}
+
+.atlas-project-card__title svg {
+  margin-top: 0.2rem;
+  color: rgb(215 239 124 / 0.72);
+}
+
+.atlas-project-card__tagline {
+  color: rgb(250 247 238 / 0.67);
+  font-size: var(--text-body-sm);
+  line-height: 1.7;
+}
+
+.atlas-project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-top: 1px solid rgb(250 247 238 / 0.14);
+  padding-top: 1rem;
+  color: rgb(250 247 238 / 0.55);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.atlas-project-card__category {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.atlas-project-card__category svg,
+.atlas-project-card__footer > span:last-child {
+  color: rgb(215 239 124);
 }
 
 .atlas-card--story .atlas-card__media {

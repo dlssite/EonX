@@ -6,7 +6,6 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { cn, payloadImageUrl } from '@/lib/utils'
 import { Container } from '@/components/ui/Container'
-import { Badge } from '@/components/ui/Badge'
 import { staggerContainer, fadeUp } from '@/variants'
 
 type TeamMember = {
@@ -22,16 +21,6 @@ export type { TeamMember }
 
 type TeamPreviewProps = {
   members: TeamMember[]
-}
-
-const deptBadge: Record<string, 'brand' | 'accent' | 'default'> = {
-  leadership:  'brand',
-  engineering: 'accent',
-  design:      'default',
-  writing:     'default',
-  art:         'default',
-  community:   'default',
-  other:       'default',
 }
 
 export function TeamPreview({ members }: TeamPreviewProps) {
@@ -91,7 +80,7 @@ export function TeamPreview({ members }: TeamPreviewProps) {
           viewport={{ once: true, margin: '-60px' }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
-          {members.map((member) => {
+          {members.map((member, index) => {
             const photoUrl   = payloadImageUrl(member.photo as Parameters<typeof payloadImageUrl>[0])
             const photoAlt   =
               typeof member.photo === 'object' && member.photo !== null
@@ -109,9 +98,8 @@ export function TeamPreview({ members }: TeamPreviewProps) {
               <motion.li
                 key={member.id}
                 variants={item}
-                className="atlas-card atlas-card--person group relative flex flex-col"
+                className="atlas-card atlas-card--person atlas-person-card group relative flex flex-col"
               >
-                {/* Portrait Image Header */}
                 <div className="atlas-card__media w-full">
                   {photoUrl ? (
                     <Image
@@ -129,27 +117,26 @@ export function TeamPreview({ members }: TeamPreviewProps) {
                     </div>
                   )}
 
-                  {/* Pinned Department Badge */}
                   {department && (
-                    <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
-                      <Badge variant={deptBadge[department] ?? 'default'} size="sm" showDot>
-                        {deptLabel}
-                      </Badge>
-                    </div>
+                    <span className="atlas-person-card__department">
+                      <span className="atlas-person-card__mark" aria-hidden="true" />
+                      {deptLabel}
+                    </span>
                   )}
+                  <span className="atlas-person-card__index">
+                    TEAM / {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="atlas-person-card__portrait-label" aria-hidden="true">
+                    EONRISIA
+                  </span>
                 </div>
 
-                {/* Profile Details */}
                 <div className="atlas-card__body">
                   <div>
-                    <p className="eyebrow mb-2">{deptLabel}</p>
-                    <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 leading-tight mb-1 group-hover:text-brand-300 transition-colors">
+                    <p className="atlas-person-card__role">{role}</p>
+                    <h3 className="atlas-person-card__name">
                       {name}
                     </h3>
-
-                    <p className="text-body-sm text-brand-400 font-semibold">
-                      {role}
-                    </p>
                   </div>
                 </div>
               </motion.li>

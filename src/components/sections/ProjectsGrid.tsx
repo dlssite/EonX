@@ -190,7 +190,7 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
         {/* ── Projects Showcase Grid ────────────────────────────────── */}
         {projects.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {projects.map((project) => {
+            {projects.map((project, index) => {
               const cover = project.coverImage as { url?: string; alt?: string } | null
               const coverUrl = payloadImageUrl(cover?.url)
               const tags = (project.tags as { tag: string }[]) ?? []
@@ -198,7 +198,7 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
               return (
                 <div
                   key={project.id}
-                  className="atlas-card atlas-card--project group relative flex flex-col"
+                  className="atlas-card atlas-card--project atlas-project-card group relative flex flex-col"
                 >
                   <div className="atlas-card__media">
                     {coverUrl ? (
@@ -227,12 +227,15 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                         {project.status as string}
                       </Badge>
                     </div>
+                    <span className="atlas-project-card__index">
+                      FIELD NOTE / {String(index + 1).padStart(2, '0')}
+                    </span>
 
                     {/* Quick view button: visible on mobile touch screens, hover reveal on desktop */}
                     <button
                       onClick={() => setSelectedProject(project)}
                       aria-label={`Quick view ${project.name as string}`}
-                      className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-2 text-label font-body font-semibold text-base-100 bg-base-950 border border-glass hover:border-brand-400 transition-colors min-h-[36px]"
+                      className="atlas-project-card__quick-view"
                     >
                       <Eye size={13} aria-hidden="true" />
                       <span>Quick View</span>
@@ -240,14 +243,14 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                   </div>
 
                   {/* Body Content */}
-                  <div className="atlas-card__body">
+                  <div className="atlas-card__body atlas-project-card__body">
                     <div>
                       {tags.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
                           {tags.slice(0, 2).map(({ tag }) => (
                             <span
                               key={tag}
-                              className="px-2.5 py-0.5 rounded-full text-[0.7rem] font-medium bg-base-950 border border-glass text-base-100/60"
+                              className="atlas-project-card__tag"
                             >
                               {tag}
                             </span>
@@ -257,7 +260,7 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
 
                       <Link
                         href={`/projects/${project.slug as string}`}
-                        className="group/link flex items-start justify-between gap-2 mb-2"
+                        className="atlas-project-card__title group/link flex items-start justify-between gap-2 mb-2"
                       >
                         <h3 className="font-display font-bold text-h4 sm:text-h4 text-base-100 group-hover/link:text-brand-300 transition-colors duration-fast leading-snug">
                           {project.name as string}
@@ -269,13 +272,13 @@ export function ProjectsGrid({ featured, projects, activeStatus = 'all' }: Proje
                         />
                       </Link>
 
-                      <p className="text-body-sm text-base-100/65 leading-relaxed line-clamp-2 mb-4">
+                      <p className="atlas-project-card__tagline line-clamp-2 mb-4">
                         {project.tagline as string}
                       </p>
                     </div>
 
-                    <div className="atlas-card__footer mt-4 pt-4 flex items-center justify-between text-label text-base-100/50">
-                      <span className="flex items-center gap-1">
+                    <div className="atlas-card__footer atlas-project-card__footer mt-4 pt-4 flex items-center justify-between">
+                      <span className="atlas-project-card__category">
                         <TagIcon size={12} className="text-brand-400" />
                         <span>Explore details</span>
                       </span>

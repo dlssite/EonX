@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { Youtube, Instagram, Twitter, Github, Globe, Linkedin } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
-import { Badge } from '@/components/ui/Badge'
 import { DeptFilter } from './DeptFilter'
 import { payloadImageUrl } from '@/lib/utils'
 
@@ -25,15 +24,6 @@ export type { TeamMember }
 type TeamGridProps = {
   members: TeamMember[]
   activeDept: string
-}
-
-const deptBadge: Record<string, 'brand' | 'accent' | 'success' | 'warning' | 'default'> = {
-  engineering: 'brand',
-  design:      'accent',
-  writing:     'default',
-  art:         'accent',
-  community:   'success',
-  leadership:  'warning',
 }
 
 const socialIcons: Record<string, React.ComponentType<{ size?: number; 'aria-hidden'?: 'true' }>> = {
@@ -59,7 +49,7 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {members.map((rawMember) => {
+            {members.map((rawMember, index) => {
               const member = rawMember as {
                 id: string
                 name: string
@@ -86,9 +76,8 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
               return (
                 <div
                   key={member.id}
-                  className="atlas-card atlas-card--person group relative flex flex-col"
+                  className="atlas-card atlas-card--person atlas-person-card group relative flex flex-col"
                 >
-                  {/* Portrait Media Header */}
                   <div className="atlas-card__media w-full">
                     {photoUrl ? (
                       <Image
@@ -106,28 +95,26 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                       </div>
                     )}
 
-                    {/* Pinned department badge */}
-                    <div className="absolute top-3.5 left-3.5 sm:top-4 sm:left-4 z-10">
-                      <Badge variant={deptBadge[member.department] ?? 'default'} size="sm" showDot>
-                        {deptLabel}
-                      </Badge>
-                    </div>
+                    <span className="atlas-person-card__department">
+                      <span className="atlas-person-card__mark" aria-hidden="true" />
+                      {deptLabel}
+                    </span>
+                    <span className="atlas-person-card__index">
+                      TEAM / {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="atlas-person-card__portrait-label" aria-hidden="true">
+                      EONRISIA
+                    </span>
                   </div>
 
-                  {/* Card Content Body */}
                   <div className="atlas-card__body space-y-4">
                     <div>
-                      <p className="eyebrow mb-2">{deptLabel}</p>
-                      <h3 className="font-display font-bold text-h4 sm:text-h3 text-base-100 mb-1 group-hover:text-brand-300 transition-colors">
+                      <p className="atlas-person-card__role">{member.role}</p>
+                      <h3 className="atlas-person-card__name">
                         {member.name}
                       </h3>
-
-                      <p className="text-body-sm text-brand-400 font-semibold mb-3">
-                        {member.role}
-                      </p>
-
                       {member.bio && (
-                        <p className="text-body-sm text-base-100/65 leading-relaxed line-clamp-3">
+                        <p className="atlas-person-card__bio line-clamp-3">
                           {member.bio}
                         </p>
                       )}
@@ -146,7 +133,7 @@ export function TeamGrid({ members, activeDept }: TeamGridProps) {
                               target="_blank"
                               rel="noopener noreferrer"
                               aria-label={`${member.name} on ${s.platform}`}
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-label font-medium bg-base-950/80 border border-glass text-base-100/60 hover:text-white hover:border-brand-400 hover:bg-brand-500/20 transition-all duration-fast min-h-[36px]"
+                              className="atlas-person-card__social"
                             >
                               <Icon size={13} aria-hidden="true" />
                               <span className="capitalize">{s.platform}</span>
