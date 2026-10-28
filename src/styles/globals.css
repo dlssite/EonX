@@ -1018,3 +1018,44 @@ html[data-theme="light"] .atlas-project-card__title:hover h3,
 html[data-theme="light"] .atlas-featured-project:hover .atlas-featured-project__title {
   color: rgb(215 239 124) !important;
 }
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="bg-base-950"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="bg-base-900"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="bg-base-850"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="bg-base-800"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="bg-base-700"] {
+  background-color: rgb(30 48 38) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class~="text-base-100"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class~="text-base-50"] {
+  color: rgb(250 247 238) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-base-100/"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-base-50/"] {
+  color: rgb(250 247 238 / 0.78) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-brand-"] {
+  color: rgb(215 239 124) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-accent-"] {
+  color: rgb(255 163 119) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-emerald-"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-green-"] {
+  color: rgb(134 239 172) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-amber-"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-yellow-"] {
+  color: rgb(253 224 71) !important;
+}
+
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-rose-"],
+html[data-theme="light"] :is(.glass-panel, .card-surface, .atlas-card) [class*="text-red-"] {
+  color: rgb(253 164 175) !important;
+}
